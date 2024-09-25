@@ -1,0 +1,33 @@
+@font-face {
+  font-family: Panel__Store;
+  src: url(assets/font/IRANSans.ttf);
+}
+
+body {
+  font-family: Panel__Store ;
+  margin: 0;
+  padding: 0;
+  direction: rtl;
+}
+
+/* بکگراند های سفارشی */
+.bg-gradient-custom {
+  background: linear-gradient(127.09deg, rgba(6, 11, 40, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%);
+}
+.bg-gradient-custom-1 {
+  background: linear-gradient(126.97deg, rgba(6, 11, 40, 0.74) 28.26%, rgba(10, 14, 35, 0.71) 91.2%);
+}
+
+
+/* مخفی کردن نوار اسکرول */
+.scrollbar-hide {
+  overflow: hidden; 
+}
+/* مخفی کردن نوار اسکرول در مرورگرهای مختلف */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
