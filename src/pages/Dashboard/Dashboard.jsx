@@ -11,6 +11,8 @@ import { IoMdNotifications } from "react-icons/io";
 import { BsTelegram } from "react-icons/bs";
 import { FaSpotify } from "react-icons/fa6";
 import { FaSoundcloud } from "react-icons/fa";
+// import Category from "../Category/Category";
+import CategoryTable from "../Store/Category/CategoryTable";
 
 const Dashboard = () => {
   return (
@@ -206,111 +208,14 @@ const Dashboard = () => {
       {/* The fourth section */}
       <div className="lg:flex gap-6 mb-6 ">
         <div className="w-full lg:w-2/3 my-6 lg:my-0 bg-gradient-custom backdrop-blur-[100px] p-6 rounded-xl shadow-lg">
-          <div className="mb-4">
+          <div className="mb-4 overflow-x-auto">
             <h3 className="text-white font-semibold"> پروژه ها</h3>
             <span className="text-gray-400 text-sm font-medium flex my-1">
               <IoCheckmarkDoneCircleSharp className="w-5 h-5 me-1 text-green-700" />{" "}
               این ماه انجام شد
             </span>
           </div>
-          <div className="overflow-x-auto ">
-            <table className="table mt-5">
-              <thead className="text-right">
-                <tr className="border-b border-gray-700 ">
-                  <th>شرکت ها </th>
-                  <th>اعضا</th>
-                  <th>بودجه</th>
-                  <th>تکمیل</th>
-                </tr>
-              </thead>
-              <tbody className="text-right">
-                <tr className="border-b border-gray-700 ">
-                  <td>طراحی نسخه UI </td>
-                  <td>
-                    <div className="flex -space-x-3">
-                      <img
-                        src="https://demos.creative-tim.com/vision-ui-dashboard-react/static/media/avatar4.2a4ba26c.png"
-                        className="w-7 h-7 rounded-full"
-                      />
-                      <img
-                        src="https://demos.creative-tim.com/vision-ui-dashboard-react/static/media/avatar2.b8132c3c.png"
-                        className="w-7 h-7 rounded-full"
-                      />
-                      <img
-                        src="https://demos.creative-tim.com/vision-ui-dashboard-react/static/media/avatar3.4d26ce02.png"
-                        className="w-7 h-7 rounded-full"
-                      />
-                      <img
-                        src="https://demos.creative-tim.com/vision-ui-dashboard-react/static/media/avatar1.1d9e1978.png"
-                        className="w-7 h-7 rounded-full"
-                      />
-                    </div>
-                  </td>
-                  <td>$14,000</td>
-                  <td>
-                    <progress
-                      className="progress progress-info w-56 mx-2"
-                      value="10"
-                      max="100"
-                    ></progress>
-                    10%
-                  </td>
-                </tr>
-                <tr className="border-b border-gray-700 ">
-                  <td>اپلیکیشن موبایل</td>
-                  <td>
-                    <div className="flex -space-x-3">
-                      <img
-                        src="https://demos.creative-tim.com/vision-ui-dashboard-react/static/media/avatar4.2a4ba26c.png"
-                        className="w-7 h-7 rounded-full"
-                      />
-                      <img
-                        src="https://demos.creative-tim.com/vision-ui-dashboard-react/static/media/avatar1.1d9e1978.png"
-                        className="w-7 h-7 rounded-full"
-                      />
-                    </div>
-                  </td>
-                  <td>$20,500</td>
-                  <td>
-                    <progress
-                      className="progress progress-info w-56 mx-2"
-                      value="90"
-                      max="100"
-                    ></progress>
-                    90%
-                  </td>
-                </tr>
-                <tr className="border-b border-gray-700 ">
-                  <td>فروشگاه آنلاین</td>
-                  <td>
-                    <div className="flex -space-x-3">
-                      <img
-                        src="https://demos.creative-tim.com/vision-ui-dashboard-react/static/media/avatar4.2a4ba26c.png"
-                        className="w-7 h-7 rounded-full"
-                      />
-                      <img
-                        src="https://demos.creative-tim.com/vision-ui-dashboard-react/static/media/avatar2.b8132c3c.png"
-                        className="w-7 h-7 rounded-full"
-                      />
-                      <img
-                        src="https://demos.creative-tim.com/vision-ui-dashboard-react/static/media/avatar3.4d26ce02.png"
-                        className="w-7 h-7 rounded-full"
-                      />
-                    </div>
-                  </td>
-                  <td>$2,000</td>
-                  <td>
-                    <progress
-                      className="progress progress-info w-56 mx-2"
-                      value="40"
-                      max="100"
-                    ></progress>
-                    25%
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+            <CategoryTable />
         </div>
 
         <div className="w-full lg:w-1/3 my-6 lg:my-0 bg-gradient-custom backdrop-blur-[100px] p-6 rounded-xl shadow-lg">

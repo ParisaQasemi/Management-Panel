@@ -36,9 +36,9 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
           {/* ---------- Store ---------- */}
           <SidebarGroupTitle title='فروشگاه'/>
-          <SidebarItem title='لیست محصولات' icon={<FaThList />} path='/ListProducts'/>
-          <SidebarItem title='مدیریت گروه محصول' icon={<AiOutlineProduct />} path='/ProductGroupManagement'/>
-          <SidebarItem title='مدیریت محصول' icon={<AiOutlineProduct />} path='/ProductManagement'/>
+          {/* <SidebarItem title='لیست محصولات' icon={<FaThList />} path='/ListProducts'/> */}
+          <SidebarItem title='مدیریت گروه محصول' icon={<AiOutlineProduct />} path='/Category'/>
+          <SidebarItem title='مدیریت محصول' icon={<AiOutlineProduct />} path='/Product'/>
           <SidebarItem title='مدیریت برند ها' icon={<TbBrandAsana />} path='/BrandManagement'/>
           <SidebarItem title='مدیریت گارانتی ها' icon={<AiOutlineAppstore />} path='/WarrantyManagement'/>
           <SidebarItem title='مدیریت رنگ ها' icon={<IoIosColorPalette />} path='/ColorManagement'/>
@@ -49,7 +49,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <SidebarItem title='مدیریت سبد ها' icon={<FaShoppingCart />} path='/CartManagement'/>
           <SidebarItem title='مدیریت سفارشات' icon={<FaLuggageCart />} path='/OrderManagement'/>
           <SidebarItem title='مدیریت نحوه ارسال' icon={<MdShoppingCartCheckout />} path='/ShoppingMethodManagement'/>
-          <SidebarItem title='صورت حساب ' icon={<MdShoppingCartCheckout />} path='/Billing'/>
+          {/* <SidebarItem title='صورت حساب ' icon={<MdShoppingCartCheckout />} path='/Billing'/> */}
 
           {/* ---------- Users And Partners ---------- */}
           <SidebarGroupTitle title='کاربران و همکاران '/>

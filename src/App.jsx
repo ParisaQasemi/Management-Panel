@@ -1,12 +1,12 @@
 import "./App.css";
 import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
-import Mainbar from "./component/layout/Mainbar/Mainbar";
-import Sidebar from "./component/layout/SidebarGroupTitle/Sidebar";
+import Mainbar from "./layout/Mainbar/Mainbar";
+import Sidebar from "./layout/SidebarGroupTitle/Sidebar";
+
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);
   };
