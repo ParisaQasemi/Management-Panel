@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { createPortal } from "react-dom";
 import { CgClose } from "react-icons/cg";
+import { createPortal } from "react-dom";
 
+// کامپوننت مودال
 const Modal = ({ isOpenModal, closeModal, children }) => {
   useEffect(() => {
     if (isOpenModal) {
@@ -21,7 +22,6 @@ const Modal = ({ isOpenModal, closeModal, children }) => {
         >
           <CgClose className="text-2xl" />
         </button>
-
         {children}
       </div>
     </div>,

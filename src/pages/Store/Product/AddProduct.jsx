@@ -119,7 +119,7 @@ const AddProduct = () => {
           </button>
           <button
             type="submit"
-            className="w-full bg-red-600 text-white px-4 py-2 my-2 rounded-lg hover:bg-red-700 transition"
+            className="w-full my-2 bg-red-600 text-white px-4 py-2 my rounded-lg hover:bg-red-700 transition"
           >
             انصراف
           </button>
