@@ -1,16 +1,23 @@
 import React from "react";
-import Search from "../../../layout/Navbar/Search";
-import OpenModalBtn from "../../../component/Modal/OpenModalBtn";
-import ProductGroupManagementTable from "./ProductGroupManagementTable";
+import Search from "../../../component/Search/Search";
+import ModalBtn from "../../../component/Modal/ModalBtn";
+import CategoryTable from "./CategoryTable";
+import Pagination from "../../../component/Pagination/Pagination";
 
 const Category = () => {
   return (
     <div>
-      <div className="flex justify-between items-center ">
+      {/* Search and Modal Button */}
+      <div className="flex justify-between">
         <Search />
-        <OpenModalBtn />
+        <ModalBtn />
       </div>
-      <ProductGroupManagementTable />
+
+      {/* Table */}
+      <CategoryTable />
+
+      {/* Pagination */}
+      <Pagination />
     </div>
   );
 };

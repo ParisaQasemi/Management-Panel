@@ -5,9 +5,6 @@ import Navbar from "../Navbar/Navbar";
 import Dashboard from "../../pages/Dashboard/Dashboard";
 
 import ListProducts from "../../pages/Store/ListProducts/ListProducts";
-import Category from "../../pages/Store/Category/Category";
-
-import Product from "../../pages/Store/Product/Product";
 import BrandManagement from "../../pages/Store/BrandManagement/BrandManagement";
 import WarrantyManagement from "../../pages/Store/WarrantyManagement/WarrantyManagement";
 import ColorManagement from "../../pages/Store/ColorManagement/ColorManagement";
@@ -29,6 +26,7 @@ import Table from "../../pages/Table/Table";
 import Login from "../../pages/Login/Login";
 import Profile from "../../pages/Profile/Profile";
 import Register from "../../pages/Register/Register";
+import Category from "../../pages/Store/ProductGroupManagement/Category";
 
 const Mainbar = ({ toggleSidebar }) => {
   return (
@@ -37,7 +35,6 @@ const Mainbar = ({ toggleSidebar }) => {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/Category" element={<Category />} />
-        <Route path="/Product" element={<Product />} />
 
 
 

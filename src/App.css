@@ -2,10 +2,6 @@
   font-family: Panel__Store;
   src: url(assets/font/IRANSans.ttf);
 }
-/* @font-face {
-  font-family: number;
-  src: url(assets/font/IRANSans\(FaNum\).ttf);
-} */
 
 body {
   font-family: Panel__Store ;

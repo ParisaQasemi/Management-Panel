@@ -11,8 +11,6 @@ import { IoMdNotifications } from "react-icons/io";
 import { BsTelegram } from "react-icons/bs";
 import { FaSpotify } from "react-icons/fa6";
 import { FaSoundcloud } from "react-icons/fa";
-// import Category from "../Category/Category";
-import CategoryTable from "../Store/Category/CategoryTable";
 
 const Dashboard = () => {
   return (
@@ -215,7 +213,6 @@ const Dashboard = () => {
               این ماه انجام شد
             </span>
           </div>
-            <CategoryTable />
         </div>
 
         <div className="w-full lg:w-1/3 my-6 lg:my-0 bg-gradient-custom backdrop-blur-[100px] p-6 rounded-xl shadow-lg">
