@@ -22,9 +22,9 @@ import Login from "../../pages/Login/Login";
 import Profile from "../../pages/Profile/Profile";
 import Register from "../../pages/Register/Register";
 import Category from "../../pages/Store/ProductGroupManagement/Category";
-
-
 import AddCategory from "../../pages/Store/ProductGroupManagement/AddCategory";
+import Product from "../../pages/Store/Product/Product";
+import AddProduct from "../../pages/Store/Product/AddProduct";
 
 const Mainbar = ({ toggleSidebar }) => {
   return (
@@ -32,8 +32,15 @@ const Mainbar = ({ toggleSidebar }) => {
       <Navbar toggleSidebar={toggleSidebar} />
       <Routes>
         <Route path="/" element={<Dashboard />} />
+        
         <Route path="/Category" element={<Category />} />
         <Route path="/AddCategory" element={<AddCategory />} />
+
+        <Route path="/Product" element={<Product />} />
+        <Route path="/AddProduct" element={<AddProduct />} />
+
+
+
 
         <Route path="/BrandManagement" element={<BrandManagement />} />
         <Route path="/WarrantyManagement" element={<WarrantyManagement />} />

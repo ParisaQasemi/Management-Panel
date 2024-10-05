@@ -1,29 +1,28 @@
 import React, { useState } from "react";
 import Search from "../../../component/Search/Search";
 import ModalBtn from "../../../component/Modal/ModalBtn";
-import AddCategory from "./AddCategory";
-import CategoryTable from "./CategoryTable";
+import AddProduct from "./AddProduct";
+import ProductTable from "./ProductTable";
 import Pagination from "../../../component/Pagination/Pagination";
 
-
-const Category = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+const Product = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => {
-    setIsModalOpen(!isModalOpen)
-  }
+    setIsModalOpen(!isModalOpen);
+  };
 
   return (
     <div>
       {/* Search and Modal Button */}
       <div className="flex justify-between">
         <Search />
-        <ModalBtn onClick={toggleModal}/>
-        {isModalOpen && <AddCategory />}
+        <ModalBtn onClick={toggleModal} />
+        {isModalOpen && <AddProduct />}
       </div>
 
       {/* Table */}
-      <CategoryTable />
+      <ProductTable />
 
       {/* Pagination */}
       <Pagination />
@@ -31,4 +30,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default Product;
