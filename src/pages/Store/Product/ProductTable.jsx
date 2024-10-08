@@ -87,12 +87,20 @@ const ProductTable = () => {
     );
   };
 
+  const searchParams = {
+    title: 'جستجو',
+    placeholder: 'قسمتی از عنوان را وارد کنید',
+    searchField: 'title'
+  }
+
   return (
     <>
       <PaginationTable
         data={data}
         dataInfo={dataInfo}
         additionField={additionField}
+        searchParams={searchParams}
+        numOfPage = {2}
       />
     </>
   );

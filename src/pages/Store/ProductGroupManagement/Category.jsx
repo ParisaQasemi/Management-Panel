@@ -3,7 +3,6 @@ import Search from "../../../component/Search/Search";
 import ModalBtn from "../../../component/Modal/ModalBtn";
 import AddCategory from "./AddCategory";
 import CategoryTable from "./CategoryTable";
-import PaginationBtn from "../../../component/Pagination/PaginationBtn";
 
 
 const Category = () => {
@@ -25,8 +24,6 @@ const Category = () => {
       {/* Table */}
       <CategoryTable />
 
-      {/* Pagination */}
-      <PaginationBtn />
     </div>
   );
 };
