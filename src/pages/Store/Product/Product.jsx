@@ -3,7 +3,7 @@ import Search from "../../../component/Search/Search";
 import ModalBtn from "../../../component/Modal/ModalBtn";
 import AddProduct from "./AddProduct";
 import ProductTable from "./ProductTable";
-import Pagination from "../../../component/Pagination/Pagination";
+import PaginationBtn from "../../../component/Pagination/PaginationBtn";
 
 const Product = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,7 +25,7 @@ const Product = () => {
       <ProductTable />
 
       {/* Pagination */}
-      <Pagination />
+      <PaginationBtn />
     </div>
   );
 };

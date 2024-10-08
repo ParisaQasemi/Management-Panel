@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { GoPlus } from "react-icons/go";
 
 const ModalBtn = ({ onClick }) => {

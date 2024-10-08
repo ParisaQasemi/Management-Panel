@@ -39,9 +39,6 @@ const Mainbar = ({ toggleSidebar }) => {
         <Route path="/Product" element={<Product />} />
         <Route path="/AddProduct" element={<AddProduct />} />
 
-
-
-
         <Route path="/BrandManagement" element={<BrandManagement />} />
         <Route path="/WarrantyManagement" element={<WarrantyManagement />} />
         <Route path="/ColorManagement" element={<ColorManagement />} />
