@@ -42,20 +42,23 @@ const PaginationTable = ({
     );
     setCurrentPage(1);
   }, [searchChar]);
+
+
   // Modal Button
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+  // const toggleModal = () => {
+  //   setIsModalOpen(!isModalOpen);
+  // };
 
   return (
     <div>
+      
       {/* Modal Button and Search */}
-      <div className="flex justify-between">
+      {/* <div className="flex justify-between">
         <Search setSearchChar={setSearchChar} />
         <ModalBtn onClick={toggleModal} />
         {isModalOpen && <AddProduct />}
-      </div>
+      </div> */}
 
       {/* Table Product */}
       <table className="table text-right my-5 bg-gradient-custom backdrop-blur-lg">

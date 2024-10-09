@@ -5,7 +5,7 @@ import AddCategory from "./AddCategory";
 import CategoryTable from "./CategoryTable";
 
 
-const Category = () => {
+const Category = ({setSearchChar}) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const toggleModal = () => {
@@ -13,18 +13,18 @@ const Category = () => {
   }
 
   return (
-    <div>
+    <>
       {/* Search and Modal Button */}
       <div className="flex justify-between">
-        <Search />
-        <ModalBtn onClick={toggleModal}/>
+        <Search setSearchChar={setSearchChar} />
+        <ModalBtn onClick={toggleModal} />
         {isModalOpen && <AddCategory />}
       </div>
 
       {/* Table */}
       <CategoryTable />
 
-    </div>
+    </>
   );
 };
 
