@@ -3,6 +3,7 @@ import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import Mainbar from "./layout/Mainbar/Mainbar";
 import Sidebar from "./layout/SidebarGroupTitle/Sidebar";
+import AuthLayout from "./layout/auth/AuthLayout";
 
 
 function App() {
@@ -17,8 +18,10 @@ function App() {
         className="bg-gradient-to-bl from-[#0d081d] via-[#181682] to-[#293ec9] text-white 
        min-h-screen"
       >
-        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-        <Mainbar toggleSidebar={toggleSidebar} />
+        {/* <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+        <Mainbar toggleSidebar={toggleSidebar} /> */}
+
+        <AuthLayout />
       </div>
     </BrowserRouter>
   );

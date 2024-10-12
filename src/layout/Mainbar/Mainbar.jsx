@@ -18,13 +18,13 @@ import UserPermissions from "../../pages/UsersAndColleagues/UserPermissions/User
 import Questions from "../../pages/Communications/Questions/Questions";
 import Feedback from "../../pages/Communications/Feedback/Feedback";
 import Table from "../../pages/Table/Table";
-import Login from "../../pages/Login/Login";
 import Profile from "../../pages/Profile/Profile";
 import Register from "../../pages/Register/Register";
 import Category from "../../pages/Store/ProductGroupManagement/Category";
 import AddCategory from "../../pages/Store/ProductGroupManagement/AddCategory";
 import Product from "../../pages/Store/Product/Product";
 import AddProduct from "../../pages/Store/Product/AddProduct";
+// import Login from "../../pages/auth/Login";
 
 const Mainbar = ({ toggleSidebar }) => {
   return (
@@ -32,13 +32,10 @@ const Mainbar = ({ toggleSidebar }) => {
       <Navbar toggleSidebar={toggleSidebar} />
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        
         <Route path="/Category" element={<Category />} />
         <Route path="/AddCategory" element={<AddCategory />} />
-
         <Route path="/Product" element={<Product />} />
         <Route path="/AddProduct" element={<AddProduct />} />
-
         <Route path="/BrandManagement" element={<BrandManagement />} />
         <Route path="/WarrantyManagement" element={<WarrantyManagement />} />
         <Route path="/ColorManagement" element={<ColorManagement />} />
@@ -58,7 +55,7 @@ const Mainbar = ({ toggleSidebar }) => {
         <Route path="/Profile" element={<Profile />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/Table" element={<Table />} />
-        <Route path="/Login" element={<Login />} />
+        {/* <Route path="/Login" element={<Login />} /> */}
         <Route path="/ListProducts" element={<ListProducts />} />
       </Routes>
     </div>
