@@ -3,6 +3,8 @@ import { GrFormNextLink, GrFormPreviousLink } from "react-icons/gr";
 import Search from "../Search/Search";
 import ModalBtn from "../Modal/ModalBtn";
 import AddProduct from "../../pages/Store/Product/AddProduct";
+import { useLocation } from "react-router-dom";
+import AddCategory from "../../pages/Store/ProductGroupManagement/AddCategory";
 
 const PaginationTable = ({
   data,
@@ -41,24 +43,23 @@ const PaginationTable = ({
       data.filter((d) => d[searchParams.searchField].includes(searchChar))
     );
     setCurrentPage(1);
-  }, [searchChar]);
-
-
+  }, [searchChar, data]);
   // Modal Button
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const toggleModal = () => {
-  //   setIsModalOpen(!isModalOpen);
-  // };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const location = useLocation();
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
   return (
     <div>
-      
       {/* Modal Button and Search */}
-      {/* <div className="flex justify-between">
+      <div className="flex justify-between">
         <Search setSearchChar={setSearchChar} />
         <ModalBtn onClick={toggleModal} />
-        {isModalOpen && <AddProduct />}
-      </div> */}
+        {isModalOpen && location.pathname === "/Product" && <AddProduct />}
+        {isModalOpen && location.pathname === "/Category" && <AddCategory />}
+      </div>
 
       {/* Table Product */}
       <table className="table text-right my-5 bg-gradient-custom backdrop-blur-lg">

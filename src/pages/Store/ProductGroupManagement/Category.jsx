@@ -1,29 +1,12 @@
-import React, { useState } from "react";
-import Search from "../../../component/Search/Search";
-import ModalBtn from "../../../component/Modal/ModalBtn";
-import AddCategory from "./AddCategory";
+import React from "react";
 import CategoryTable from "./CategoryTable";
 
 
-const Category = ({setSearchChar}) => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen)
-  }
-
+const Category = () => {
   return (
     <>
-      {/* Search and Modal Button */}
-      <div className="flex justify-between">
-        <Search setSearchChar={setSearchChar} />
-        <ModalBtn onClick={toggleModal} />
-        {isModalOpen && <AddCategory />}
-      </div>
-
       {/* Table */}
       <CategoryTable />
-
     </>
   );
 };
