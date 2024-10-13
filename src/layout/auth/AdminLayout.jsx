@@ -19,7 +19,7 @@ const AdminLayout = () => {
     <div>
       {
         loading ? (
-          <h1 className='text-center font-bold text-xl mt-20'>لطفا صبر کنید ...</h1>
+          <h1 className='text-center font-bold text-3xl pt-20'>لطفا صبر کنید ...</h1>
         ) : isLogin ? (
           <>
             <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />

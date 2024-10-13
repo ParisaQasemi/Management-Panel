@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import AuthFormikControl from "../../component/authForm/AuthFormikControl";
 import axios from "axios";
 import { json, useNavigate } from "react-router-dom";
+import { Alert } from "../../utils/alert";
 
 const initialValues = {
   phone: "",
@@ -11,7 +12,8 @@ const initialValues = {
   remember: false,
 };
 
-const onSubmit = (values, navigate) => {
+const onSubmit = (values, submitMethods, navigate) => {
+  console.log(submitMethods);
   axios
     .post("https://ecomadminapi.azhadev.ir/api/auth/login", {
       ...values,
@@ -19,9 +21,13 @@ const onSubmit = (values, navigate) => {
     })
     .then((res) => {
       console.log(res);
-      if(res.status == 200) {
-        localStorage.setItem('loginToken', JSON.stringify(res.data))
-        navigate('/')
+      if (res.status == 200) {
+        localStorage.setItem("loginToken", JSON.stringify(res.data));
+        navigate("/");
+        submitMethods.setSubmitting(false);
+      } else {
+        submitMethods.setSubmitting(false);
+        Alert(' متاسفم! ' , res.data.message, 'error')
       }
     });
 };
@@ -35,7 +41,7 @@ const validationSchema = Yup.object({
 });
 
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div
       className=" h-screen flex items-center justify-center
@@ -66,7 +72,9 @@ const Login = () => {
 
             <Formik
               initialValues={initialValues}
-              onSubmit={(values)=>onSubmit(values, navigate)}
+              onSubmit={(values, submitMethods) =>
+                onSubmit(values, submitMethods, navigate)
+              }
               validationSchema={validationSchema}
             >
               {(formik) => {
@@ -99,8 +107,9 @@ const Login = () => {
                       />
 
                       <div>
-                        <button className="w-full h-10 my-6 rounded-xl text-sm text-white bg-[#0075ff]">
-                          ورود
+                        <button disabled={formik.isSubmitting}
+                          className="w-full h-10 my-6 rounded-xl text-sm text-white bg-[#0075ff]">
+                            {formik.isSubmitting ? "... لطفا صبر کنید" : "ورود" }
                         </button>
                       </div>
                     </Form>
