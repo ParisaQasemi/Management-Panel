@@ -78,6 +78,7 @@ const Navbar = ({ toggleSidebar }) => {
         return "صفحه دیگر";
     }
   };
+  
   const goToDashboard = () => {
     navigate("/");
   };
@@ -107,7 +108,7 @@ const Navbar = ({ toggleSidebar }) => {
           {/* Buttons section*/}
           <div className="w-24 flex items-center justify-end">
             <NavLink
-              to="/Login"
+              to="/auth/Login"
               className="ps-2 py-2 text-sm flex items-center"
             >
               <FaUserCircle className="cursor-pointer" />

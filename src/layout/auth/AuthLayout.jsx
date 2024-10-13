@@ -1,15 +1,25 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Login from '../../pages/auth/Login';
+import React from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Login from "../../pages/auth/Login";
+import { useIsLogin } from "../../hooks/authHooks";
 
 const AuthLayout = () => {
-    return (
-        <div>
-            <Routes>
-                <Route path='/Login' element={<Login />}/>
-            </Routes>
-        </div>
-    );
-}
+  const [loading, isLogin] = useIsLogin();
+  return (
+    <div>
+      {loading ? (
+        <h1 className="text-center font-bold text-xl">لطفا صبر کنید ...</h1>
+      ) : !isLogin ? (
+        <>
+          <Routes>
+            <Route path="/auth/Login" element={<Login />} />
+          </Routes>
+        </>
+      ) : (
+        <Navigate to={"/"} />
+      )}
+    </div>
+  );
+};
 
 export default AuthLayout;

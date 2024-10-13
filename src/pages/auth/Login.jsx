@@ -3,6 +3,7 @@ import React from "react";
 import * as Yup from "yup";
 import AuthFormikControl from "../../component/authForm/AuthFormikControl";
 import axios from "axios";
+import { json, useNavigate } from "react-router-dom";
 
 const initialValues = {
   phone: "",
@@ -10,14 +11,18 @@ const initialValues = {
   remember: false,
 };
 
-const onSubmit = (values) => {
+const onSubmit = (values, navigate) => {
   axios
     .post("https://ecomadminapi.azhadev.ir/api/auth/login", {
       ...values,
-      remember: values.remember ? 1 : 0
+      remember: values.remember ? 1 : 0,
     })
     .then((res) => {
       console.log(res);
+      if(res.status == 200) {
+        localStorage.setItem('loginToken', JSON.stringify(res.data))
+        navigate('/')
+      }
     });
 };
 
@@ -30,15 +35,16 @@ const validationSchema = Yup.object({
 });
 
 const Login = () => {
+  const navigate = useNavigate()
   return (
     <div
-      className="bg-gradient-to-bl from-[#181682] via-[#0d081d] text-white h-screen
-     flex items-center justify-center"
+      className=" h-screen flex items-center justify-center
+      bg-gradient-to-bl from-[#181682] via-[#0d081d] text-white "
     >
       <div className="flex w-full">
         {/* Left Section */}
         <div
-          className="w-1/2 h-screen flex items-center justify-center rounded-l-3xl
+          className="hidden lg:flex w-1/2 h-screen items-center justify-center rounded-l-3xl
           bg-[url('/src/assets/img/ImageLogin.png')]
           bg-cover bg-center "
         >
@@ -49,10 +55,10 @@ const Login = () => {
         </div>
 
         {/* Right Section */}
-        <div className="w-1/2 h-screen p-10 rounded-lg flex flex-col items-center justify-center">
+        <div className="w-full lg:w-1/2  h-screen p-10 rounded-lg flex flex-col items-center justify-center">
           <div className="">
             <h2 className="text-xl text-white font-bold mb-1">
-              از دیدنت خوشحالم !
+              از دیدنت خوشحالم :)
             </h2>
             <p className="text-gray-400 text-md mb-20">
               برای ورود شماره موبایل و رمز عبور خود را وارد کنید
@@ -60,7 +66,7 @@ const Login = () => {
 
             <Formik
               initialValues={initialValues}
-              onSubmit={onSubmit}
+              onSubmit={(values)=>onSubmit(values, navigate)}
               validationSchema={validationSchema}
             >
               {(formik) => {
