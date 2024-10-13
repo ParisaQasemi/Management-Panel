@@ -24,7 +24,7 @@ import Category from "../../pages/Store/ProductGroupManagement/Category";
 import AddCategory from "../../pages/Store/ProductGroupManagement/AddCategory";
 import Product from "../../pages/Store/Product/Product";
 import AddProduct from "../../pages/Store/Product/AddProduct";
-// import Login from "../../pages/auth/Login";
+import Logout from "../../pages/auth/Logout";
 
 const Mainbar = ({ toggleSidebar }) => {
   return (
@@ -55,8 +55,9 @@ const Mainbar = ({ toggleSidebar }) => {
         <Route path="/Profile" element={<Profile />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/Table" element={<Table />} />
-        {/* <Route path="/Login" element={<Login />} /> */}
         <Route path="/ListProducts" element={<ListProducts />} />
+        {/* <Route path="/Login" element={<Login />} /> */}
+        <Route path="/Logout" element={<Logout />} />
       </Routes>
     </div>
   );

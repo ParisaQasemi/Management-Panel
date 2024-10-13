@@ -108,11 +108,11 @@ const Navbar = ({ toggleSidebar }) => {
           {/* Buttons section*/}
           <div className="w-24 flex items-center justify-end">
             <NavLink
-              to="/auth/Login"
+              to="/logout"
               className="ps-2 py-2 text-sm flex items-center"
             >
               <FaUserCircle className="cursor-pointer" />
-              <span className="ps-1 hidden md:block">ورود</span>
+              <span className="ps-1 hidden md:block">خروج</span>
             </NavLink>
             <IoMenu
               className="ms-2 cursor-pointer md:hidden"

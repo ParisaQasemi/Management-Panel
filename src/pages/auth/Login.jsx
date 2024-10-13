@@ -24,11 +24,14 @@ const onSubmit = (values, submitMethods, navigate) => {
       if (res.status == 200) {
         localStorage.setItem("loginToken", JSON.stringify(res.data));
         navigate("/");
-        submitMethods.setSubmitting(false);
       } else {
-        submitMethods.setSubmitting(false);
-        Alert(' متاسفم! ' , res.data.message, 'error')
+        Alert(" متاسفم! ", res.data.message, "error");
       }
+      submitMethods.setSubmitting(false);
+    })
+    .catch((error) => {
+      submitMethods.setSubmitting(false);
+      Alert("متاسفم", "متاسفم. مشکلی از سمت سرور رخ داده", "error");
     });
 };
 
@@ -107,9 +110,11 @@ const Login = () => {
                       />
 
                       <div>
-                        <button disabled={formik.isSubmitting}
-                          className="w-full h-10 my-6 rounded-xl text-sm text-white bg-[#0075ff]">
-                            {formik.isSubmitting ? "... لطفا صبر کنید" : "ورود" }
+                        <button
+                          disabled={formik.isSubmitting}
+                          className="w-full h-10 my-6 rounded-xl text-sm text-white bg-[#0075ff]"
+                        >
+                          {formik.isSubmitting ? "... لطفا صبر کنید" : "ورود"}
                         </button>
                       </div>
                     </Form>

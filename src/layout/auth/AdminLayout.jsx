@@ -4,11 +4,8 @@ import Mainbar from "../Mainbar/Mainbar";
 import { Navigate } from 'react-router-dom';
 import { useIsLogin } from "../../hooks/authHooks";
 
-
-
 const AdminLayout = () => {
   const [loading, isLogin] = useIsLogin()
-
   // Responsive Menu Item
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = () => {
@@ -19,7 +16,7 @@ const AdminLayout = () => {
     <div>
       {
         loading ? (
-          <h1 className='text-center font-bold text-3xl pt-20'>لطفا صبر کنید ...</h1>
+          <h1 className='text-center font-bold text-3xll pt-20'>لطفا صبر کنید ...</h1>
         ) : isLogin ? (
           <>
             <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
