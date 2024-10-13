@@ -1,31 +1,27 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { Alert } from "../../utils/alert";
+import { logoutService } from "../../services/auth";
 
 const Logout = () => {
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const loginToken = JSON.parse(localStorage.getItem("loginToken"));
-
-    axios
-      .get("https://ecomadminapi.azhadev.ir/api/auth/logout", {
-        headers: {
-          Authorization: `Bearer ${loginToken.token}`,
-        },
-      })
-      .then((res) => {
-        if (res.status == 200) {
-          localStorage.removeItem("loginToken");
-          setLoading(false);
+  const handleLogout = async ()=>{
+    try {
+        const res = await logoutService();
+        if(res.status == 200) {
+            localStorage.removeItem("loginToken")
         } else {
-          Alert("متاسفم", res.data.message, "error");
+            Alert("متاسفم", res.data.message, "error");
         }
-      })
-      .catch((error) => {
-        setLoading(false);
-        Alert("متاسفم", 'متاسفم. مشکلی از سمت سرور رخ داده', "error");
-      });
+        setLoading(false)
+    } catch (error) {
+        setLoading(false)
+        // Alert("متاسفم", 'مشکلی از سمت سرور رخ داده', "error");
+    }
+  }
+
+  useEffect(() => {
+    handleLogout()
   }, []);
 
   return (

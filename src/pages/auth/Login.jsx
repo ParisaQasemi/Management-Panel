@@ -5,6 +5,8 @@ import AuthFormikControl from "../../component/authForm/AuthFormikControl";
 import axios from "axios";
 import { json, useNavigate } from "react-router-dom";
 import { Alert } from "../../utils/alert";
+import httpService from "../../services/httpService";
+import { loginService } from "../../services/auth";
 
 const initialValues = {
   phone: "",
@@ -12,28 +14,22 @@ const initialValues = {
   remember: false,
 };
 
-const onSubmit = (values, submitMethods, navigate) => {
-  console.log(submitMethods);
-  axios
-    .post("https://ecomadminapi.azhadev.ir/api/auth/login", {
-      ...values,
-      remember: values.remember ? 1 : 0,
-    })
-    .then((res) => {
-      console.log(res);
-      if (res.status == 200) {
-        localStorage.setItem("loginToken", JSON.stringify(res.data));
-        navigate("/");
-      } else {
-        Alert(" متاسفم! ", res.data.message, "error");
-      }
-      submitMethods.setSubmitting(false);
-    })
-    .catch((error) => {
-      submitMethods.setSubmitting(false);
-      Alert("متاسفم", "متاسفم. مشکلی از سمت سرور رخ داده", "error");
-    });
-};
+const onSubmit = async (values, submitMethods, navigate) => {
+  try {
+    const res = await loginService(values)
+    if (res.status == 200) {
+      localStorage.setItem("loginToken", JSON.stringify(res.data));
+      navigate("/");
+    } else {
+      Alert(" متاسفم! ", res.data.message, "error");
+    }
+    submitMethods.setSubmitting(false);
+  } catch (error) {
+    submitMethods.setSubmitting(false);
+    Alert("متاسفم", "متاسفم. مشکلی از سمت سرور رخ داده", "error");
+  }
+}
+
 
 const validationSchema = Yup.object({
   phone: Yup.number().required("لطفا این قسمت را پر کنید"),
@@ -81,7 +77,6 @@ const Login = () => {
               validationSchema={validationSchema}
             >
               {(formik) => {
-                console.log(formik);
                 return (
                   <div>
                     <Form>
