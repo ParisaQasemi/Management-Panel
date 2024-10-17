@@ -63,26 +63,30 @@ const PaginationTable = ({
 
       {/* Table Product */}
       <table className="table text-right my-5 bg-gradient-custom backdrop-blur-lg">
-        <thead className="text-md font-bold text-white">
+        <thead className="text-md font-bold text-gray-300">
           <tr>
             {dataInfo.map((i) => (
               <th key={i.field}>{i.title}</th>
             ))}
-            {additionField ? <th>{additionField.title}</th> : null}
+            {additionField
+              ? additionField.map((a, index) => {
+                return  <th key={a.id + "__" + index}>{a.title}</th>;
+                })
+              : null}
           </tr>
         </thead>
 
-        <tbody className="text-sm">
+        <tbody className="text-sm font-light text-white">
           {tableData.map((d) => (
             <tr key={d.id}>
               {dataInfo.map((i) => (
                 <th key={`${i.field}_${d.id}`}>{d[i.field]}</th>
               ))}
-              {additionField ? (
-                <th key={`additional_${d.id}`}>
-                  {additionField.elements(d.id)}
-                </th>
-              ) : null}
+              {additionField
+                ? additionField.map((a, index) => {
+                  return  <td key={a.id + "__" + index}>{a.elements(d)}</td>;
+                })
+                : null}
             </tr>
           ))}
         </tbody>

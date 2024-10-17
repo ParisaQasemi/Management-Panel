@@ -1,73 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PaginationTable from "../../../component/Pagination/PaginationTable";
-import { PiSubsetProperOf } from "react-icons/pi";
-import { FaEdit } from "react-icons/fa";
-import { IoMdAdd } from "react-icons/io";
-import { MdDelete } from "react-icons/md";
+import { getCategoriesService } from "../../../services/category";
+import { Alert } from "../../../utils/alert";
+import Actions from "./tableAdditons/Actions";
+import ShowInData from "./tableAdditons/showInData";
 
 const CategoryTable = () => {
-  const data = [
-    {
-      id: "1",
-      category: "frontEnd",
-      title: "React",
-      price: "$ 500",
-      stock: "5",
-      like: "2",
-      status: "1",
-    },
-    {
-      id: "2",
-      category: "frontEnd",
-      title: "JavaScript",
-      price: "$ 330",
-      stock: "6",
-      like: "7",
-      status: "2",
-    },
-    {
-      id: "3",
-      category: "frontEnd",
-      title: "TypeScript",
-      price: "$ 330",
-      stock: "6",
-      like: "7",
-      status: "2",
-    },
-  ];
+  const [data, setData] = useState([]);
+  const handleGetCategories = async () => {
+    try {
+      const res = await getCategoriesService();
+      if (res.status == 200) {
+        console.log(res.data);
+        setData(res.data.data)
+      } else {
+        Alert("مشکل !", res.data.message, "error");
+      }
+    } catch (error) {
+      Alert("مشکل !", "مشکلی از سمت سرور رخ داده" , "error");
+    }
+  };
+
+  useEffect(()=> {
+    handleGetCategories()
+  }, [])
 
   const dataInfo = [
     { field: "id", title: "#" },
     { field: "title", title: "عنوان محصول" },
-    { field: "price", title: "قیمت محصول" },
+    { field: "parent_id", title: "والد"},
+    { field: "created_at", title: "تاریخ"},
   ];
 
-  const additionField = {
-    title: "عملیات",
-    elements: (itemId) => additionalElements(itemId),
-  };
-
-  const additionalElements = (itemId) => {
-    return (
-      <>
-        <button className="mx-1 cursor-pointer text-blue-500" title="زیرمجموعه">
-          <PiSubsetProperOf />
-        </button>
-
-        <button className="mx-1 cursor-pointer text-yellow-500" title="ویرایش">
-          <FaEdit />
-        </button>
-
-        <button className="mx-1 cursor-pointer text-green-500" title="افزودن">
-          <IoMdAdd />
-        </button>
-
-        <button className="mx-1 cursor-pointer text-red-500" title="حذف">
-          <MdDelete />
-        </button>
-      </>
-    );
-  };
+  const additionField = [
+    {
+      title: "نمایش در منو",
+      elements: (rowData) => <ShowInData rowData={rowData}/>,
+    },
+    {
+      title: "عملیات",
+      elements: (rowData) => <Actions rowData={rowData}/>,
+    }
+  ];
 
   const searchParams = {
     title: "جستجو",
@@ -82,7 +56,7 @@ const CategoryTable = () => {
         dataInfo={dataInfo}
         additionField={additionField}
         searchParams={searchParams}
-        numOfPage={2}
+        numOfPage={5}
       />
     </>
   );
