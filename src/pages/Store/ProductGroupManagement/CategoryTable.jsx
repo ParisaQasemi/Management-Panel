@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import PaginationTable from "../../../component/Pagination/PaginationTable";
 import { getCategoriesService } from "../../../services/category";
-import { Alert } from "../../../utils/alert";
 import Actions from "./tableAdditons/Actions";
 import ShowInData from "./tableAdditons/showInData";
 import { Outlet, useLocation, useParams } from "react-router-dom";
-import jMoment from "jalali-moment";
 import { convertDateToJalali } from "../../../utils/convertDate";
 
 const CategoryTable = () => {
   const params = useParams();
   const location = useLocation();
   const [data, setData] = useState([]);
+  const [forceRender, setForceRender] = useState(0)
   const handleGetCategories = async () => {
     try {
       const res = await getCategoriesService(params.categoryId);
@@ -25,7 +24,7 @@ const CategoryTable = () => {
 
   useEffect(() => {
     handleGetCategories();
-  }, [params]);
+  }, [params, forceRender]);
 
   const dataInfo = [
     { field: "id", title: "#" },
@@ -64,6 +63,7 @@ const CategoryTable = () => {
           additionField={additionField}
           searchParams={searchParams}
           numOfPage={5}
+          setForceRender={setForceRender}
         />
       ) : (
         <h3 className="text-center text-red-600 font-bold mt-5">

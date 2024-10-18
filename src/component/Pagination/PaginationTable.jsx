@@ -12,6 +12,7 @@ const PaginationTable = ({
   additionField,
   numOfPage,
   searchParams,
+  setForceRender 
 }) => {
   const [initData, setInitData] = useState(data);
   // Table
@@ -58,7 +59,7 @@ const PaginationTable = ({
         <Search setSearchChar={setSearchChar} />
         <ModalBtn onClick={toggleModal} />
         {isModalOpen && location.pathname === "/Product" && <AddProduct />}
-        {isModalOpen && location.pathname === "/Category" && <AddCategory />}
+        {isModalOpen && location.pathname === "/Category" && <AddCategory setForceRender={setForceRender}/>}
       </div>
 
       {/* Table Product */}
@@ -70,7 +71,7 @@ const PaginationTable = ({
             ))}
             {additionField
               ? additionField.map((a, index) => {
-                return  <th key={a.id + "__" + index}>{a.title}</th>;
+                  return <th key={a.id + "__" + index}>{a.title}</th>;
                 })
               : null}
           </tr>
@@ -84,8 +85,8 @@ const PaginationTable = ({
               ))}
               {additionField
                 ? additionField.map((a, index) => {
-                  return  <td key={a.id + "__" + index}>{a.elements(d)}</td>;
-                })
+                    return <td key={a.id + "__" + index}>{a.elements(d)}</td>;
+                  })
                 : null}
             </tr>
           ))}
