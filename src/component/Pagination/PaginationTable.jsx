@@ -5,6 +5,7 @@ import ModalBtn from "../Modal/ModalBtn";
 import AddProduct from "../../pages/Store/Product/AddProduct";
 import { useLocation } from "react-router-dom";
 import AddCategory from "../../pages/Store/ProductGroupManagement/AddCategory";
+import SpinnerLoad from "../SpinnerLoad";
 
 const PaginationTable = ({
   data,
@@ -12,7 +13,10 @@ const PaginationTable = ({
   additionField,
   numOfPage,
   searchParams,
-  setForceRender 
+  setForceRender,
+  loading,
+  colorClass = "border-blue-500", 
+
 }) => {
   const [initData, setInitData] = useState(data);
   // Table
@@ -59,39 +63,50 @@ const PaginationTable = ({
         <Search setSearchChar={setSearchChar} />
         <ModalBtn onClick={toggleModal} />
         {isModalOpen && location.pathname === "/Product" && <AddProduct />}
-        {isModalOpen && location.pathname === "/Category" && <AddCategory setForceRender={setForceRender}/>}
+        {isModalOpen && location.pathname === "/Category" && (
+          <AddCategory setForceRender={setForceRender} />
+        )}
       </div>
 
       {/* Table Product */}
-      <table className="table text-right my-5 bg-gradient-custom backdrop-blur-lg">
-        <thead className="text-md font-bold text-gray-300">
-          <tr>
-            {dataInfo.map((i) => (
-              <th key={i.field}>{i.title}</th>
-            ))}
-            {additionField
-              ? additionField.map((a, index) => {
-                  return <th key={a.id + "__" + index}>{a.title}</th>;
-                })
-              : null}
-          </tr>
-        </thead>
 
-        <tbody className="text-sm font-light text-white">
-          {tableData.map((d) => (
-            <tr key={d.id}>
+      {loading ? (
+        <SpinnerLoad colorClass={colorClass} />
+      ) : data.length ? (
+        <table className="table text-right my-5 bg-gradient-custom backdrop-blur-lg">
+          <thead className="text-md font-bold text-gray-300">
+            <tr>
               {dataInfo.map((i) => (
-                <th key={`${i.field}_${d.id}`}>{d[i.field]}</th>
+                <th key={i.field}>{i.title}</th>
               ))}
               {additionField
                 ? additionField.map((a, index) => {
-                    return <td key={a.id + "__" + index}>{a.elements(d)}</td>;
+                    return <th key={a.id + "__" + index}>{a.title}</th>;
                   })
                 : null}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody className="text-sm font-light text-white">
+            {tableData.map((d) => (
+              <tr key={d.id}>
+                {dataInfo.map((i) => (
+                  <th key={`${i.field}_${d.id}`}>{d[i.field]}</th>
+                ))}
+                {additionField
+                  ? additionField.map((a, index) => {
+                      return <td key={a.id + "__" + index}>{a.elements(d)}</td>;
+                    })
+                  : null}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <h3 className="text-center text-red-600 font-bold mt-5">
+          هیچ دسته بندی یافت نشد
+        </h3>
+      )}
 
       {/* Pagination Table button */}
       {pages.length > 1 ? (

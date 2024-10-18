@@ -3,15 +3,17 @@ import PaginationTable from "../../../component/Pagination/PaginationTable";
 import { getCategoriesService } from "../../../services/category";
 import Actions from "./tableAdditons/Actions";
 import ShowInData from "./tableAdditons/showInData";
-import { Outlet, useLocation, useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { convertDateToJalali } from "../../../utils/convertDate";
 
 const CategoryTable = () => {
   const params = useParams();
-  const location = useLocation();
   const [data, setData] = useState([]);
-  const [forceRender, setForceRender] = useState(0)
+  const [forceRender, setForceRender] = useState(0);
+  const [loading, setLoading] = useState(false)
+
   const handleGetCategories = async () => {
+    setLoading(true)
     try {
       const res = await getCategoriesService(params.categoryId);
       if (res.status == 200) {
@@ -19,6 +21,8 @@ const CategoryTable = () => {
       }
     } catch (error) {
       console.log(error.message);
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -56,20 +60,15 @@ const CategoryTable = () => {
   return (
     <>
       <Outlet />
-      {data.length ? (
-        <PaginationTable
-          data={data}
-          dataInfo={dataInfo}
-          additionField={additionField}
-          searchParams={searchParams}
-          numOfPage={5}
-          setForceRender={setForceRender}
-        />
-      ) : (
-        <h3 className="text-center text-red-600 font-bold mt-5">
-          هیچ دسته بندی یافت نشد
-        </h3>
-      )}
+      <PaginationTable
+        data={data}
+        dataInfo={dataInfo}
+        additionField={additionField}
+        searchParams={searchParams}
+        numOfPage={5}
+        setForceRender={setForceRender}
+        loading={loading}
+      />
     </>
   );
 };

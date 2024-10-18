@@ -4,7 +4,12 @@ import * as Yup from "yup";
 import { Form, Formik } from "formik";
 import FormikControl from "../../../component/form/FormikControl";
 import { Alert } from "../../../utils/alert";
-import { createNewCategoryService, getCategoriesService } from "../../../services/category";
+import {
+  createNewCategoryService,
+  getCategoriesService,
+} from "../../../services/category";
+import SpinnerLoad from "../../../component/SpinnerLoad";
+import SubmitButton from "../../../component/form/SubmitButton";
 
 const initialValues = {
   parent_id: "",
@@ -17,24 +22,24 @@ const initialValues = {
 
 const onSubmit = async (values, actions) => {
   try {
-    values= {
+    values = {
       ...values,
       is_active: values.is_active ? 1 : 0,
       show_in_menu: values.show_in_menu ? 1 : 0,
-    }
-    const res = await createNewCategoryService(values)
+    };
+    const res = await createNewCategoryService(values);
     console.log(res);
-    
+
     if (res.status === 201) {
-      Alert('رکورد ثبت شد', res.data.message, 'success')
-      actions.resetForm()
-      setForceRender(prev => prev + 1);
+      Alert("رکورد ثبت شد", res.data.message, "success");
+      actions.resetForm();
+      setForceRender((prev) => prev + 1);
     }
   } catch (error) {
     console.log(error.message);
   }
-  console.log(values)
-}
+  console.log(values);
+};
 
 const validationSchema = Yup.object({
   parent_id: Yup.number(),
@@ -60,7 +65,7 @@ const validationSchema = Yup.object({
   show_in_menu: Yup.boolean(),
 });
 
-const AddCategory = ({setForceRender}) => {
+const AddCategory = ({ setForceRender }) => {
   const [parents, setParents] = useState([]);
   const handleGetParentsCategorty = async () => {
     try {
@@ -68,10 +73,10 @@ const AddCategory = ({setForceRender}) => {
       if (res.status === 200) {
         const allParents = res.data.data;
         setParents(
-          allParents.map(p => {
-            return { id:p.id , value:p.title };
+          allParents.map((p) => {
+            return { id: p.id, value: p.title };
           })
-        )
+        );
       }
     } catch (errors) {
       Alert("مشکل !", "متاسفانه دسته بندی های والد دریافت نشد", "warning");
@@ -85,7 +90,9 @@ const AddCategory = ({setForceRender}) => {
     <ModalContent>
       <Formik
         initialValues={initialValues}
-        onSubmit={(values, actions)=> onSubmit(values, actions, setForceRender)}
+        onSubmit={(values, actions) =>
+          onSubmit(values, actions, setForceRender)
+        }
         validationSchema={validationSchema}
       >
         {/* Form Inputs */}
@@ -130,9 +137,7 @@ const AddCategory = ({setForceRender}) => {
           </div>
 
           <div className="flex justify-center mb-24 ">
-            <button className="text-white bg-[#0075ff] hover:bg-blue-600 font-bold py-2 px-10 rounded-lg focus:outline-none focus:ring focus:border-[#0075ff]">
-              ذخیره
-            </button>
+            <SubmitButton />
           </div>
         </Form>
       </Formik>
