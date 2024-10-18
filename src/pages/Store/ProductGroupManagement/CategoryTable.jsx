@@ -17,11 +17,9 @@ const CategoryTable = () => {
       const res = await getCategoriesService(params.categoryId);
       if (res.status == 200) {
         setData(res.data.data);
-      } else {
-        Alert("مشکل !", res.data.message, "error");
       }
     } catch (error) {
-      Alert("مشکل !", "مشکلی از سمت سرور رخ داده", "error");
+      console.log(error.message);
     }
   };
 
