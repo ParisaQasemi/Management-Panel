@@ -25,6 +25,7 @@ import AddCategory from "../../pages/Store/ProductGroupManagement/AddCategory";
 import Product from "../../pages/Store/Product/Product";
 import AddProduct from "../../pages/Store/Product/AddProduct";
 import Logout from "../../pages/auth/Logout";
+import CategoryChildren from "../../pages/Store/ProductGroupManagement/tableAdditons/CategoryChildren";
 
 const Mainbar = ({ toggleSidebar }) => {
   return (
@@ -33,7 +34,7 @@ const Mainbar = ({ toggleSidebar }) => {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/Category" element={<Category />}>
-          <Route path=":categoryId" />
+          <Route path=":categoryId" element={<CategoryChildren />}/>
         </Route>
         <Route path="/AddCategory" element={<AddCategory />} />
         <Route path="/Product" element={<Product />} />

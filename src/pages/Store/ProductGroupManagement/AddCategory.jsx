@@ -1,57 +1,122 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ModalContent from "../../../component/Modal/ModalContent";
+import * as Yup from "yup";
+import { Form, Formik } from "formik";
+import FormikControl from "../../../component/form/FormikControl";
+import { Alert } from "../../../utils/alert";
+import { getCategoriesService } from "../../../services/category";
+
+const initialValues = {
+  parent_id: "",
+  title: "",
+  description: "",
+  image: null,
+  is_active: true,
+  show_in_menu: true,
+};
+
+const onSubmit = (values, actions) => {};
+
+const validationSchema = Yup.object({
+  parent_id: Yup.number(),
+  title: Yup.string()
+    .required("لطفا این قسمت را پر کنید")
+    .matches(
+      /^[\u0600-\u06FF\sa-zA-Z0-9@!%$?&]+$/,
+      "فقط از حروف و اعداد استفاده شود"
+    ),
+  description: Yup.string().matches(
+    /^[\u0600-\u06FF\sa-zA-Z0-9@!%$?&]+$/,
+    "فقط از حروف و اعداد استفاده شود"
+  ),
+  image: Yup.mixed()
+    .required("آپلود تصویر اجباری است")
+    .test("filesize", "حجم فایل نمیتواند بیشتر 500 کیلوبایت باشد", (value) =>
+      !value ? true : value.size < 500 * 1024
+    )
+    .test("format", "فرمت فایل باید jpg باشد", (value) =>
+      !value ? true : value.type === "image/jpeg"
+    ),
+  is_active: Yup.boolean(),
+  show_in_menu: Yup.boolean(),
+});
 
 const AddCategory = () => {
+  const [parents, setParents] = useState([]);
+  const handleGetParentsCategorty = async () => {
+    try {
+      const res = await getCategoriesService();
+      if (res.status === 200) {
+        const allParents = res.data.data;
+        setParents(
+          allParents.map(p => {
+            return { id:p.id , value:p.title };
+          })
+        )
+      }
+    } catch (errors) {
+      Alert("مشکل !", "متاسفانه دسته بندی های والد دریافت نشد", "warning");
+    }
+  };
+  useEffect(() => {
+    handleGetParentsCategorty();
+  }, []);
+
   return (
     <ModalContent>
-      {/* Form Inputs */}
-      <form className="w-3/5 mt-20 mx-auto ">
-        <div className="mb-10">
-          <label className="block text-white text-sm font-bold">
-            دسته والد
-          </label>
-          <select className="w-full p-1 border-b-[1px] border-white text-white focus:outline-none bg-transparent">
-            <option>بدون والد</option>
-          </select>
-        </div>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
+        {/* Form Inputs */}
+        <Form className="w-3/5 mt-20 mx-auto ">
+          {parents.length > 0 ? (
+            <FormikControl
+              control="select"
+              options={parents}
+              name="parent_id"
+              label="دسته والد"
+            />
+          ) : null}
 
-        <div className="mb-10">
-          <label className="block text-white text-sm font-bold">عنوان</label>
-          <input
+          <FormikControl
+            control="input"
             type="text"
-            className="w-full p-1 border-b-[1px] border-white text-white focus:outline-none bg-transparent"
+            name="title"
+            label="عنوان دسته"
+            placeholder="عنوان دسته"
           />
-        </div>
 
-        <div className="mb-10">
-          <label className="block text-white text-sm font-bold">توضیحات</label>
-          <textarea className="w-full p-1 border-b-[1px] border-white text-white focus:outline-none bg-transparent"></textarea>
-        </div>
-
-        <div className="mb-10">
-          <label className="block text-white text-sm font-bold">تصویر</label>
-          <input
-            type="file"
-            className="w-full p-1 border-b-[1px] border-white text-white   focus:outline-none bg-transparent"
+          <FormikControl
+            control="textarea"
+            name="description"
+            label="توضیحات"
+            placeholder="توضیحات"
           />
-        </div>
 
-        <div className="flex justify-center items-center mb-10">
-          <label className="block text-white text-sm font-bold">
-            وضعیت فعال
-          </label>
-          <label className="flex cursor-pointer">
-            <input type="checkbox" className="sr-only peer" />
-            <div className="w-8 h-5 mx-1 bg-gray-200 rounded-full peer peer-checked:bg-blue-600"></div>
-          </label>
-        </div>
+          <FormikControl control="file" name="image" label="تصویر" />
 
-        <div className="flex justify-center mb-24 ">
-          <button className="text-white bg-[#0075ff] hover:bg-blue-600 font-bold py-2 px-10 rounded-lg focus:outline-none focus:ring focus:border-[#0075ff]">
-            ذخیره
-          </button>
-        </div>
-      </form>
+          <div className="flex justify-around">
+            <FormikControl
+              control="switch"
+              name="is_active"
+              label="وضعیت فعال"
+            />
+            <FormikControl
+              control="switch"
+              name="show_in_menu"
+              label="نمایش در منو"
+            />
+          </div>
+
+          <div className="flex justify-center mb-24 ">
+            <button className="text-white bg-[#0075ff] hover:bg-blue-600 font-bold py-2 px-10 rounded-lg focus:outline-none focus:ring focus:border-[#0075ff]">
+              ذخیره
+            </button>
+          </div>
+        </Form>
+      </Formik>
     </ModalContent>
   );
 };

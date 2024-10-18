@@ -4,7 +4,9 @@ import { getCategoriesService } from "../../../services/category";
 import { Alert } from "../../../utils/alert";
 import Actions from "./tableAdditons/Actions";
 import ShowInData from "./tableAdditons/showInData";
-import { useLocation, useParams } from "react-router-dom";
+import { Outlet, useLocation, useParams } from "react-router-dom";
+import jMoment from "jalali-moment";
+import { convertDateToJalali } from "../../../utils/convertDate";
 
 const CategoryTable = () => {
   const params = useParams();
@@ -14,7 +16,6 @@ const CategoryTable = () => {
     try {
       const res = await getCategoriesService(params.categoryId);
       if (res.status == 200) {
-        console.log(res.data);
         setData(res.data.data);
       } else {
         Alert("مشکل !", res.data.message, "error");
@@ -32,10 +33,13 @@ const CategoryTable = () => {
     { field: "id", title: "#" },
     { field: "title", title: "عنوان محصول" },
     { field: "parent_id", title: "والد" },
-    { field: "created_at", title: "تاریخ" },
   ];
 
   const additionField = [
+    {
+      title: "تاریخ",
+      elements: (rowData) => convertDateToJalali(rowData.created_at),
+    },
     {
       title: "نمایش در منو",
       elements: (rowData) => <ShowInData rowData={rowData} />,
@@ -54,20 +58,20 @@ const CategoryTable = () => {
 
   return (
     <>
-      {location.state ? (
-        <h5 className="text-center">
-          <span>زیرمجموعه :</span>
-          <span className="text-blue-400"> {location.state.parentData.title} </span>
-        </h5>
-      ) : null}
-
-      <PaginationTable
-        data={data}
-        dataInfo={dataInfo}
-        additionField={additionField}
-        searchParams={searchParams}
-        numOfPage={5}
-      />
+      <Outlet />
+      {data.length ? (
+        <PaginationTable
+          data={data}
+          dataInfo={dataInfo}
+          additionField={additionField}
+          searchParams={searchParams}
+          numOfPage={5}
+        />
+      ) : (
+        <h3 className="text-center text-red-600 font-bold mt-5">
+          هیچ دسته بندی یافت نشد
+        </h3>
+      )}
     </>
   );
 };
