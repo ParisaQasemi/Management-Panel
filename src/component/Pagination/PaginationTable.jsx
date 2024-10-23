@@ -15,8 +15,8 @@ const PaginationTable = ({
   searchParams,
   setForceRender,
   loading,
-  colorClass = "border-blue-500", 
-
+  colorClass = "border-blue-500",
+  additionalElement,
 }) => {
   const [initData, setInitData] = useState(data);
   // Table
@@ -61,11 +61,12 @@ const PaginationTable = ({
       {/* Modal Button and Search */}
       <div className="flex justify-between">
         <Search setSearchChar={setSearchChar} />
-        <ModalBtn onClick={toggleModal} />
+        {/* <ModalBtn onClick={toggleModal} />
         {isModalOpen && location.pathname === "/Product" && <AddProduct />}
-        {isModalOpen && location.pathname === "/Category" && (
+        {isModalOpen && location.pathname.includes("/Category") && (
           <AddCategory setForceRender={setForceRender} />
-        )}
+        )} */}
+        {additionalElement || ""}
       </div>
 
       {/* Table Product */}

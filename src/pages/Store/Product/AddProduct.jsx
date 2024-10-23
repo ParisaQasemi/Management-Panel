@@ -1,10 +1,12 @@
 import React from "react";
 import ModalContent from "../../../component/Modal/ModalContent";
 
-const AddProduct = () => {
+const AddProduct = ({ children }) => {
   return (
     <>
       <ModalContent>
+        {children}
+
         {/* Form Inputs */}
         <form className="w-3/5 mt-20 mx-auto ">
           <div className="mb-10">

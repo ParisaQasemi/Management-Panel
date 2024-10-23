@@ -1,7 +1,12 @@
+import { data } from 'autoprefixer'
 import httpService from './httpService'
 
 export const getCategoriesService = (id=null)=> {
     return httpService(`/admin/categories${id ? `?parent=${id}` : ""}` , 'get')
+}
+
+export const  getSingleCategoryService = (id)=> {
+    return httpService(`/admin/category/${id}`, 'get')
 }
 
 export const createNewCategoryService = (data)=> {
@@ -15,6 +20,13 @@ export const createNewCategoryService = (data)=> {
         formdata.append('show_in_menu', data.show_in_menu)
         data = formdata
     }
-
     return httpService('/admin/categories', 'post', data)
+}
+
+export const editCategoryService= (id, data)=> {
+    return httpService(`/admin/categories/${id}`, 'put', data)
+}
+
+export const deleteCategoryService = (id)=> {
+    return httpService(`/admin/categories/${id}`, 'delete')
 }

@@ -9,8 +9,7 @@ const CategoryChildren = () => {
       <h5 className="text-center">
         <span>زیرمجموعه :</span>
         <span className="text-blue-400">
-          {" "}
-          {location.state.parentData.title}{" "}
+          {location.state.parentData.title}
         </span>
       </h5>
       <PrevPageButton />

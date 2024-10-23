@@ -1,97 +1,65 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PaginationTable from "../../../component/Pagination/PaginationTable";
 import { PiSubsetProperOf } from "react-icons/pi";
 import { FaEdit } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
+import AddProduct from "./AddProduct";
+import CloseModalBtn from "../../../component/Modal/CloseModalBtn";
+import ModalBtn from "../../../component/Modal/ModalBtn";
+import { useParams } from "react-router-dom";
 
 const ProductTable = () => {
-  const data = [
-    {
-      id: "1",
-      category: "laptop",
-      title: "LapTop - asus",
-      price: "$ 2000",
-      stock: "5",
-      like: "2",
-      status: "1",
-    },
-    {
-      id: "2",
-      category: "laptop",
-      title: "Mobail",
-      price: "$ 330",
-      stock: "6",
-      like: "7",
-      status: "2",
-    },
-    {
-      id: "3",
-      category: "laptop",
-      title: "tablet",
-      price: "$ 330",
-      stock: "6",
-      like: "7",
-      status: "2",
-    },
-    {
-      id: "4",
-      category: "laptop",
-      title: "phone",
-      price: "$ 330",
-      stock: "6",
-      like: "7",
-      status: "2",
-    },
-    {
-      id: "5",
-      category: "laptop",
-      title: "phone",
-      price: "$ 330",
-      stock: "6",
-      like: "7",
-      status: "2",
-    },
-  ];
+  const params = useParams();
+  const [data, setData] = useState([]);
+  const [forceRender, setForceRender] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [showModal, setshowModal] = useState(false); // باز و بستن مدال
+
+  const handleGetCategories = async () => {
+    setLoading(true);
+    try {
+      const res = await getCategoriesService(params.categoryId);
+      if (res.status == 200) {
+        setData(res.data.data);
+      }
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    handleGetCategories();
+  }, [params, forceRender]);
 
   const dataInfo = [
     { field: "id", title: "#" },
     { field: "title", title: "عنوان محصول" },
-    { field: "price", title: "قیمت محصول" },
+    { field: "parent_id", title: "والد" },
   ];
 
-  const additionField = {
-    title: "عملیات",
-    elements: (itemId) => additionalElements(itemId),
-  };
-
-  const additionalElements = (itemId) => {
-    return (
-      <>
-        <button className="mx-1 cursor-pointer text-blue-500" title="زیرمجموعه">
-          <PiSubsetProperOf />
-        </button>
-
-        <button className="mx-1 cursor-pointer text-yellow-500" title="ویرایش">
-          <FaEdit />
-        </button>
-
-        <button className="mx-1 cursor-pointer text-green-500" title="افزودن">
-          <IoMdAdd />
-        </button>
-
-        <button className="mx-1 cursor-pointer text-red-500" title="حذف">
-          <MdDelete />
-        </button>
-      </>
-    );
-  };
+  const additionField = [
+    {
+      title: "تاریخ",
+      elements: (rowData) => convertDateToJalali(rowData.created_at),
+    },
+    {
+      title: "نمایش در منو",
+      elements: (rowData) => <ShowInData rowData={rowData} />,
+    },
+    {
+      title: "عملیات",
+      elements: (rowData) => <Actions rowData={rowData} />,
+    },
+  ];
 
   const searchParams = {
-    title: 'جستجو',
-    placeholder: 'قسمتی از عنوان را وارد کنید',
-    searchField: 'title'
-  }
+    title: "جستجو",
+    placeholder: "قسمتی از عنوان را وارد کنید",
+    searchField: "title",
+  };
 
   return (
     <>
@@ -100,8 +68,18 @@ const ProductTable = () => {
         dataInfo={dataInfo}
         additionField={additionField}
         searchParams={searchParams}
-        numOfPage = {2}
+        numOfPage={2}
+        additionalElement={<ModalBtn onClick={() => setshowModal(true)} />} // باز و بستن مدال
       />
+
+      {/* باز و بستن مدال */}
+      {showModal && (
+        <AddProduct>
+          <button onClick={() => setshowModal(false)}>
+            <CloseModalBtn />
+          </button>
+        </AddProduct>
+      )}
     </>
   );
 };
