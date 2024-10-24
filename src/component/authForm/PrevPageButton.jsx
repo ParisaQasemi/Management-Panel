@@ -6,7 +6,7 @@ const PrevPageButton = () => {
   return (
     <div>
       <button
-        className="bg-gray-500 text-white p-2 rounded text-sm"
+        className="bg-gray-500 text-white p-2 rounded text-sm left-0"
         onClick={() => navigate(-1)}
       >
         بازگشت

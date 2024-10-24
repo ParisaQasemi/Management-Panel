@@ -10,7 +10,7 @@ import {
 } from "../../../services/category";
 import SubmitButton from "../../../component/form/SubmitButton";
 import { useParams } from "react-router-dom";
-import { CategoryContext } from "../../../context/categoryContext";
+import { CategoryContext } from "../../../context/CategoryContext";
 import {
   initialValues,
   onSubmit,
@@ -94,6 +94,8 @@ const AddCategory = ({ setForceRender, children }) => {
       >
         {/* Form Inputs */}
         <Form className="w-3/5 mt-20 mx-auto ">
+        {editId}
+
           {parents.length > 0 ? (
             <FormikControl
               control="select"

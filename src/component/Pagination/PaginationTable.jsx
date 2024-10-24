@@ -105,7 +105,7 @@ const PaginationTable = ({
         </table>
       ) : (
         <h3 className="text-center text-red-600 font-bold mt-5">
-          هیچ دسته بندی یافت نشد
+          هیچ رکوردی یافت نشد
         </h3>
       )}
 

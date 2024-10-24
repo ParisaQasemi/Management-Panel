@@ -36,7 +36,6 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
           {/* ---------- Store ---------- */}
           <SidebarGroupTitle title='فروشگاه'/>
-          {/* <SidebarItem title='لیست محصولات' icon={<FaThList />} path='/ListProducts'/> */}
           <SidebarItem title='مدیریت گروه محصول' icon={<AiOutlineProduct />} path='/Category'/>
           <SidebarItem title='مدیریت محصول' icon={<AiOutlineProduct />} path='/Product'/>
           <SidebarItem title='مدیریت برند ها' icon={<TbBrandAsana />} path='/BrandManagement'/>

@@ -4,7 +4,6 @@ import { IoHomeSharp, IoMenu, IoNotifications } from "react-icons/io5";
 import { FaUserCircle } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 
-
 const Navbar = ({ toggleSidebar }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -78,7 +77,7 @@ const Navbar = ({ toggleSidebar }) => {
         return "صفحه دیگر";
     }
   };
-  
+
   const goToDashboard = () => {
     navigate("/");
   };

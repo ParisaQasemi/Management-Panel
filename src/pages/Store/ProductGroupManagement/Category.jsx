@@ -1,6 +1,6 @@
 import React from "react";
 import CategoryTable from "./CategoryTable";
-import CategoryContextContainer from "../../../context/categoryContext";
+import CategoryContextContainer from "../../../context/CategoryContext";
 
 
 const Category = () => {
