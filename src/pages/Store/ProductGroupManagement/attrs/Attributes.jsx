@@ -6,18 +6,21 @@ import PaginationTable from "../../../../component/Pagination/PaginationTable";
 import PrevPageButton from "../../../../component/authForm/PrevPageButton";
 import {
   AddCategoryAttrsService,
+  deleteCategoryAttrService,
   getCategoryAttrsService,
 } from "../../../../services/categoryAttr";
 import { Form, Formik } from "formik";
 import FormikControl from "../../../../component/form/FormikControl";
-import * as Yup from "yup";
 import SubmitButton from "../../../../component/form/SubmitButton";
-import { Alert } from "../../../../utils/alert";
+import { Alert, Confirm } from "../../../../utils/alert";
+import { initialValues, onSubmit, validationSchema } from "./core";
+import AddAtrrs from "./AddAtrrs";
 
-const AddAttributes = () => {
+const Attributes = () => {
   const location = useLocation();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [reInitValues, setReInitValues] = useState(null)
 
   const dataInfo = [
     { field: "id", title: "#" },
@@ -32,7 +35,7 @@ const AddAttributes = () => {
     },
     {
       title: "عملیات",
-      elements: (rowData) => <AttrAction rowData={rowData} />,
+      elements: (rowData) => <AttrAction rowData={rowData} handleDeleteCategoryAttr={handleDeleteCategoryAttr} />,
     },
   ];
 
@@ -59,41 +62,23 @@ const AddAttributes = () => {
     console.log(data); // برای بررسی داده‌ها
   }, []);
 
-  const initialValues = {
-    title: "",
-    unit: "",
-    in_filter: true,
-  };
 
-  const onSubmit = async (values, actions, catId, setData) => {
-    try {
-      values = {
-        ...values,
-        in_filter: values.in_filter ? 1 : 0,
-      };
-      const res = await AddCategoryAttrsService(catId, values);
-      if (res.status == 201) {
-        Alert("انجام شد", res.data.message, "success");
-        setData((oldData) => [...oldData, res.data.data]);
+  const handleDeleteCategoryAttr = async (attr)=>{
+    if( await Confirm(`حذف ${attr.title}`, 'آیا از حذف رکورد اطمینان دارید؟')) {
+      try {
+        const res = await deleteCategoryAttrService(attr.id)
+        if(res.status == 200) {
+          Alert('انجام شد', res.data.message, 'success')
+          setData(lastData=>[...lastData].filter(d=>d.id != attr.id))
+        }
       }
-    } catch (error) {}
-  };
+      catch (error){
 
-  const validationSchema = Yup.object({
-    title: Yup.string()
-      .required("لطفا این قسمت را پر کنید")
-      .matches(
-        /^[\u0600-\u06FF\sa-zA-Z0-9@!%$?&]+$/,
-        "فقط از حروف و اعداد استفاده شود"
-      ),
-    unit: Yup.string()
-      .required("لطفا این قسمت را پر کنید")
-      .matches(
-        /^[\u0600-\u06FF\sa-zA-Z0-9@!%$?&]+$/,
-        "فقط از حروف و اعداد استفاده شود"
-      ),
-    is_filter: Yup.boolean(),
-  });
+      }
+    }
+  }
+
+
 
   return (
     <>
@@ -110,14 +95,13 @@ const AddAttributes = () => {
 
       <div className="p-6 ">
         {/* <!-- بخش بالای فرم --> */}
-        <Formik
+        {/* <Formik
           initialValues={initialValues}
           onSubmit={(values, actions) =>
             onSubmit(values, actions, location.state.categoryData.id, setData)
           }
           validationSchema={validationSchema}
         >
-          {/* {({ isSubmitting }) => ( */}
           <Form>
             <div className="flex items-start justify-between mb-2 border-b-[1px] border-gray-500">
               <FormikControl
@@ -137,11 +121,6 @@ const AddAttributes = () => {
               />
 
               <div className="flex items-start justify-between w-80">
-                {/* <span className="ml-2 text-sm">نمایش در فیلتر</span>
-                <input
-                  type="checkbox"
-                  className="rounded border-gray-300 focus:ring-green-500"
-                /> */}
                 <FormikControl
                   control="switch"
                   name="in_filter"
@@ -152,7 +131,12 @@ const AddAttributes = () => {
               </div>
             </div>
           </Form>
-        </Formik>
+        </Formik> */}
+        <AddAtrrs 
+        reInitValues={reInitValues}
+        location={location}
+        setData={setData}
+        />
 
         <div className="flex justify-end">
           <PrevPageButton />
@@ -172,4 +156,4 @@ const AddAttributes = () => {
   );
 };
 
-export default AddAttributes;
+export default Attributes;
