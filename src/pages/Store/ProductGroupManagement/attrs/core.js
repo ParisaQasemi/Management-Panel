@@ -1,41 +1,64 @@
-import { AddCategoryAttrsService } from "../../../../services/categoryAttr";
+import {addCategoryAttrsService,editCategoryAttrService} from "../../../../services/categoryAttr";
 import { Alert } from "../../../../utils/alert";
 import * as Yup from "yup";
 
-
 export const initialValues = {
-    title: "",
-    unit: "",
-    in_filter: true,
-  };
+  title: "",
+  unit: "",
+  in_filter: true,
+};
 
-export const onSubmit = async (values, actions, catId, setData) => {
-    try {
-      values = {
-        ...values,
-        in_filter: values.in_filter ? 1 : 0,
-      };
-      const res = await AddCategoryAttrsService(catId, values);
+export const onSubmit = async (
+  values,
+  actions,
+  catId,
+  setData,
+  attrToEdit,
+  setAtrrToEdit,
+  
+) => {
+  try {
+    values = {
+      ...values,
+      in_filter: values.in_filter ? 1 : 0,
+    }
+
+    if (attrToEdit) {
+      const res = await editCategoryAttrService(attrToEdit.id, values);
+      if (res.status == 200) {
+        setData((oldData) => {
+          const newData = [...oldData];
+          const index = newData.findIndex((d) => d.id == attrToEdit.id);
+          newData[index] = res.data.data;
+          return newData;
+        });
+
+        Alert("انجام شد", res.data.message, "success");
+        setAtrrToEdit(null);
+      }
+    } else {
+      const res = await addCategoryAttrsService(catId, values);
       if (res.status == 201) {
         Alert("انجام شد", res.data.message, "success");
         setData((oldData) => [...oldData, res.data.data]);
-        actions.resetForm()
+        actions.resetForm();
       }
-    } catch (error) {}
-  };
+    }
+  } catch (error) {}
+};
 
 export const validationSchema = Yup.object({
-    title: Yup.string()
-      .required("لطفا این قسمت را پر کنید")
-      .matches(
-        /^[\u0600-\u06FF\sa-zA-Z0-9@!%$?&]+$/,
-        "فقط از حروف و اعداد استفاده شود"
-      ),
-    unit: Yup.string()
-      .required("لطفا این قسمت را پر کنید")
-      .matches(
-        /^[\u0600-\u06FF\sa-zA-Z0-9@!%$?&]+$/,
-        "فقط از حروف و اعداد استفاده شود"
-      ),
-    is_filter: Yup.boolean(),
-  });
+  title: Yup.string()
+    .required("لطفا این قسمت را پر کنید")
+    .matches(
+      /^[\u0600-\u06FF\sa-zA-Z0-9@!%$?&]+$/,
+      "فقط از حروف و اعداد استفاده شود"
+    ),
+  unit: Yup.string()
+    .required("لطفا این قسمت را پر کنید")
+    .matches(
+      /^[\u0600-\u06FF\sa-zA-Z0-9@!%$?&]+$/,
+      "فقط از حروف و اعداد استفاده شود"
+    ),
+  is_filter: Yup.boolean(),
+});

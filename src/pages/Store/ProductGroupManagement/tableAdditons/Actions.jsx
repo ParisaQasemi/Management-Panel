@@ -1,16 +1,15 @@
 import React, { useContext } from "react";
 import { FaEdit } from "react-icons/fa";
-import { IoMdAdd } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 import { PiSubsetProperOf } from "react-icons/pi";
 import { useNavigate, useParams } from "react-router-dom";
 import { CategoryContext } from "../../../../context/CategoryContext";
 import { SiGoogledocs } from "react-icons/si";
 
-const Actions = ({ rowData, handleDeleteCategory }) => {
+const Actions = ({ rowData, handleDeleteCategory, setshowModal }) => {
   const navigate = useNavigate();
   const params = useParams();
-  const { setEditId } = useContext(CategoryContext);
+  const { setEditId } = useContext(CategoryContext); //دکمه ویرایش
 
   return (
     <>
@@ -30,8 +29,12 @@ const Actions = ({ rowData, handleDeleteCategory }) => {
         </button>
       ) : null}
 
+      {/* دکمه ویرایش */}
       <button
-        onClick={() => setEditId(rowData.id)}
+        onClick={() => {
+          setEditId(rowData.id);
+          setshowModal();
+        }}
         className="mx-1 cursor-pointer text-yellow-500"
         title="ویرایش"
       >

@@ -1,6 +1,6 @@
 import * as Yup from "yup";
-import { createNewCategoryService, editCategoryService } from "../../../../services/category";
-import { Alert } from "../../../../utils/alert";
+import { createNewCategoryService, editCategoryService } from "../../../services/category";
+import { Alert } from "../../../utils/alert";
 
 export const initialValues = {
   parent_id: "",

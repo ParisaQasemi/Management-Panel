@@ -5,7 +5,7 @@ import AttrAction from "./AttrAction";
 import PaginationTable from "../../../../component/Pagination/PaginationTable";
 import PrevPageButton from "../../../../component/authForm/PrevPageButton";
 import {
-  AddCategoryAttrsService,
+  addCategoryAttrsService,
   deleteCategoryAttrService,
   getCategoryAttrsService,
 } from "../../../../services/categoryAttr";
@@ -20,7 +20,9 @@ const Attributes = () => {
   const location = useLocation();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [attrToEdit, setAttrToEdit] = useState(null)
   const [reInitValues, setReInitValues] = useState(null)
+
 
   const dataInfo = [
     { field: "id", title: "#" },
@@ -35,7 +37,9 @@ const Attributes = () => {
     },
     {
       title: "عملیات",
-      elements: (rowData) => <AttrAction rowData={rowData} handleDeleteCategoryAttr={handleDeleteCategoryAttr} />,
+      elements: (rowData) => <AttrAction rowData={rowData}
+      attrToEdit={attrToEdit} setAttrToEdit={setAttrToEdit}
+      handleDeleteCategoryAttr={handleDeleteCategoryAttr} />,
     },
   ];
 
@@ -59,8 +63,16 @@ const Attributes = () => {
   };
   useEffect(() => {
     handleGetCategoryAttrs();
-    console.log(data); // برای بررسی داده‌ها
   }, []);
+
+  useEffect(()=> {
+    if(attrToEdit) setAttrToEdit({
+      title: attrToEdit.title,
+      unit: attrToEdit.unit,
+      in_filter: attrToEdit.in_filter ? true : false
+    })
+    else setReInitValues(null)
+  }, [attrToEdit])
 
 
   const handleDeleteCategoryAttr = async (attr)=>{
@@ -88,50 +100,13 @@ const Attributes = () => {
       <h6 className="text-center my-3">
         ویژگی:
         <span className="text-blue-400">
-          {" "}
-          {location.state.categoryData.title}{" "}
+          {location.state.categoryData.title}
         </span>
       </h6>
 
       <div className="p-6 ">
-        {/* <!-- بخش بالای فرم --> */}
-        {/* <Formik
-          initialValues={initialValues}
-          onSubmit={(values, actions) =>
-            onSubmit(values, actions, location.state.categoryData.id, setData)
-          }
-          validationSchema={validationSchema}
-        >
-          <Form>
-            <div className="flex items-start justify-between mb-2 border-b-[1px] border-gray-500">
-              <FormikControl
-                control="input"
-                type="text"
-                name="title"
-                label="عنوان :"
-                placeholder="عنوان ویژگی جدید"
-              />
 
-              <FormikControl
-                control="input"
-                type="text"
-                name="unit"
-                label="واحد :"
-                placeholder="واحد ویژگی جدید"
-              />
-
-              <div className="flex items-start justify-between w-80">
-                <FormikControl
-                  control="switch"
-                  name="in_filter"
-                  label=" نمایش در فیلتر "
-                />
-
-                <SubmitButton />
-              </div>
-            </div>
-          </Form>
-        </Formik> */}
+        {/* <!-- بخش بالای حدول --> */}
         <AddAtrrs 
         reInitValues={reInitValues}
         location={location}

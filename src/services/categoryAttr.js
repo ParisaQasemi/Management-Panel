@@ -4,8 +4,14 @@ export const getCategoryAttrsService = (categoryId)=> {
     return httpService(`/admin/categories/${categoryId}/attributes`, 'get')
 }
 
-export const AddCategoryAttrsService = (categoryId, data)=> {
+export const addCategoryAttrsService = (categoryId, data)=> {
     return httpService(`/admin/categories/${categoryId}/attributes`, 'post', data)
+}
+
+
+// دکمه ویرایش 
+export const editCategoryAttrService = (attrId, data)=> {
+    return httpService(`/admin/categories/attributes/${attrId}`, 'put', data)
 }
 
 export const deleteCategoryAttrService = (attrId)=> {

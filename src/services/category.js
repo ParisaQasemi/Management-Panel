@@ -1,4 +1,3 @@
-import { data } from 'autoprefixer'
 import httpService from './httpService'
 
 export const getCategoriesService = (id=null)=> {
@@ -6,7 +5,7 @@ export const getCategoriesService = (id=null)=> {
 }
 
 export const  getSingleCategoryService = (id)=> {
-    return httpService(`/admin/category/${id}`, 'get')
+    return httpService(`/admin/categories/${id}`, 'get')
 }
 
 export const createNewCategoryService = (data)=> {
