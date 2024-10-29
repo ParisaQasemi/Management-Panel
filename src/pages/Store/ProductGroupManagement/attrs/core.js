@@ -25,7 +25,7 @@ export const onSubmit = async (
 
     if (attrToEdit) {
       const res = await editCategoryAttrService(attrToEdit.id, values);
-      if (res.status == 200) {
+      if (res.status === 200) {
         setData((oldData) => {
           const newData = [...oldData];
           const index = newData.findIndex((d) => d.id == attrToEdit.id);
@@ -33,18 +33,20 @@ export const onSubmit = async (
           return newData;
         });
 
-        Alert("انجام شد", res.data.message, "success");
+        Alert("عملیات موفقیت‌آمیز", res.data.message, "success");
         setAtrrToEdit(null);
       }
     } else {
       const res = await addCategoryAttrsService(catId, values);
-      if (res.status == 201) {
+      if (res.status === 201) {
         Alert("انجام شد", res.data.message, "success");
         setData((oldData) => [...oldData, res.data.data]);
         actions.resetForm();
       }
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log(error.message)
+  }
 };
 
 export const validationSchema = Yup.object({

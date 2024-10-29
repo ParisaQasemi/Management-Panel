@@ -5,15 +5,10 @@ import AttrAction from "./AttrAction";
 import PaginationTable from "../../../../component/Pagination/PaginationTable";
 import PrevPageButton from "../../../../component/authForm/PrevPageButton";
 import {
-  addCategoryAttrsService,
   deleteCategoryAttrService,
   getCategoryAttrsService,
 } from "../../../../services/categoryAttr";
-import { Form, Formik } from "formik";
-import FormikControl from "../../../../component/form/FormikControl";
-import SubmitButton from "../../../../component/form/SubmitButton";
 import { Alert, Confirm } from "../../../../utils/alert";
-import { initialValues, onSubmit, validationSchema } from "./core";
 import AddAtrrs from "./AddAtrrs";
 
 const Attributes = () => {
@@ -53,7 +48,7 @@ const Attributes = () => {
     setLoading(true);
     try {
       const res = await getCategoryAttrsService(location.state.categoryData.id);
-      if (res.status == 200) {
+      if (res.status === 200) {
         setData(res.data.data);
       }
     } catch (error) {
@@ -66,7 +61,7 @@ const Attributes = () => {
   }, []);
 
   useEffect(()=> {
-    if(attrToEdit) setAttrToEdit({
+    if(attrToEdit) setReInitValues({
       title: attrToEdit.title,
       unit: attrToEdit.unit,
       in_filter: attrToEdit.in_filter ? true : false
@@ -98,9 +93,9 @@ const Attributes = () => {
         مدیریت ویژگی های دسته بندی
       </h3>
       <h6 className="text-center my-3">
-        ویژگی:
+         ویژگی : 
         <span className="text-blue-400">
-          {location.state.categoryData.title}
+         { location.state.categoryData.title } 
         </span>
       </h6>
 
@@ -111,6 +106,8 @@ const Attributes = () => {
         reInitValues={reInitValues}
         location={location}
         setData={setData}
+        attrToEdit={attrToEdit}
+        setAttrToEdit={setAttrToEdit} 
         />
 
         <div className="flex justify-end">

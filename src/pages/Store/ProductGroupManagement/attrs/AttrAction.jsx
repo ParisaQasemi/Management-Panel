@@ -4,7 +4,7 @@ import { MdDelete } from "react-icons/md";
 
 const AttrAction = ({rowData, attrToEdit, setAttrToEdit, handleDeleteCategoryAttr}) => {
   return (
-    <div className={`${attrToEdit && attrToEdit.id == rowData.id ? 'alert_danger' : ''}`}>
+    <div className={`${attrToEdit && attrToEdit.id == rowData.id ? ' alert_attributes' : ''}`}>
         <button
         className="mx-1 cursor-pointer text-yellow-500"
         title="ویرایش"

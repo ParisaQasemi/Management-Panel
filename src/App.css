@@ -32,9 +32,14 @@ body {
   scrollbar-width: none; 
 }
 
-.alert_danger {
+.alert_attributes {
   background-color: rgba(220, 134, 134, 0.4);
-  box-shadow: 0 0 10px rgba(220, 134, 134, 0.4);
-  padding: 3px 10px 3px 0;
-  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(231, 102, 102, 0.4);
+  border-radius: 2px;
+  display: inline;
+  padding-top: 2px;
+}
+
+.alert_attributes_bg {
+  background-color: rgba(220, 134, 134, 0.4) ;
 }
