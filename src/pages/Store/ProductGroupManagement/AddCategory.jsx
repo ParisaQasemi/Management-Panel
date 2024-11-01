@@ -3,26 +3,25 @@ import ModalContent from "../../../component/Modal/ModalContent";
 import { Form, Formik } from "formik";
 import FormikControl from "../../../component/form/FormikControl";
 import { Alert } from "../../../utils/alert";
-import { getCategoriesService, getSingleCategoryService} from "../../../services/category";
+import {
+  getCategoriesService,
+  getSingleCategoryService,
+} from "../../../services/category";
 import SubmitButton from "../../../component/form/SubmitButton";
 import { useParams } from "react-router-dom";
 import { CategoryContext } from "../../../context/CategoryContext";
-import {
-  initialValues,
-  onSubmit,
-  validationSchema,
-} from "./core";
+import { initialValues, onSubmit, validationSchema } from "./core";
+import ModalContentHeader from "../../../component/Modal/ModalContentHeader";
 
 const AddCategory = ({ setForceRender, children }) => {
   const params = useParams();
-  const { editId, setEditId } = useContext(CategoryContext);  //دکمه ویرایش 
-  const [editCategory, setEditCategory] = useState(null); // دکمه ویرایش 
+  const { editId, setEditId } = useContext(CategoryContext); //دکمه ویرایش
+  const [editCategory, setEditCategory] = useState(null); // دکمه ویرایش
   const [parents, setParents] = useState([]);
   const [reInitialValues, setReInitialValues] = useState(null);
 
-
-  // دکمه ویرایش 
-  const handleGetSingleCategory = async ()=> {
+  // دکمه ویرایش
+  const handleGetSingleCategory = async () => {
     try {
       const res = await getSingleCategoryService(editId);
       console.log(res);
@@ -38,10 +37,6 @@ const AddCategory = ({ setForceRender, children }) => {
     if (editId) handleGetSingleCategory();
     else setEditCategory(null);
   }, [editId]);
-
-
-
-  
 
   const handleGetParentsCategorty = async () => {
     try {
@@ -62,9 +57,6 @@ const AddCategory = ({ setForceRender, children }) => {
     handleGetParentsCategorty();
   }, []);
 
-
-
-  
   useEffect(() => {
     if (editCategory) {
       setReInitialValues({
@@ -74,7 +66,7 @@ const AddCategory = ({ setForceRender, children }) => {
         image: null,
         is_active: editCategory.is_active ? true : false,
         show_in_menu: editCategory.show_in_menu ? true : false,
-      })
+      });
     } else if (params.categoryId) {
       setReInitialValues({
         ...initialValues,
@@ -86,7 +78,9 @@ const AddCategory = ({ setForceRender, children }) => {
   }, [params.categoryId, editCategory]);
 
   return (
-    <ModalContent editId={editId} editCategory={editCategory}>
+    <ModalContent size="full" editId={editId} editCategory={editCategory}>
+      <ModalContentHeader title=" افزودن دسته محصولات" />
+
       {children}
       <Formik
         initialValues={reInitialValues || initialValues}
@@ -98,7 +92,6 @@ const AddCategory = ({ setForceRender, children }) => {
       >
         {/* Form Inputs */}
         <Form className="w-3/5 mt-20 mx-auto ">
-
           {parents.length > 0 ? (
             <FormikControl
               control="select"

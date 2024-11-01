@@ -2,9 +2,19 @@ import axios from "axios"
 import config from './config.json'
 import { Alert } from "../utils/alert";
 
+export const apiPath = config.onlinePath
+
 axios.interceptors.response.use((res)=> {
     if( res.status != 200 && res.status != 201 ) {
-        Alert("مشکل !", res.data.message, "error");
+        if(typeof(res.data) == 'object'){
+            let message = ''
+            for(const key in res.data){
+                message = message + `${key} : ${res.data[key]}`
+            }
+            res.data.message = message
+        }
+
+        Alert("مشکل !", res.data.message, "warning");
     }
     return res
 }, (error)=> {
@@ -15,7 +25,7 @@ axios.interceptors.response.use((res)=> {
 const httpService = (url, method, data=null) => {
     const tokenInfo = JSON.parse(localStorage.getItem('loginToken'))
     return axios({
-        url: config.onlineApi+url,
+        url: apiPath + '/api' + url,
         method,
         data,
         headers: {

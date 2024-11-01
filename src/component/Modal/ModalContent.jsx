@@ -1,21 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import { createPortal } from "react-dom";
 import ModalContentHeader from "./ModalContentHeader";
 import ModalContentFooter from "./ModalContentFooter";
 
-const ModalContent = ({ children, editId, editCategory }) => {
-  const title = editId 
-    ? (editCategory ? "ویرایش : " +  editCategory.title : "")
-    : "افزودن دسته محصولات"
+const ModalContent = ({ children, editId, editCategory, size = "full" }) => {
+  const title = editId
+    ? editCategory
+      ? "ویرایش : " + editCategory.title
+      : ""
+    : "افزودن دسته محصولات";
 
-    // `ویرایش ${editCategory.title}`
+  const modalSizeClass =
+    size === "small"
+      ? "fixed inset-0 z-30 max-w-xl mx-auto my-5 p-2 bg-[#090e24] rounded-lg shadow-lg"
+      : "fixed inset-0 z-30 w-full h-full overflow-y-auto bg-[#090e24]";
 
   return createPortal(
-    <div className="absolute z-30 top-0 w-full h-full overflow-y-auto bg-[#090e24]">
-      <ModalContentHeader title={title} />
-      {children}
-      <ModalContentFooter />
-    </div>,
+    <>
+      <div className="fixed inset-0 bg-black opacity-70 z-30 " />
+      <div className={`${modalSizeClass}`}>
+        {/* <ModalContentHeader title={title} /> */}
+        {children}
+        <ModalContentFooter modalSizeClass={modalSizeClass} />
+      </div>
+    </>,
     document.getElementById("modal-root")
   );
 };

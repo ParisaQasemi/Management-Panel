@@ -31,7 +31,7 @@ const Navbar = ({ toggleSidebar }) => {
       case "/Product":
         return "مدیریت محصول";
 
-      case "/BrandManagement":
+      case "/Brand":
         return "مدیریت برند ها";
 
       case "/WarrantyManagement":

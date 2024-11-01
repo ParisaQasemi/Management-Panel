@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Dashboard from "../../pages/Dashboard/Dashboard";
 import ListProducts from "../../pages/Store/ListProducts/ListProducts";
-import BrandManagement from "../../pages/Store/BrandManagement/BrandManagement";
+import Brand from "../../pages/Store/Brand/Brand";
 import WarrantyManagement from "../../pages/Store/WarrantyManagement/WarrantyManagement";
 import ColorManagement from "../../pages/Store/ColorManagement/ColorManagement";
 import DiscountManagement from "../../pages/Store/DiscountManagement/DiscountManagement";
@@ -43,7 +43,7 @@ const Mainbar = ({ toggleSidebar }) => {
         <Route path="/AddCategory" element={<AddCategory />} />
         <Route path="/Product" element={<Product />} />
         <Route path="/AddProduct" element={<AddProduct />} />
-        <Route path="/BrandManagement" element={<BrandManagement />} />
+        <Route path="/Brand" element={<Brand />} />
         <Route path="/WarrantyManagement" element={<WarrantyManagement />} />
         <Route path="/ColorManagement" element={<ColorManagement />} />
         <Route path="/DiscountManagement" element={<DiscountManagement />} />

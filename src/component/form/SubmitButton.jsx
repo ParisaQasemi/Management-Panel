@@ -9,6 +9,7 @@ const SubmitButton = () => {
         return (
           <button
             className="flex items-center text-sm text-white bg-[#0075ff] hover:bg-blue-600 font-bold py-2 px-5 rounded-lg focus:outline-none focus:ring focus:border-[#0075ff]"
+            type="submit"
             disabled={form.isSubmitting}
           >
             <span>ذخیره</span>
