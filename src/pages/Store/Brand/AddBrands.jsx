@@ -1,21 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ModalContent from "../../../component/Modal/ModalContent";
 import { Form, Formik } from "formik";
 import FormikControl from "../../../component/form/FormikControl";
 import SubmitButton from "../../../component/form/SubmitButton";
 import { initialValues, onSubmit, validationSchema } from "./core";
 import ModalContentHeader from "../../../component/Modal/ModalContentHeader";
+import { apiPath } from "../../../services/httpService";
 
-const AddBrands = ({ setData, children }) => {
+const AddBrands = ({ setData, children, brandToEdit }) => {
+  const [reInitValues, setReInitValues] = useState(null);
+
+  useEffect(() => {
+    if (brandToEdit)
+      setReInitValues({
+        original_name: brandToEdit.original_name,
+        persian_name: brandToEdit.persian_name || '',
+        descriptions: brandToEdit.descriptions || '',
+        logo: null
+      })
+      else setReInitValues(null)
+  }, [brandToEdit]);
+
   return (
     <>
-      <ModalContent size="small" > 
-        <ModalContentHeader title="برند"/>
+      <ModalContent size="small">
+        <ModalContentHeader title={brandToEdit ? "برند" : "افزودن برند"} />
         {children}
         <Formik
-          initialValues={initialValues}
-          onSubmit={(values, actions) => onSubmit(values, actions, setData)}
+          initialValues={reInitValues || initialValues}
+          onSubmit={(values, actions) =>
+            onSubmit(values, actions, setData, brandToEdit)
+          }
           validationSchema={validationSchema}
+          enableReinitialize
         >
           {/* Form Inputs */}
           <Form className="w-3/5 mt-20 mx-auto ">
@@ -41,6 +58,12 @@ const AddBrands = ({ setData, children }) => {
               label="توضیحات"
               placeholder="توضیحات"
             />
+
+            {brandToEdit ? (
+              <div className="w-full flex justify-center items-center bg-red-300 p-2">
+                <img src={apiPath + "/" + brandToEdit.logo} width="60" alt="" />
+              </div>
+            ) : null}
 
             <FormikControl
               control="file"

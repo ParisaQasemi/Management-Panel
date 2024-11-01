@@ -1,4 +1,4 @@
-import { addNewBrandService } from "../../../services/Brands";
+import { addNewBrandService, editBrandService } from "../../../services/Brands";
 import { Alert } from "../../../utils/alert";
 import * as Yup from "yup";
 
@@ -9,13 +9,26 @@ export const initialValues = {
   logo: null,
 };
 
-export const onSubmit = async (values, actions, setData) => {
-  const res = await addNewBrandService(values);
-  console.log(res);
+export const onSubmit = async (values, actions, setData, brandToEdit) => {
+  if (brandToEdit) {
+    const res = await editBrandService(brandToEdit.id, values);
+    if (res.status === 200) {
+      Alert("انجام شد", res.data.message, "success");
+      setData((lastData) => {
+        let newData = [...lastData];
+        let index = newData.findIndex((d) => d.id == brandToEdit.id);
+        newData[index] = res.data.data;
+        return newData;
+      });
+    }
+  } else {
+    const res = await addNewBrandService(values);
+    console.log(res);
 
-  if (res.status === 201) {
-    Alert("انجام شد", res.data.message, "success");
-    setData((lastData) => [...lastData, res.data.data]);
+    if (res.status === 201) {
+      Alert("انجام شد", res.data.message, "success");
+      setData((lastData) => [...lastData, res.data.data]);
+    }
   }
 };
 

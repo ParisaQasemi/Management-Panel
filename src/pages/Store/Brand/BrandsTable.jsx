@@ -3,16 +3,21 @@ import PaginationTable from "../../../component/Pagination/PaginationTable";
 import AddBrands from "./AddBrands";
 import { apiPath } from "../../../services/httpService";
 import Actions from "./tableAdditional/Actions";
-import { getAllBrandsService } from "../../../services/Brands";
+import {
+  deleteBrandService,
+  getAllBrandsService,
+} from "../../../services/Brands";
 import ModalBtn from "../../../component/Modal/ModalBtn";
 import CloseModalBtn from "../../../component/Modal/CloseModalBtn";
 import { CategoryContext } from "../../../context/CategoryContext";
+import { Alert, Confirm } from "../../../utils/alert";
 
-const BrandsTable = () => {
+const BrandsTable = ({}) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showModal, setshowModal] = useState(false);
   const { setEditId } = useContext(CategoryContext);
+  const [brandToEdit, setBrandToEdit] = useState(null);
 
   const dataInfo = [
     { field: "id", title: "#" },
@@ -31,7 +36,14 @@ const BrandsTable = () => {
     },
     {
       title: "عملیات",
-      elements: (rowData) => <Actions rowData={rowData} />,
+      elements: (rowData) => (
+        <Actions
+          rowData={rowData}
+          setBrandToEdit={setBrandToEdit}
+          handleDeleteBrand={handleDeleteBrand}
+          setshowModal={setshowModal} 
+        />
+      ),
     },
   ];
 
@@ -54,9 +66,25 @@ const BrandsTable = () => {
     handleGetAllBrands();
   }, []);
 
-  const handleOpenModal = () => {
+  const handleDeleteBrand = async (brand) => {
+    if (
+      await Confirm(
+        "حذف برند",
+        `آیا از حذف ${brand.original_name} اطمینان دارید؟`
+      )
+    ) {
+      const res = await deleteBrandService(brand.id);
+      if (res.status == 200) {
+        Alert("انجام شد", res.data.message, "success");
+        setData((lastData) => lastData.filter((d) => d.id != brand.id));
+      }
+    }
+  };
+
+  const handleOpenModal = (brand) => {
     setEditId(null);
     setshowModal(true);
+    setBrandToEdit(brand || null); 
   };
 
   return (
@@ -72,13 +100,16 @@ const BrandsTable = () => {
       />
 
       {showModal && (
-        <AddBrands setData={setData}>
+        <AddBrands
+          setData={setData}
+          brandToEdit={brandToEdit}
+          setBrandToEdit={setBrandToEdit}
+        >
           <button onClick={() => setshowModal(false)}>
-            <CloseModalBtn  />
+            <CloseModalBtn />
           </button>
         </AddBrands>
       )}
-
     </>
   );
 };
