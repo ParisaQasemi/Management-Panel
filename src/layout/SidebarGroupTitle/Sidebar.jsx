@@ -39,7 +39,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <SidebarItem title='مدیریت گروه محصول' icon={<AiOutlineProduct />} path='/Category'/>
           <SidebarItem title='مدیریت محصول' icon={<AiOutlineProduct />} path='/Product'/>
           <SidebarItem title='مدیریت برند ها' icon={<TbBrandAsana />} path='/Brand'/>
-          <SidebarItem title='مدیریت گارانتی ها' icon={<AiOutlineAppstore />} path='/WarrantyManagement'/>
+          <SidebarItem title='مدیریت گارانتی ها' icon={<AiOutlineAppstore />} path='/Guaranties'/>
           <SidebarItem title='مدیریت رنگ ها' icon={<IoIosColorPalette />} path='/ColorManagement'/>
           <SidebarItem title='مدیریت تخفیف ها' icon={<RiDiscountPercentFill />} path='/DiscountManagement'/>
           

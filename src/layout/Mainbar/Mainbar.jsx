@@ -5,7 +5,6 @@ import Navbar from "../Navbar/Navbar";
 import Dashboard from "../../pages/Dashboard/Dashboard";
 import ListProducts from "../../pages/Store/ListProducts/ListProducts";
 import Brand from "../../pages/Store/Brand/Brand";
-import WarrantyManagement from "../../pages/Store/WarrantyManagement/WarrantyManagement";
 import ColorManagement from "../../pages/Store/ColorManagement/ColorManagement";
 import DiscountManagement from "../../pages/Store/DiscountManagement/DiscountManagement";
 import CartManagement from "../../pages/OrderCart/CartManagement/CartManagement";
@@ -27,6 +26,7 @@ import AddProduct from "../../pages/Store/Product/AddProduct";
 import Logout from "../../pages/auth/Logout";
 import CategoryChildren from "../../pages/Store/ProductGroupManagement/tableAdditons/CategoryChildren";
 import Attributes from "../../pages/Store/ProductGroupManagement/attrs/Attributes";
+import Guaranties from "../../pages/Store/Guaranties/Guaranties";
 
 const Mainbar = ({ toggleSidebar }) => {
   return (
@@ -44,7 +44,7 @@ const Mainbar = ({ toggleSidebar }) => {
         <Route path="/Product" element={<Product />} />
         <Route path="/AddProduct" element={<AddProduct />} />
         <Route path="/Brand" element={<Brand />} />
-        <Route path="/WarrantyManagement" element={<WarrantyManagement />} />
+        <Route path="/Guaranties" element={<Guaranties />} />
         <Route path="/ColorManagement" element={<ColorManagement />} />
         <Route path="/DiscountManagement" element={<DiscountManagement />} />
         <Route path="/CartManagement" element={<CartManagement />} />

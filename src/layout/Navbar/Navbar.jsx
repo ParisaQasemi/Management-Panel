@@ -34,7 +34,7 @@ const Navbar = ({ toggleSidebar }) => {
       case "/Brand":
         return "مدیریت برند ها";
 
-      case "/WarrantyManagement":
+      case "/Guaranties":
         return "مدیریت گارانتی ها";
 
       case "/ColorManagement":

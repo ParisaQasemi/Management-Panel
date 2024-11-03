@@ -24,7 +24,7 @@ const AddBrands = ({ setData, children, brandToEdit }) => {
   return (
     <>
       <ModalContent size="small">
-        <ModalContentHeader title={brandToEdit ? "برند" : "افزودن برند"} />
+        <ModalContentHeader title={brandToEdit ? "ویرایش برند" : "افزودن برند"} />
         {children}
         <Formik
           initialValues={reInitValues || initialValues}
@@ -60,7 +60,7 @@ const AddBrands = ({ setData, children, brandToEdit }) => {
             />
 
             {brandToEdit ? (
-              <div className="w-full flex justify-center items-center bg-red-300 p-2">
+              <div className="w-full flex justify-center items-center p-2">
                 <img src={apiPath + "/" + brandToEdit.logo} width="60" alt="" />
               </div>
             ) : null}
