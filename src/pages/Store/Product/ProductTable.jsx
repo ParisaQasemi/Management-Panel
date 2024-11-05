@@ -1,75 +1,105 @@
-import React, { useEffect, useState } from "react";
-import PaginationTable from "../../../component/Pagination/PaginationTable";
-import { PiSubsetProperOf } from "react-icons/pi";
-import { FaEdit } from "react-icons/fa";
-import { IoMdAdd } from "react-icons/io";
-import { MdDelete } from "react-icons/md";
+import React, { useContext, useEffect, useState } from "react";
 import AddProduct from "./AddProduct";
-import CloseModalBtn from "../../../component/Modal/CloseModalBtn";
-import ModalBtn from "../../../component/Modal/ModalBtn";
 import { useParams } from "react-router-dom";
+import Actions from "./tableAddition/Actions";
+import { getProductsService } from "../../../services/products";
+import PaginatiedDataTable from "../../../component/Pagination/PaginatiedDataTable";
+import ModalBtn from "../../../component/Modal/ModalBtn";
+import CloseModalBtn from "../../../component/Modal/CloseModalBtn";
+import { CategoryContext } from "../../../context/CategoryContext";
 
 const ProductTable = () => {
-  const params = useParams();
-  const [data, setData] = useState([]);
-  const [forceRender, setForceRender] = useState(0);
-  const [loading, setLoading] = useState(false);
+  // const params = useParams();
+  // const [forceRender, setForceRender] = useState(0);
   const [showModal, setshowModal] = useState(false); // باز و بستن مدال
-
-  const handleGetCategories = async () => {
-    setLoading(true);
-    try {
-      const res = await getCategoriesService(params.categoryId);
-      if (res.status == 200) {
-        setData(res.data.data);
-      }
-    } catch (error) {
-      console.log(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    handleGetCategories();
-  }, [params, forceRender]);
+  const { setEditId } = useContext(CategoryContext);
+  // NEW Code
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [searchChar, setSearchChar] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [countOnPage, setCountOnPage] = useState(5);
+  const [pageCount, setPageCount] = useState(0);
 
   const dataInfo = [
     { field: "id", title: "#" },
-    { field: "title", title: "عنوان محصول" },
-    { field: "parent_id", title: "والد" },
-  ];
-
-  const additionField = [
     {
-      title: "تاریخ",
-      elements: (rowData) => convertDateToJalali(rowData.created_at),
+      field: null,
+      title: "گروه محصول",
+      elements: (rowData) => rowData.categories[0].title,
     },
+    { field: "title", title: "عنوان" },
+    { field: "price", title: "قیمت" },
+    { field: "stock", title: "موجودی" },
     {
-      title: "نمایش در منو",
-      elements: (rowData) => <ShowInData rowData={rowData} />,
-    },
-    {
+      field: null,
       title: "عملیات",
       elements: (rowData) => <Actions rowData={rowData} />,
     },
   ];
 
+  // const additionField = [
+  //   {
+  //     title: "تاریخ",
+  //     elements: (rowData) => convertDateToJalali(rowData.created_at),
+  //   },
+  //   {
+  //     title: "نمایش در منو",
+  //     elements: (rowData) => <ShowInData rowData={rowData} />,
+  //   },
+  //   {
+  //     title: "عملیات",
+  //     elements: (rowData) => <Actions rowData={rowData} />,
+  //   },
+  // ];
+
   const searchParams = {
     title: "جستجو",
     placeholder: "قسمتی از عنوان را وارد کنید",
-    searchField: "title",
+    // searchField: "title",
+  };
+
+  const handleGetProducts = async (page, count, char) => {
+    setLoading(true);
+    const res = await getProductsService(page, count, char);
+    res && setLoading(false);
+    if (res.status === 200) {
+      setData(res.data.data);
+      setPageCount(res.data.last_page);
+    }
+  };
+
+  const handleSearch = (char)=> {
+    setSearchChar(char)
+    handleGetProducts(1, countOnPage, char)
+  }
+
+  useEffect(()=> {
+    handleGetProducts(currentPage, countOnPage, searchChar)
+  },[currentPage])
+
+  const handleOpenModal = () => {
+    setEditId(null);
+    setshowModal(true);
+    console.log('Buuuug')
   };
 
   return (
     <>
-      <PaginationTable
-        data={data}
+      <PaginatiedDataTable
+        tableData={data}
         dataInfo={dataInfo}
-        additionField={additionField}
         searchParams={searchParams}
-        numOfPage={2}
-        additionalElement={<ModalBtn onClick={() => setshowModal(true)} />} // باز و بستن مدال
+        loading={loading}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        pageCount={pageCount}
+        handleSearch={handleSearch}
+        // additionField={additionField}
+        numOfPage={5}
+        // additionalElement={<ModalBtn onClick={() => setshowModal(true)} />} // باز و بستن مدال
+        additionalElement={<ModalBtn onClick={handleOpenModal} />}
+
       />
 
       {/* باز و بستن مدال */}

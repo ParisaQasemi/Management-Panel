@@ -75,7 +75,7 @@ const PaginationTable = ({
         <SpinnerLoad colorClass={colorClass} />
       ) : data.length ? (
         <table className="table text-right my-5 bg-gradient-custom backdrop-blur-lg">
-          <thead className="text-md font-bold text-gray-300">
+          <thead className="text-lg font-bold text-white">
             <tr>
               {dataInfo.map((i) => (
                 <th key={i.field}>{i.title}</th>
@@ -88,7 +88,7 @@ const PaginationTable = ({
             </tr>
           </thead>
 
-          <tbody className="text-sm font-light text-white">
+          <tbody className="text-sm font-light text-gray-300">
             {tableData.map((d) => (
               <tr key={d.id}>
                 {dataInfo.map((i) => (
