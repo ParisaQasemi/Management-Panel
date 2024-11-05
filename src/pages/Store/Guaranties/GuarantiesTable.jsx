@@ -84,7 +84,7 @@ const GuarantiesTable = () => {
         data={data}
         dataInfo={dataInfo}
         additionField={additionField}
-        numOfPage={8}
+        numOfPage={2}
         searchParams={searchParams}
         loading={loading}
         additionalElement={<ModalBtn onClick={handleOpenModal} />}

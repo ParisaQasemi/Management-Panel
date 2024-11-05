@@ -2,7 +2,7 @@ import React from 'react';
 import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 
-const Actions = ({ rowData, setshowModal, setColorToEdit, handleDeleteColor }) => {
+const Actions = ({ rowData, setshowModal, handleDeleteProduct }) => {
     return (
       <>
         <button
@@ -20,7 +20,7 @@ const Actions = ({ rowData, setshowModal, setColorToEdit, handleDeleteColor }) =
           className="mx-1 cursor-pointer text-red-500"
           title="حذف"
           onClick={() => {
-            handleDeleteColor(rowData);
+            handleDeleteProduct(rowData);
           }}
         >
           <MdDelete />

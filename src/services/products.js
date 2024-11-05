@@ -6,3 +6,7 @@ export const getProductsService = (page, countOnPage, searchChar) => {
     "get"
   );
 };
+
+export const deleteProductService = (productId)=> {
+  return httpService(`/admin/products/${productId}`, 'delete')
+}

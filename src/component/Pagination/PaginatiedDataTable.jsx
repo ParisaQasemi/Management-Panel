@@ -13,8 +13,9 @@ const PaginatiedDataTable = ({
   setCurrentPage,
   searchParams,
   handleSearch,
-  
 }) => {
+  const pageRange = 3;
+
   const [pages, setPages] = useState([]);
   let timeout;
 
@@ -94,18 +95,43 @@ const PaginatiedDataTable = ({
               <GrFormPreviousLink />
             </button>
 
-            {pages.map((page) => (
+            {currentPage > pageRange ? (
               <button
-                key={page}
-                className={`join-item btn btn-sm mx-1 rounded-lg border-none
+                className={`join-item btn btn-sm me-1 rounded-lg border-none
+     text-white bg-[#74b0f5] hover:bg-[#0075ff] 
+     `}
+                onClick={() => setCurrentPage(1)}
+              >
+                1
+              </button>
+            ) : null}
+
+            {pages.map((page) => {
+              return page < currentPage + pageRange &&
+                page > currentPage - pageRange ? (
+                <button
+                  key={page}
+                  className={`join-item btn btn-sm mx-1 rounded-lg border-none
          text-white bg-[#74b0f5] hover:bg-[#0075ff]
               ${currentPage === page ? "bg-[#0075ff]" : ""}
          `}
-                onClick={() => setCurrentPage(page)}
+                  onClick={() => setCurrentPage(page)}
+                >
+                  {page}
+                </button>
+              ) : null;
+            })}
+
+            {currentPage <= pageCount - pageRange ? (
+              <button
+                className={`join-item btn btn-sm ms-1 rounded-lg border-none
+     text-white bg-[#74b0f5] hover:bg-[#0075ff] 
+     `}
+                onClick={() => setCurrentPage(pageCount)}
               >
-                {page}
+                {pageCount}
               </button>
-            ))}
+            ) : null}
 
             <button
               className="join-item btn btn-sm mx-1 rounded-lg border-none
