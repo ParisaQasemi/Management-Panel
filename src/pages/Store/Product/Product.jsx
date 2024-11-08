@@ -4,7 +4,6 @@ import ProductTable from "./ProductTable";
 const Product = () => {
   return (
     <>
-      {/* Table and Search item and Modal button */}
       <ProductTable />
     </>
   );

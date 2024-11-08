@@ -1,19 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
-import AddProduct from "./AddProduct";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import Actions from "./tableAddition/Actions";
-import { deleteProductService, getProductsService } from "../../../services/products";
+import {
+  deleteProductService,
+  getProductsService,
+} from "../../../services/products";
 import PaginatiedDataTable from "../../../component/Pagination/PaginatiedDataTable";
-import ModalBtn from "../../../component/Modal/ModalBtn";
-import CloseModalBtn from "../../../component/Modal/CloseModalBtn";
-import { CategoryContext } from "../../../context/CategoryContext";
 import { Alert, Confirm } from "../../../utils/alert";
 
 const ProductTable = () => {
   // const params = useParams();
   // const [forceRender, setForceRender] = useState(0);
-  const [showModal, setshowModal] = useState(false); // باز و بستن مدال
-  const { setEditId } = useContext(CategoryContext);
   // NEW Code
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -27,7 +23,11 @@ const ProductTable = () => {
     {
       field: null,
       title: "گروه محصول",
-      elements: (rowData) => rowData.categories[0].title,
+      // elements: (rowData) => rowData.categories[0].title,
+      elements: (rowData) =>
+        rowData.categories && rowData.categories.length > 0
+          ? rowData.categories[0].title
+          : "نامشخص",
     },
     { field: "title", title: "عنوان" },
     { field: "price", title: "قیمت" },
@@ -35,7 +35,9 @@ const ProductTable = () => {
     {
       field: null,
       title: "عملیات",
-      elements: (rowData) => <Actions rowData={rowData} handleDeleteProduct={handleDeleteProduct} />,
+      elements: (rowData) => (
+        <Actions rowData={rowData} handleDeleteProduct={handleDeleteProduct} />
+      ),
     },
   ];
 
@@ -70,30 +72,26 @@ const ProductTable = () => {
     }
   };
 
-  const handleDeleteProduct = async (product)=> {
-    if(await Confirm('حذف محصول', `آیا از حذف ${product.title} اطمینان دارید؟`)) {
-      const res = await deleteProductService(product.id)
-      if(res.status === 200) {
-        Alert('انجام شد', res.data.message, 'success')
-        handleGetProducts(currentPage, countOnPage, searchChar)
+  const handleDeleteProduct = async (product) => {
+    if (
+      await Confirm("حذف محصول", `آیا از حذف ${product.title} اطمینان دارید؟`)
+    ) {
+      const res = await deleteProductService(product.id);
+      if (res.status === 200) {
+        Alert("انجام شد", res.data.message, "success");
+        handleGetProducts(currentPage, countOnPage, searchChar);
       }
     }
-  }
-
-  const handleSearch = (char)=> {
-    setSearchChar(char)
-    handleGetProducts(1, countOnPage, char)
-  }
-
-  useEffect(()=> {
-    handleGetProducts(currentPage, countOnPage, searchChar)
-  },[currentPage])
-
-  const handleOpenModal = () => {
-    setEditId(null);
-    setshowModal(true);
-    console.log('Buuuug')
   };
+
+  const handleSearch = (char) => {
+    setSearchChar(char);
+    handleGetProducts(1, countOnPage, char);
+  };
+
+  useEffect(() => {
+    handleGetProducts(currentPage, countOnPage, searchChar);
+  }, [currentPage]);
 
   return (
     <>
@@ -106,21 +104,8 @@ const ProductTable = () => {
         setCurrentPage={setCurrentPage}
         pageCount={pageCount}
         handleSearch={handleSearch}
-        // additionField={additionField}
         numOfPage={2}
-        // additionalElement={<ModalBtn onClick={() => setshowModal(true)} />} // باز و بستن مدال
-        additionalElement={<ModalBtn onClick={handleOpenModal} />}
-
       />
-
-      {/* باز و بستن مدال */}
-      {showModal && (
-        <AddProduct>
-          <button onClick={() => setshowModal(false)}>
-            <CloseModalBtn />
-          </button>
-        </AddProduct>
-      )}
     </>
   );
 };

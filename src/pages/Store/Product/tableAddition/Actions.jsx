@@ -2,14 +2,13 @@ import React from 'react';
 import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 
-const Actions = ({ rowData, setshowModal, handleDeleteProduct }) => {
+const Actions = ({ rowData, setshowModal, }) => {
     return (
       <>
         <button
           className="mx-1 cursor-pointer text-yellow-500"
           title="ویرایش"
           onClick={() => {
-            setColorToEdit(rowData);
             setshowModal(true);
           }}
         >
@@ -20,7 +19,7 @@ const Actions = ({ rowData, setshowModal, handleDeleteProduct }) => {
           className="mx-1 cursor-pointer text-red-500"
           title="حذف"
           onClick={() => {
-            handleDeleteProduct(rowData);
+
           }}
         >
           <MdDelete />

@@ -16,12 +16,6 @@ const Navbar = ({ toggleSidebar }) => {
       case "/Table":
         return "جدول ها";
 
-      // case "/Profile":
-      //   return "پروفایل";
-
-      // case "/Register":
-      //   return "ثبت نام";
-
       case "/ListProducts":
         return "لیست محصولات";
 
@@ -30,6 +24,9 @@ const Navbar = ({ toggleSidebar }) => {
 
       case "/Product":
         return "مدیریت محصول";
+
+      case "/AddProduct":
+        return "افزودن محصول جدید";
 
       case "/Brand":
         return "مدیریت برند ها";
@@ -95,7 +92,7 @@ const Navbar = ({ toggleSidebar }) => {
               className="mx-1 text-gray-400 text-sm cursor-pointer"
               onClick={goToDashboard}
             />
-            / {getTitle()}
+            &nbsp; / &nbsp; {getTitle()}
           </span>
           <h3 className="font-semibold text-sm hidden md:block">
             {getTitle()}
@@ -103,7 +100,6 @@ const Navbar = ({ toggleSidebar }) => {
         </div>
         {/* Search section and buttons*/}
         <div className="flexflex-col-2 md:flex-row items-start justify-between w-full md:w-auto p-0 h-10">
-          {/* <Search /> */}
           {/* Buttons section*/}
           <div className="w-24 flex items-center justify-end">
             <NavLink

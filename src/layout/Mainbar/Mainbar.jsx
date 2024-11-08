@@ -38,10 +38,10 @@ const Mainbar = ({ toggleSidebar }) => {
           <Route path=":categoryId" element={<CategoryChildren />}/>
         </Route>
         <Route path="/Category/:categoryId/attributes" element={<Attributes />}/>
-
-
         <Route path="/AddCategory" element={<AddCategory />} />
         <Route path="/Product" element={<Product />} />
+        <Route path="/products/add-product" element={<AddProduct />} />
+
         <Route path="/AddProduct" element={<AddProduct />} />
         <Route path="/Brand" element={<Brand />} />
         <Route path="/Guaranties" element={<Guaranties />} />

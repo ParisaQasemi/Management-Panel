@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import SpinnerLoad from "../SpinnerLoad";
 import { GrFormNextLink, GrFormPreviousLink } from "react-icons/gr";
 import Search from "../Search/Search";
+import ModalBtn from "../Modal/ModalBtn";
+import { Link } from "react-router-dom";
 
 const PaginatiedDataTable = ({
   children,
@@ -13,6 +15,8 @@ const PaginatiedDataTable = ({
   setCurrentPage,
   searchParams,
   handleSearch,
+  setshowModal,
+  handleOpenModal,
 }) => {
   const pageRange = 3;
 
@@ -36,12 +40,16 @@ const PaginatiedDataTable = ({
   return (
     <>
       <div className="flex justify-between">
-        <div className="w-96 my-3">
-          <div className="mb-3">
+        <div className="w-full">
+          <div className="flex justify-between ">
             <Search
               setSearchChar={handleSetSearchChar}
               placeholder={searchParams.placeholder}
             />
+
+            <Link to="/products/add-product">
+              <ModalBtn />
+            </Link>
           </div>
         </div>
 

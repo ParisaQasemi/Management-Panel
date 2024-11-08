@@ -63,11 +63,6 @@ const PaginationTable = ({
       {/* Modal Button and Search */}
       <div className="flex justify-between">
         <Search setSearchChar={setSearchChar} />
-        {/* <ModalBtn onClick={toggleModal} />
-        {isModalOpen && location.pathname === "/Product" && <AddProduct />}
-        {isModalOpen && location.pathname.includes("/Category") && (
-          <AddCategory setForceRender={setForceRender} />
-        )} */}
         {additionalElement || ""}
       </div>
 
