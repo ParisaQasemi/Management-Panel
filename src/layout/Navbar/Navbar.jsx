@@ -25,7 +25,7 @@ const Navbar = ({ toggleSidebar }) => {
       case "/Product":
         return "مدیریت محصول";
 
-      case "/AddProduct":
+      case "/products/add-product":
         return "افزودن محصول جدید";
 
       case "/Brand":
