@@ -51,10 +51,7 @@ const MultiSelect = ({ resultType, options, name, label, firstItem }) => {
                 id={name + "select"}
                 onChange={(e) => handleSelectItems(e.target.value, form)}
               >
-                <option value="" className="text-black">
-                  {" "}
-                  {firstItem}{" "}
-                </option>
+                <option value="" className="text-black"> {firstItem}</option>
                 {options &&
                   options.length > 0 &&
                   options.map((o) => (

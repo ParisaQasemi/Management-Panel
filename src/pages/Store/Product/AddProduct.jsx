@@ -72,7 +72,7 @@ const AddProduct = () => {
                 <SpinnerLoad colorClass={"text-white"} isSmall={true} />
               ) : mainCategories !== null ? (
                 <FormikControl
-                  control="multiSelect"
+                  control="searchableSelect"
                   options={mainCategories}
                   name="category_ids"
                   label="دسته اصلی"
@@ -80,6 +80,8 @@ const AddProduct = () => {
                   resultType="string"
                 />
               ) : null}
+
+
 
               <div className="mb-10">
                 <label className="block text-white text-sm font-bold">
