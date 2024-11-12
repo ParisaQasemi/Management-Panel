@@ -1,4 +1,6 @@
 import * as Yup from "yup";
+import { createNewProductService } from "../../../services/products";
+import { Alert } from "../../../utils/alert";
 
 export const initialValues = {
   category_ids: "",
@@ -18,13 +20,17 @@ export const initialValues = {
   discount: null,
 };
 
-export const onSubmit = async (values, actions) => {};
+export const onSubmit = async (values, actions) => {
+  const res = await createNewProductService(values);
+  if (res.status === 201) {
+    Alert("انجام شد", res.data.message, "success");
+  }
+};
 
 export const validationSchema = Yup.object({
   category_ids: Yup.string()
     .required("لطفا این قسمت را پر کنید")
     .matches(/^[0-9\s-]+$/, "فقط از اعداد و خط تیره استفاده شود"),
-
   title: Yup.string()
     .required("لطفا این قسمت را پر کنید")
     .matches(
@@ -59,7 +65,7 @@ export const validationSchema = Yup.object({
       value ? value.size <= 500 * 1024 : true
     )
     .test("format", "فرمت فایل باید jpg باشد", (value) =>
-      value ? value.type === "image/jpeg" : true
+      value ? value.type === "image/jpeg" || value.type === "image/png" : true
     ),
 
   alt_image: Yup.string().matches(

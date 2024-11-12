@@ -51,10 +51,8 @@ body {
 .multi_select_items_content {
   position: absolute;
   background: #ffffff;
-  /* width: 100%; */
-  /* right: 0; */
-  /* top: 38px; */
-  z-index: 1;
+  width: 85%; /* جلوگیری از زیاد شدن عرض */
+  z-index: 100;
   border: 1px solid white;
   border-radius: 5px;
   box-shadow: -1px 7px 10px gray;
