@@ -1,25 +1,18 @@
 import "./App.css";
-import { BrowserRouter } from "react-router-dom";
-import Sidebar from "./component/layout/Sidebar";
-import Mainbar from "./component/layout/Mainbar";
-import { useState } from "react";
-
+import { useLocation } from "react-router-dom";
+import AdminLayout from "./layout/auth/AdminLayout";
+import AuthLayout from "./layout/auth/AuthLayout";
 
 function App() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen((prev) => !prev);
-  }
+  const location = useLocation();
 
   return (
-    <BrowserRouter>
-      <div className="bg-gradient-to-bl from-[#0d081d] via-[#181682] to-[#293ec9] text-white 
-       min-h-screen">
-          <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-          <Mainbar toggleSidebar={toggleSidebar}/>
-      </div>
-    </BrowserRouter>
+    <div
+      className="min-h-screen
+        bg-gradient-to-bl from-[#0d081d] via-[#181682] to-[#293ec9] text-white "
+    >
+      {location.pathname.includes("/auth") ? <AuthLayout /> : <AdminLayout />}
+    </div>
   );
 }
 
