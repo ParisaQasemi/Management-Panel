@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { IoIosClose } from "react-icons/io";
 import FormikError from "./FormikError";
 
-const SearchableSelect = ({ formik, resultType, options, name, label, firstItem }) => {
+const SearchableSelect = ({ formik, resultType, options, name, label, firstItem, initialItems }) => {
   const [selectedItems, setSelectedItems] = useState([]);
   const [showItems, setShowItems] = useState(false); // کنترل نمایش لیست آیتم‌ها
   const [copyOptions, setCopyOptions] = useState(options);
@@ -29,6 +29,10 @@ const SearchableSelect = ({ formik, resultType, options, name, label, firstItem 
       return newData;
     });
   };
+
+  useEffect(()=>{
+    setSelectedItems(initialItems)
+  }, [initialItems])
 
   useEffect(() => {
     setCopyOptions(options);
