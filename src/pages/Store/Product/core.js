@@ -6,8 +6,8 @@ export const initialValues = {
   category_ids: "",
   title: "",
   price: "",
-  weight: null,
-  brand_id: null,
+  weight: "",
+  brand_id: "",
   color_ids: "",
   guarantee_ids: "",
   descriptions: "",
@@ -16,8 +16,8 @@ export const initialValues = {
   image: null,
   alt_image: "",
   keywords: "",
-  stock: null,
-  discount: null,
+  stock: "",
+  discount: "",
 };
 
 export const onSubmit = async (values, actions, productToEdit) => {
@@ -56,7 +56,7 @@ export const validationSchema = Yup.object({
     'فقط از اعداد و خط تیره استفاده شود"'
   ),
   descriptions: Yup.string().matches(
-    /^[\u0600-\u06FF\sa-zA-Z0-9@!%-.$?&]+$/,
+    /^[\u0600-\u06FF\sa-zA-Z0-9@!%-<>/:.$?&]+$/,
     'فقط از حروف و اعداد استفاده شود"'
   ),
   short_descriptions: Yup.string().matches(

@@ -13,7 +13,7 @@ const AddBrands = ({ setData, children, brandToEdit }) => {
   useEffect(() => {
     if (brandToEdit)
       setReInitValues({
-        original_name: brandToEdit.original_name,
+        original_name: brandToEdit.original_name || '',
         persian_name: brandToEdit.persian_name || '',
         descriptions: brandToEdit.descriptions || '',
         logo: null

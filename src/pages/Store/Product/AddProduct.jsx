@@ -13,7 +13,7 @@ import { useLocation } from "react-router-dom";
 const AddProduct = () => {
   const loaction = useLocation();
   const productToEdit = loaction.state?.productToEdit || {};
-  const [reInitialValues, setReInitialValues] = useState(null);
+  const [reInitialValues, setReInitialValues] = useState(initialValues);
 
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedColor, setSelectedColor] = useState([]);
@@ -98,29 +98,34 @@ const AddProduct = () => {
   };
 
   useEffect(() => {
-    getAllParentCategories();
-    getAllBrands();
-    getAllColors();
-    getAllGuarantees();
-    setInitialSelectValues();
+    getAllParentCategories()
+    getAllBrands()
+    getAllColors()
+    getAllGuarantees()
+    setInitialSelectValues()
+
+
     for (const key in productToEdit) {
-      if (productToEdit[key] === null) productToEdit[key] = "";
+      if (productToEdit[key] === null || productToEdit[key] === undefined) {
+        productToEdit[key] = "";
+      }
     }
-    if (productToEdit)
-      setReInitialValues({
-        ...productToEdit,
-        category_ids: productToEdit.categories
-          ? productToEdit.categories.map((c) => c.id).join("_")
-          : "",
-        color_ids: productToEdit.color
-          ? productToEdit.color.map((c) => c.id).join("_")
-          : "",
-        guarantees_ids: productToEdit.guarantees
-          ? productToEdit.guarantees.map((c) => c.id).join("_")
-          : "",
-      });
-    else setReInitialValues(null);
+  
+    setReInitialValues({
+      ...initialValues,
+      ...productToEdit,
+      category_ids: productToEdit.categories
+        ? productToEdit.categories.map((c) => c.id).join("_")
+        : "",
+      color_ids: productToEdit.color
+        ? productToEdit.color.map((c) => c.id).join("_")
+        : "",
+      guarantees_ids: productToEdit.guarantees
+        ? productToEdit.guarantees.map((c) => c.id).join("_")
+        : "",
+    });
   }, []);
+  
 
   const handleSetMainCategories = async (value) => {
     setMainCategories("waiting");
@@ -176,6 +181,7 @@ const AddProduct = () => {
                 firstItem="دسته مورد نظر را انتخاب کنید"
                 resultType="string"
                 initialItems={selectedCategories}
+                value={formik.values.category_ids || ""}
               />
 
               <FormikControl
@@ -202,6 +208,7 @@ const AddProduct = () => {
                 type="number"
                 label="وزن"
                 firstItem="(گرم) فقط از اعداد استفاده کنید"
+                value={formik.values.weight || ""}
               />
 
               <FormikControl
@@ -235,18 +242,30 @@ const AddProduct = () => {
                 initialItems={selectedGuarantees}
               />
 
-              <FormikControl
+              {/* <FormikControl
                 control="textarea"
                 name="descriptions"
                 label="توضیحات"
                 firstItem="فقط از حروف و اعداد استفاده شود"
-              />
+              /> */}
+
+              
+               <FormikControl
+                control="ckeditor"
+                name="descriptions"
+                label="توضیحات"
+                firstItem="فقط از حروف و اعداد استفاده شود"
+                value={formik.values.descriptions || []}
+
+              /> 
 
               <FormikControl
                 control="textarea"
                 name="short_descriptions"
                 label="توضیحات کوتاه"
                 firstItem="فقط از حروف و اعداد استفاده شود"
+                value={formik.values.short_descriptions || []}
+
               />
 
               <FormikControl
@@ -254,6 +273,8 @@ const AddProduct = () => {
                 name="cart_descriptions"
                 label="توضیحات سبد"
                 firstItem="فقط از حروف و اعداد استفاده شود"
+                value={formik.values.cart_descriptions || []}
+
               />
 
               {!productToEdit ? (
@@ -262,6 +283,8 @@ const AddProduct = () => {
                   name="image"
                   label="تصویر"
                   firstItem="تصویر"
+                  value={formik.values.image || ""}
+
                 />
               ) : null}
 

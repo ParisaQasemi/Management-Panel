@@ -27,6 +27,8 @@ import CategoryChildren from "../../pages/Store/ProductGroupManagement/tableAddi
 import Attributes from "../../pages/Store/ProductGroupManagement/attrs/Attributes";
 import Guaranties from "../../pages/Store/Guaranties/Guaranties";
 import Color from "../../pages/Store/Color/Color";
+import SetAttribute from "../../pages/Store/Product/setAttr/SetAttribute";
+import ProductGallery from "../../pages/Store/Product/gallery/ProductGallery";
 
 const Mainbar = ({ toggleSidebar }) => {
   return (
@@ -41,6 +43,8 @@ const Mainbar = ({ toggleSidebar }) => {
         <Route path="/AddCategory" element={<AddCategory />} />
         <Route path="/Product" element={<Product />} />
         <Route path="/products/add-product" element={<AddProduct />} />
+        <Route path="/products/set-attr" element={<SetAttribute />} />
+        <Route path="/products/gallery" element={<ProductGallery />} />
 
         <Route path="/AddProduct" element={<AddProduct />} />
         <Route path="/Brand" element={<Brand />} />
@@ -63,7 +67,6 @@ const Mainbar = ({ toggleSidebar }) => {
         <Route path="/Register" element={<Register />} />
         <Route path="/Table" element={<Table />} />
         <Route path="/ListProducts" element={<ListProducts />} />
-        {/* <Route path="/Login" element={<Login />} /> */}
         <Route path="/Logout" element={<Logout />} />
       </Routes>
     </div>

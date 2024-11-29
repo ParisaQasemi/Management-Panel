@@ -32,6 +32,8 @@ const Select = ({ options = [], name, label, firstItem, handleOnchange }) => {
                     id={name}
                     name={name}
                     onChange={(e) => handleOnchange(e.target.value, form)}
+                    // onChange={(e) => form.setFieldValue(name, e.target.value)} // استفاده از form.setFieldValue
+
                     className="w-full mt-1 p-1 border-white border-b-[1px] text-white text-sm focus:outline-none bg-transparent  "
                   >
                     {setOptions()}

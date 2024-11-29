@@ -28,6 +28,9 @@ const Navbar = ({ toggleSidebar }) => {
       case "/products/add-product":
         return "افزودن محصول جدید";
 
+      case "/products/gallery":
+        return "مدیریت گالری تصاویر";
+
       case "/Brand":
         return "مدیریت برند ها";
 

@@ -1,22 +1,21 @@
 import React from "react";
 import { FaEdit } from "react-icons/fa";
+import { GrGallery } from "react-icons/gr";
 import { MdDelete } from "react-icons/md";
 import { PiSubsetProperOf } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 
-const Actions = ({ rowData, setshowModal }) => {
-  const navigation = useNavigate()
+const Actions = ({ rowData }) => {
+  const navigation = useNavigate();
 
   return (
     <>
       <button
         className="mx-1 cursor-pointer text-blue-500"
-        title="زیرمجموعه"
+        title="ثبت ویژگی"
         onClick={() =>
-          navigate(`/Category/${rowData.id}`, {
-            state: {
-              parentData: rowData,
-            },
+          navigation('/products/set-attr', {
+            state: { selectedProduct: rowData },
           })
         }
       >
@@ -27,12 +26,20 @@ const Actions = ({ rowData, setshowModal }) => {
         title="ویرایش"
         onClick={() => {
           // setshowModal(true);
-          navigation('/products/add-product', {state:{productToEdit:rowData}})
+          navigation("/products/add-product", {
+            state: { productToEdit: rowData },
+          });
         }}
       >
         <FaEdit />
       </button>
-
+      <button
+        className="mx-1 cursor-pointer text-green-600"
+        title="مدیریت گالری"
+        onClick={() => navigation('/products/gallery', {state:{selectedProduct:rowData}})}
+      >
+        <GrGallery />
+      </button>
       <button
         className="mx-1 cursor-pointer text-red-500"
         title="حذف"
