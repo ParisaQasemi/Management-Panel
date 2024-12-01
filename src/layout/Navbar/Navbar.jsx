@@ -40,7 +40,7 @@ const Navbar = ({ toggleSidebar }) => {
       case "/Color":
         return "مدیریت رنگ ها";
 
-      case "/DiscountManagement":
+      case "/Discount":
         return "مدیریت تخفیف ها";
 
       case "/CartManagement":

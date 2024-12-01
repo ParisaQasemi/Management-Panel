@@ -10,7 +10,7 @@ import SpinnerLoad from "../SpinnerLoad";
 const PaginationTable = ({
   data,
   dataInfo,
-  additionField,
+  // additionField,
   numOfPage,
   searchParams,
   setForceRender,
@@ -73,7 +73,7 @@ const PaginationTable = ({
       ) : data.length ? (
         <table className="table text-right my-5 bg-gradient-custom backdrop-blur-lg">
           <thead className="text-lg font-bold text-white">
-            <tr>
+            {/* <tr>
               {dataInfo.map((i) => (
                 <th key={i.field}>{i.title}</th>
               ))}
@@ -82,21 +82,44 @@ const PaginationTable = ({
                     return <th key={a.id + "__" + index}>{a.title}</th>;
                   })
                 : null}
+            </tr> */}
+
+
+             <tr>
+              {dataInfo.map((i, index) => (
+                <th key={i.field || `notField__${index}`}>{i.title}</th>
+              ))}
             </tr>
+
+
           </thead>
 
           <tbody className="text-sm font-light text-gray-300">
             {tableData.map((d) => (
+              // <tr key={d.id}>
+              //   {dataInfo.map((i) => (
+              //     <th key={`${i.field}_${d.id}`}>{d[i.field]}</th>
+              //   ))}
+              //   {additionField
+              //     ? additionField.map((a, index) => {
+              //         return <td key={a.id + "__" + index}>{a.elements(d)}</td>;
+              //       })
+              //     : null}
+              // </tr>
+
               <tr key={d.id}>
-                {dataInfo.map((i) => (
-                  <th key={`${i.field}_${d.id}`}>{d[i.field]}</th>
-                ))}
-                {additionField
-                  ? additionField.map((a, index) => {
-                      return <td key={a.id + "__" + index}>{a.elements(d)}</td>;
-                    })
-                  : null}
+                {dataInfo.map((i, index) =>
+                  i.field ? (
+                    <td key={`${i.field}_${d.id}`}>{d[i.field]}</td>
+                  ) : (
+                    <td key={d.id + "__" + i.id + "__" + index}>
+                      {i.elements(d)}
+                    </td>
+                  )
+                )}
               </tr>
+
+              
             ))}
           </tbody>
         </table>

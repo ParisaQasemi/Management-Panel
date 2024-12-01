@@ -67,9 +67,7 @@ const CategoryTable = () => {
     { field: "id", title: "#" },
     { field: "title", title: "عنوان محصول" },
     { field: "parent_id", title: "والد" },
-  ];
 
-  const additionField = [
     {
       title: "تاریخ",
       elements: (rowData) => convertDateToJalali(rowData.created_at),
@@ -90,6 +88,27 @@ const CategoryTable = () => {
     },
   ];
 
+  // const additionField = [
+  //   {
+  //     title: "تاریخ",
+  //     elements: (rowData) => convertDateToJalali(rowData.created_at),
+  //   },
+  //   {
+  //     title: "نمایش در منو",
+  //     elements: (rowData) => <ShowInData rowData={rowData} />,
+  //   },
+  //   {
+  //     title: "عملیات",
+  //     elements: (rowData) => (
+  //       <Actions
+  //         rowData={rowData}
+  //         setshowModal={() => setshowModal(true)}
+  //         handleDeleteCategory={handleDeleteCategory}
+  //       />
+  //     ),
+  //   },
+  // ];
+
   const searchParams = {
     title: "جستجو",
     placeholder: "قسمتی از عنوان را وارد کنید",
@@ -102,7 +121,7 @@ const CategoryTable = () => {
       <PaginationTable
         data={data}
         dataInfo={dataInfo}
-        additionField={additionField}
+        // additionField={additionField}
         searchParams={searchParams}
         numOfPage={5}
         setForceRender={setForceRender}

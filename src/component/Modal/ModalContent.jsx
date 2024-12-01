@@ -18,7 +18,7 @@ const ModalContent = ({ children, editId, editCategory, size = "full" }) => {
   return createPortal(
     <>
       <div className="fixed inset-0 bg-black opacity-70 z-30 " />
-      <div className={`${modalSizeClass}`}>
+      <div className={`${modalSizeClass} h-fit`}>
         {/* <ModalContentHeader title={title} /> */}
         {children}
         <ModalContentFooter modalSizeClass={modalSizeClass} />

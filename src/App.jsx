@@ -1,4 +1,5 @@
 import "./App.css";
+import 'animate.css';
 import { useLocation } from "react-router-dom";
 import AdminLayout from "./layout/auth/AdminLayout";
 import AuthLayout from "./layout/auth/AuthLayout";

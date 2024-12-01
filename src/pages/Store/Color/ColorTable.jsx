@@ -21,9 +21,7 @@ const ColorTable = () => {
     { field: "id", title: "#" },
     { field: "title", title: "عنوان" },
     { field: "code", title: "کد رنگ" },
-  ];
 
-  const additionField = [
     {
       title: "رنگ",
       elements: (rowData) => (
@@ -47,6 +45,31 @@ const ColorTable = () => {
       ),
     },
   ];
+
+  // const additionField = [
+  //   {
+  //     title: "رنگ",
+  //     elements: (rowData) => (
+  //       <div
+  //         className="block"
+  //         style={{ background: rowData.code, color: rowData.code }}
+  //       >
+  //         ...
+  //       </div>
+  //     ),
+  //   },
+  //   {
+  //     title: "عملیات",
+  //     elements: (rowData) => (
+  //       <Actions
+  //         rowData={rowData}
+  //         setColorToEdit={setColorToEdit}
+  //         handleDeleteColor={handleDeleteColor}
+  //         setshowModal={setshowModal}
+  //       />
+  //     ),
+  //   },
+  // ];
 
   const searchParams = {
     title: "جستجو",
@@ -88,7 +111,7 @@ const ColorTable = () => {
       <PaginationTable
         data={data}
         dataInfo={dataInfo}
-        additionField={additionField}
+        // additionField={additionField}
         numOfPage={2}
         searchParams={searchParams}
         loading={loading}

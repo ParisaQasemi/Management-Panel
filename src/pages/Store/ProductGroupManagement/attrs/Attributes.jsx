@@ -23,9 +23,6 @@ const Attributes = () => {
     { field: "id", title: "#" },
     { field: "title", title: "عنوان محصول" },
     { field: "unit", title: "واحد" },
-  ];
-
-  const additionField = [
     {
       title: "نمایش در فیلتر",
       elements: (rowData) => <ShowInFilter rowData={rowData} />,
@@ -37,6 +34,19 @@ const Attributes = () => {
       handleDeleteCategoryAttr={handleDeleteCategoryAttr} />,
     },
   ];
+
+  // const additionField = [
+  //   {
+  //     title: "نمایش در فیلتر",
+  //     elements: (rowData) => <ShowInFilter rowData={rowData} />,
+  //   },
+  //   {
+  //     title: "عملیات",
+  //     elements: (rowData) => <AttrAction rowData={rowData}
+  //     attrToEdit={attrToEdit} setAttrToEdit={setAttrToEdit}
+  //     handleDeleteCategoryAttr={handleDeleteCategoryAttr} />,
+  //   },
+  // ];
 
   const searchParams = {
     title: "جستجو",
@@ -118,7 +128,7 @@ const Attributes = () => {
         <PaginationTable
           data={data}
           dataInfo={dataInfo}
-          additionField={additionField}
+          // additionField={additionField}
           numOfPage={5}
           searchParams={searchParams}
           loading={loading}

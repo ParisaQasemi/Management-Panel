@@ -5,7 +5,6 @@ import Navbar from "../Navbar/Navbar";
 import Dashboard from "../../pages/Dashboard/Dashboard";
 import ListProducts from "../../pages/Store/ListProducts/ListProducts";
 import Brand from "../../pages/Store/Brand/Brand";
-import DiscountManagement from "../../pages/Store/DiscountManagement/DiscountManagement";
 import CartManagement from "../../pages/OrderCart/CartManagement/CartManagement";
 import OrderManagement from "../../pages/OrderCart/OrderManagement/OrderManagement";
 import ShoppingMethodManagement from "../../pages/OrderCart/ShoppingMethodManagement/ShoppingMethodManagement";
@@ -29,6 +28,8 @@ import Guaranties from "../../pages/Store/Guaranties/Guaranties";
 import Color from "../../pages/Store/Color/Color";
 import SetAttribute from "../../pages/Store/Product/setAttr/SetAttribute";
 import ProductGallery from "../../pages/Store/Product/gallery/ProductGallery";
+import Discount from "../../pages/Store/Discount/Discount";
+import AddDiscount from "../../pages/Store/Discount/AddDiscount";
 
 const Mainbar = ({ toggleSidebar }) => {
   return (
@@ -50,7 +51,10 @@ const Mainbar = ({ toggleSidebar }) => {
         <Route path="/Brand" element={<Brand />} />
         <Route path="/Guaranties" element={<Guaranties />} />
         <Route path="/Color" element={<Color />} />
-        <Route path="/DiscountManagement" element={<DiscountManagement />} />
+        <Route path="/Discount" element={<Discount />}>
+          <Route path="add-discount-code" element={<AddDiscount />} />
+        </Route>
+
         <Route path="/CartManagement" element={<CartManagement />} />
         <Route path="/OrderManagement" element={<OrderManagement />} />
         <Route
