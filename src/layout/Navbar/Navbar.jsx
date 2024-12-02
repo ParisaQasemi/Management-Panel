@@ -58,7 +58,7 @@ const Navbar = ({ toggleSidebar }) => {
       case "/ViewUsers":
         return "مشاهده کاربران";
 
-      case "/UserRoles":
+      case "/Roles":
         return "نقش ها";
 
       case "/UserPermissions":

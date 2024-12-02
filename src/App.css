@@ -101,3 +101,14 @@ body {
   pointer-events: none !important;
   opacity: 0.5;
 }
+
+.sidebar_items_container {
+  max-height: calc(100vh - 210px) !important;
+  overflow: auto;
+  scrollbar-width: none; 
+
+
+}
+.sidebar_items_container::-webkit-scrollbar {
+  display: none; /* مخفی کردن نوار اسکرول */
+}

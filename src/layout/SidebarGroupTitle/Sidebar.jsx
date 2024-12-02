@@ -1,12 +1,23 @@
 import React from "react";
 
-import {FaComment, FaLuggageCart, FaShoppingCart, FaThList, FaUserCog, FaUsers,} from "react-icons/fa";
+import {
+  FaComment,
+  FaLuggageCart,
+  FaShoppingCart,
+  FaThList,
+  FaUserCog,
+  FaUsers,
+} from "react-icons/fa";
 import { IoHomeSharp } from "react-icons/io5";
 import { RiDiscountPercentFill } from "react-icons/ri";
 import { IoIosColorPalette, IoMdClose } from "react-icons/io";
-import { AiFillProduct, AiOutlineAppstore, AiOutlineProduct} from "react-icons/ai";
+import {
+  AiFillProduct,
+  AiOutlineAppstore,
+  AiOutlineProduct,
+} from "react-icons/ai";
 import { TbBrandAsana } from "react-icons/tb";
-import { MdShoppingCartCheckout, MdVerifiedUser} from "react-icons/md";
+import { MdShoppingCartCheckout, MdVerifiedUser } from "react-icons/md";
 import { BsFillQuestionSquareFill } from "react-icons/bs";
 import SidebarGroupTitle from "./SidebarGroupTitle";
 import SidebarItem from "./SidebarItem";
@@ -27,40 +38,89 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <IoMdClose className="text-2xl" />
         </button>
         {/* SideBar Title */}
-        <div className="text-2xl font-bold mt-7 mb-12 border-gray-100">
+        <div className="text-2xl font-bold mt-7 mb-12  border-gray-100">
           پنل مدیریت
         </div>
 
         {/* Navigation Links Section */}
-          <SidebarItem title='داشبورد' icon={<IoHomeSharp />} path='/'/>
+        <SidebarItem title="داشبورد" icon={<IoHomeSharp />} path="/" />
 
+        <div className="sidebar_items_container">
           {/* ---------- Store ---------- */}
-          <SidebarGroupTitle title='فروشگاه'/>
-          <SidebarItem title='مدیریت گروه محصول' icon={<AiOutlineProduct />} path='/Category'/>
-          <SidebarItem title='مدیریت محصول' icon={<AiOutlineProduct />} path='/Product'/>
-          <SidebarItem title='مدیریت برند ها' icon={<TbBrandAsana />} path='/Brand'/>
-          <SidebarItem title='مدیریت گارانتی ها' icon={<AiOutlineAppstore />} path='/Guaranties'/>
-          <SidebarItem title='مدیریت رنگ ها' icon={<IoIosColorPalette />} path='/Color'/>
-          <SidebarItem title='مدیریت تخفیف ها' icon={<RiDiscountPercentFill />} path='/Discount'/>
-          
+          <SidebarGroupTitle title="فروشگاه" />
+          <SidebarItem
+            title="مدیریت گروه محصول"
+            icon={<AiOutlineProduct />}
+            path="/Category"
+          />
+          <SidebarItem
+            title="مدیریت محصول"
+            icon={<AiOutlineProduct />}
+            path="/Product"
+          />
+          <SidebarItem
+            title="مدیریت برند ها"
+            icon={<TbBrandAsana />}
+            path="/Brand"
+          />
+          <SidebarItem
+            title="مدیریت گارانتی ها"
+            icon={<AiOutlineAppstore />}
+            path="/Guaranties"
+          />
+          <SidebarItem
+            title="مدیریت رنگ ها"
+            icon={<IoIosColorPalette />}
+            path="/Color"
+          />
+          <SidebarItem
+            title="مدیریت تخفیف ها"
+            icon={<RiDiscountPercentFill />}
+            path="/Discount"
+          />
+
           {/* ---------- Orde And Cart ---------- */}
-          <SidebarGroupTitle title=' سفارشات و سبد خرید '/>
-          <SidebarItem title='مدیریت سبد ها' icon={<FaShoppingCart />} path='/CartManagement'/>
-          <SidebarItem title='مدیریت سفارشات' icon={<FaLuggageCart />} path='/OrderManagement'/>
-          <SidebarItem title='مدیریت نحوه ارسال' icon={<MdShoppingCartCheckout />} path='/ShoppingMethodManagement'/>
+          <SidebarGroupTitle title=" سفارشات و سبد خرید " />
+          <SidebarItem
+            title="مدیریت سبد ها"
+            icon={<FaShoppingCart />}
+            path="/CartManagement"
+          />
+          <SidebarItem
+            title="مدیریت سفارشات"
+            icon={<FaLuggageCart />}
+            path="/OrderManagement"
+          />
+          <SidebarItem
+            title="مدیریت نحوه ارسال"
+            icon={<MdShoppingCartCheckout />}
+            path="/ShoppingMethodManagement"
+          />
           {/* <SidebarItem title='صورت حساب ' icon={<MdShoppingCartCheckout />} path='/Billing'/> */}
 
           {/* ---------- Users And Partners ---------- */}
-          <SidebarGroupTitle title='کاربران و همکاران '/>
-          <SidebarItem title='مشاهده کاربران' icon={<FaUsers />} path='/ViewUsers'/>
-          <SidebarItem title='نقش ها ' icon={<FaUserCog />} path='/UserRoles'/>
-          <SidebarItem title='مجوز ها ' icon={<MdVerifiedUser />} path='/UserPermissions'/>
+          <SidebarGroupTitle title="کاربران و همکاران " />
+          <SidebarItem
+            title="مشاهده کاربران"
+            icon={<FaUsers />}
+            path="/ViewUsers"
+          />
+          <SidebarItem title="نقش ها " icon={<FaUserCog />} path="/Roles" />
+          <SidebarItem
+            title="مجوز ها "
+            icon={<MdVerifiedUser />}
+            path="/Permissions"
+          />
 
           {/* ---------- Communications ---------- */}
-          <SidebarGroupTitle title=' ارتباطات '/>
-          <SidebarItem title='سوال ها ' icon={<BsFillQuestionSquareFill />} path='/Questions'/>
-          <SidebarItem title='نظرات ' icon={<FaComment />} path='/Feedback'/>
-
+          <SidebarGroupTitle title=" ارتباطات " />
+          <SidebarItem
+            title="سوال ها "
+            icon={<BsFillQuestionSquareFill />}
+            path="/Questions"
+          />
+          <SidebarItem title="نظرات " icon={<FaComment />} path="/Feedback" />
+        </div>
       </div>
     </div>
   );

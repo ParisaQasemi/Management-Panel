@@ -72,8 +72,6 @@ const DiscountTable = () => {
     navigate("add-discount-code");
   };
 
- 
-
   return (
     <>
       <PaginationTable

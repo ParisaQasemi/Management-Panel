@@ -10,8 +10,8 @@ import OrderManagement from "../../pages/OrderCart/OrderManagement/OrderManageme
 import ShoppingMethodManagement from "../../pages/OrderCart/ShoppingMethodManagement/ShoppingMethodManagement";
 import Billing from "../../pages/OrderCart/Billing/Billing";
 import ViewUsers from "../../pages/UsersAndColleagues/ViewUsers/ViewUsers";
-import UserRoles from "../../pages/UsersAndColleagues/UserRoles/UserRoles";
-import UserPermissions from "../../pages/UsersAndColleagues/UserPermissions/UserPermissions";
+import Roles from "../../pages/UsersAndColleagues/Roles/Roles";
+import Permissions from "../../pages/UsersAndColleagues/Permissions/Permissions";
 import Questions from "../../pages/Communications/Questions/Questions";
 import Feedback from "../../pages/Communications/Feedback/Feedback";
 import Table from "../../pages/Table/Table";
@@ -30,6 +30,7 @@ import SetAttribute from "../../pages/Store/Product/setAttr/SetAttribute";
 import ProductGallery from "../../pages/Store/Product/gallery/ProductGallery";
 import Discount from "../../pages/Store/Discount/Discount";
 import AddDiscount from "../../pages/Store/Discount/AddDiscount";
+import AddRole from "../../pages/UsersAndColleagues/Roles/AddRole";
 
 const Mainbar = ({ toggleSidebar }) => {
   return (
@@ -54,6 +55,13 @@ const Mainbar = ({ toggleSidebar }) => {
         <Route path="/Discount" element={<Discount />}>
           <Route path="add-discount-code" element={<AddDiscount />} />
         </Route>
+        <Route path="/Permissions" element={<Permissions />} />
+        
+        <Route path="/Roles" element={<Roles />}>
+          <Route path="add-role" element={<AddRole />} />
+        </Route>
+
+
 
         <Route path="/CartManagement" element={<CartManagement />} />
         <Route path="/OrderManagement" element={<OrderManagement />} />
@@ -63,8 +71,6 @@ const Mainbar = ({ toggleSidebar }) => {
         />
         <Route path="/Billing" element={<Billing />} />
         <Route path="/ViewUsers" element={<ViewUsers />} />
-        <Route path="/UserRoles" element={<UserRoles />} />
-        <Route path="/UserPermissions" element={<UserPermissions />} />
         <Route path="/Questions" element={<Questions />} />
         <Route path="/Feedback" element={<Feedback />} />
         <Route path="/Profile" element={<Profile />} />
