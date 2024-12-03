@@ -1,10 +1,11 @@
-import { elements } from "chart.js";
 import React, { useEffect, useState } from "react";
 import Actions from "./tableAddition/Actions";
 import { Outlet, useNavigate } from "react-router-dom";
 import ModalBtn from "../../../component/Modal/ModalBtn";
 import PaginationTable from "../../../component/Pagination/PaginationTable";
 import { getAllProductTitlesService } from "../../../services/products";
+import { Alert, Confirm } from "../../../utils/alert";
+import { deleteRoleService } from "../../../services/users";
 
 const RoleTable = () => {
   const navigate = useNavigate();
@@ -39,7 +40,15 @@ const RoleTable = () => {
     }
   };
 
-  const handleDeleteRole = async () => {};
+  const handleDeleteRole = async (role) => {
+    if(await Confirm(role.title, 'آیا از حذف این نقش اطمینان دارید؟')){
+        const res = await deleteRoleService(role.id)
+        if(res.status === 200){
+            Alert('انجام شد', res.data.message, 'success')
+            setData(old=>old.filter(d=>d.id != role.id))
+        }
+    }
+  };
 
   useEffect(() => {
     handleGetAllRoles();

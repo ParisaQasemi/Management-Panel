@@ -57,11 +57,9 @@ const Mainbar = ({ toggleSidebar }) => {
         </Route>
         <Route path="/Permissions" element={<Permissions />} />
         
-        <Route path="/Roles" element={<Roles />}>
+        <Route path="/roles" element={<Roles />}>
           <Route path="add-role" element={<AddRole />} />
         </Route>
-
-
 
         <Route path="/CartManagement" element={<CartManagement />} />
         <Route path="/OrderManagement" element={<OrderManagement />} />
