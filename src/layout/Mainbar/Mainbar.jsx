@@ -9,7 +9,7 @@ import CartManagement from "../../pages/OrderCart/CartManagement/CartManagement"
 import OrderManagement from "../../pages/OrderCart/OrderManagement/OrderManagement";
 import ShoppingMethodManagement from "../../pages/OrderCart/ShoppingMethodManagement/ShoppingMethodManagement";
 import Billing from "../../pages/OrderCart/Billing/Billing";
-import ViewUsers from "../../pages/UsersAndColleagues/ViewUsers/ViewUsers";
+import Users from "../../pages/UsersAndColleagues/Users/Users";
 import Roles from "../../pages/UsersAndColleagues/Roles/Roles";
 import Permissions from "../../pages/UsersAndColleagues/Permissions/Permissions";
 import Questions from "../../pages/Communications/Questions/Questions";
@@ -31,6 +31,7 @@ import ProductGallery from "../../pages/Store/Product/gallery/ProductGallery";
 import Discount from "../../pages/Store/Discount/Discount";
 import AddDiscount from "../../pages/Store/Discount/AddDiscount";
 import AddRole from "../../pages/UsersAndColleagues/Roles/AddRole";
+import AddUser from "../../pages/UsersAndColleagues/Users/AddUsers";
 
 const Mainbar = ({ toggleSidebar }) => {
   return (
@@ -39,9 +40,12 @@ const Mainbar = ({ toggleSidebar }) => {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/Category" element={<Category />}>
-          <Route path=":categoryId" element={<CategoryChildren />}/>
+          <Route path=":categoryId" element={<CategoryChildren />} />
         </Route>
-        <Route path="/Category/:categoryId/attributes" element={<Attributes />}/>
+        <Route
+          path="/Category/:categoryId/attributes"
+          element={<Attributes />}
+        />
         <Route path="/AddCategory" element={<AddCategory />} />
         <Route path="/Product" element={<Product />} />
         <Route path="/products/add-product" element={<AddProduct />} />
@@ -56,9 +60,13 @@ const Mainbar = ({ toggleSidebar }) => {
           <Route path="add-discount-code" element={<AddDiscount />} />
         </Route>
         <Route path="/Permissions" element={<Permissions />} />
-        
+
         <Route path="/roles" element={<Roles />}>
           <Route path="add-role" element={<AddRole />} />
+        </Route>
+
+        <Route path="/Users" element={<Users />}>
+          <Route path="add-user" element={<AddUser />} />
         </Route>
 
         <Route path="/CartManagement" element={<CartManagement />} />
@@ -68,7 +76,6 @@ const Mainbar = ({ toggleSidebar }) => {
           element={<ShoppingMethodManagement />}
         />
         <Route path="/Billing" element={<Billing />} />
-        <Route path="/ViewUsers" element={<ViewUsers />} />
         <Route path="/Questions" element={<Questions />} />
         <Route path="/Feedback" element={<Feedback />} />
         <Route path="/Profile" element={<Profile />} />

@@ -62,8 +62,15 @@ const PaginationTable = ({
     <div>
       {/* Modal Button and Search */}
       <div className="flex justify-between">
-        <Search setSearchChar={setSearchChar} />
-        {additionalElement || ""}
+        <div className="w-full">
+          <div className="flex justify-between">
+            <Search
+              setSearchChar={setSearchChar}
+              placeholder={searchParams.placeholder}
+            />
+            {additionalElement || ""}
+          </div>
+        </div>
       </div>
 
       {/* Table Product */}
@@ -84,14 +91,11 @@ const PaginationTable = ({
                 : null}
             </tr> */}
 
-
-             <tr>
+            <tr>
               {dataInfo.map((i, index) => (
                 <th key={i.field || `notField__${index}`}>{i.title}</th>
               ))}
             </tr>
-
-
           </thead>
 
           <tbody className="text-sm font-light text-gray-300">
@@ -118,8 +122,6 @@ const PaginationTable = ({
                   )
                 )}
               </tr>
-
-              
             ))}
           </tbody>
         </table>

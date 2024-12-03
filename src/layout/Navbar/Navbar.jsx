@@ -55,8 +55,11 @@ const Navbar = ({ toggleSidebar }) => {
       case "/Billing":
         return "صورت حساب";
 
-      case "/ViewUsers":
+      case "/Users":
         return "مشاهده کاربران";
+
+        case "/Users/add-user":
+          return "افزودن محصول جدید";
 
       case "/Roles":
         return "نقش ها";

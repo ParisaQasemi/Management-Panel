@@ -17,6 +17,7 @@ const PaginatiedDataTable = ({
   handleSearch,
   setshowModal,
   handleOpenModal,
+  additionalElement,
 }) => {
   const pageRange = 3;
 
@@ -46,10 +47,7 @@ const PaginatiedDataTable = ({
               setSearchChar={handleSetSearchChar}
               placeholder={searchParams.placeholder}
             />
-
-            <Link to="/products/add-product">
-              <ModalBtn />
-            </Link>
+            {additionalElement || ""}
           </div>
         </div>
 

@@ -87,7 +87,6 @@ const AddRole = () => {
             {editType !== "permissions" ? (
               <>
                 <FormikControl
-                  // className={editType == "role" ? "" : "w-64 bg-red-500"}
                   control="input"
                   type="text"
                   name="title"
@@ -96,7 +95,6 @@ const AddRole = () => {
                 />
 
                 <FormikControl
-                  // className={editType == "role" ? "" : "w-64 bg-red-500"}
                   control="textarea"
                   name="description"
                   label="توضیحات نقش"

@@ -61,7 +61,7 @@ const Date = ({ formik, name, label, yearsLimit, initialDate}) => {
     setShowConfig(false);
   };
   return (
-    <div className={`wrap-input100 validate-input form_date_picker`}>
+    <div className='h-14 mb-12'>
       <div className="mb-3 flex justify-between" onClick={handleShowDateConfig}>
         <span className="w-block text-white font-bold w-32"> {label} </span>
         <FastField
@@ -73,10 +73,10 @@ const Date = ({ formik, name, label, yearsLimit, initialDate}) => {
       </div>
 
       {showConfig ? (
-        <div className="bg-white flex justify-between m-0 p-1 rounded-lg">
+        <div className="flex justify-between m-0 p-1 rounded-lg">
           <div className="flex justify-center items-center w-full p-0">
             <select
-              className="bg-transparent text-black text-center"
+              className="bg-transparent text-white text-center"
               value={day}
               onChange={(e) => setDay(e.target.value)}
             >
@@ -89,7 +89,7 @@ const Date = ({ formik, name, label, yearsLimit, initialDate}) => {
           </div>
           <div className="flex justify-center items-center w-full p-0">
             <select
-              className="bg-transparent text-black text-center"
+              className="bg-transparent text-white text-center"
               value={month}
               onChange={(e) => setMonth(e.target.value)}
             >
@@ -102,7 +102,7 @@ const Date = ({ formik, name, label, yearsLimit, initialDate}) => {
           </div>
           <div className="flex justify-center items-center w-full p-0">
             <select
-              className="bg-transparent text-black text-center"
+              className="bg-transparent text-white text-center"
               value={year}
               onChange={(e) => setYear(e.target.value)}
             >

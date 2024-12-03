@@ -103,7 +103,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <SidebarItem
             title="مشاهده کاربران"
             icon={<FaUsers />}
-            path="/ViewUsers"
+            path="/Users"
           />
           <SidebarItem title="نقش ها " icon={<FaUserCog />} path="/Roles" />
           <SidebarItem
