@@ -4,7 +4,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import Actions from "./tableAddition/Actions";
 import ModalBtn from "../../../component/Modal/ModalBtn";
 import PaginatiedDataTable from "../../../component/Pagination/PaginatiedDataTable";
-import { getAllPaginatedUsersService } from "../../../services/users";
+import { deleteUserService, getAllPaginatedUsersService } from "../../../services/users";
 import { Alert, Confirm } from "../../../utils/alert";
 
 const UsersTable = () => {
@@ -61,17 +61,15 @@ const UsersTable = () => {
     handleGetUsers(1, countOnPage, char);
   };
 
-  const handleDeleteUser = async (product) => {
-    if (
-      await Confirm("حذف کاربر", `آیا از حذف ${product.title} اطمینان دارید؟`)
-    ) {
-      const res = await deleteProductService(product.id);
+  const handleDeleteUser = async (user)=>{
+    if (await Confirm("حذف کاربر",`آیا از حذف ${user.user_name} اطمینان دارید؟`)) {
+      const res = await deleteUserService(user.id);
       if (res.status === 200) {
         Alert("انجام شد", res.data.message, "success");
-        handleGetProducts(currentPage, countOnPage, searchChar);
+        handleGetUsers(currentPage, countOnPage, searchChar)
       }
     }
-  };
+  }
 
   useEffect(() => {
     handleGetUsers(currentPage, countOnPage, searchChar);

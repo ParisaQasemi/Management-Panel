@@ -1,5 +1,5 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate, useOutletContext } from "react-router-dom";
 import { Formik, Form } from "formik";
 import ModalContent from "../../../component/Modal/ModalContent";
 import FormikControl from "../../../component/form/FormikControl";
@@ -7,9 +7,70 @@ import SubmitButton from "../../../component/form/SubmitButton";
 import ModalContentHeader from "../../../component/Modal/ModalContentHeader";
 import CloseModalBtn from "../../../component/Modal/CloseModalBtn";
 import { initialValues, onSubmit, validationSchema } from "./core";
+import { getAllRolesService, getSinglrUserService } from "../../../services/users";
+import { convertDateToJalali } from "../../../utils/convertDate";
 
 const AddUser = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const userId = location.state?.userId;
+  const { setData } = useOutletContext();
+
+  const [userToEdit, setUserToEdit] = useState(null);
+  const [allRoles, setAllRoles] = useState([]);
+  const [selectedRoles, setSelectedRoles] = useState([]);
+  const [reInitialValues, setReInitialValues] = useState(null);
+
+  const handleGetAllRoles = async () => {
+    const res = await getAllRolesService();
+    if (res.status === 200) {
+      setAllRoles(
+        res.data.data.map((r) => {
+          return { id: r.id, value: r.title };
+        })
+      );
+    }
+  };
+
+  const handleGetUserData = async () => {
+    const res = await getSinglrUserService(userId);
+    if (res.status === 200) {
+      setUserToEdit(res.data.data);
+    }
+  };
+
+  useEffect(() => {
+    handleGetAllRoles();
+    if (userId) {
+      handleGetUserData();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (userToEdit) {
+      setSelectedRoles(
+        userToEdit.roles.map((r) => {
+          return { id: r.id, value: r.title };
+        })
+      );
+      const roles_id = userToEdit.roles.map((p) => p.id);
+      setReInitialValues({
+        birth_date: userToEdit.birth_date
+          ? convertDateToJalali(userToEdit.birth_date, "jD / jM / jYYYY")
+          : "",
+        roles_id,
+        password: "",
+        user_name: userToEdit.user_name || "",
+        first_name: userToEdit.first_name || "",
+        last_name: userToEdit.last_name || "",
+        phone: userToEdit.phone || "",
+        email: userToEdit.email || "",
+        gender: userToEdit.gender || 1,
+        isEditing: true,
+      });
+    }
+  }, [userToEdit]);
 
   const handleCloseModal = () => {
     navigate(-1);
@@ -21,7 +82,7 @@ const AddUser = () => {
         title={"افزودن کاربر"}
         closeFunction={() => navigate(-1)}
       />
-       <div>
+      <div>
         <button onClick={handleCloseModal}>
           <CloseModalBtn />
         </button>
@@ -29,9 +90,12 @@ const AddUser = () => {
 
       <div>
         <Formik
-          initialValues={initialValues}
-          onSubmit={(values, actions) => onSubmit(values, actions)}
+          initialValues={reInitialValues || initialValues}
+          onSubmit={(values, actions) =>
+            onSubmit(values, actions, setData, userId)
+          }
           validationSchema={validationSchema}
+          enableReinitialize
         >
           {(formik) => {
             return (
