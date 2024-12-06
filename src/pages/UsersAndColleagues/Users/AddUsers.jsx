@@ -47,30 +47,50 @@ const AddUser = () => {
     }
   }, []);
 
+  // useEffect(() => {
+  //   if (userToEdit) {
+  //     setSelectedRoles(
+  //       userToEdit.roles.map((r) => {
+  //         return { id: r.id, value: r.title };
+  //       })
+  //     );
+  //     const roles_id = userToEdit.roles.map((p) => p.id);
+  //     setReInitialValues({
+  //       birth_date: userToEdit.birth_date
+  //         ? convertDateToJalali(userToEdit.birth_date, "jD / jM / jYYYY")
+  //         : "",
+  //       roles_id,
+  //       password: "",
+  //       user_name: userToEdit.user_name || "",
+  //       first_name: userToEdit.first_name || "",
+  //       last_name: userToEdit.last_name || "",
+  //       phone: userToEdit.phone || "",
+  //       email: userToEdit.email || "",
+  //       gender: userToEdit.gender || 1,
+  //       isEditing: true,
+  //     });
+  //   }
+  // }, [userToEdit]);
+
   useEffect(() => {
     if (userToEdit) {
-      setSelectedRoles(
-        userToEdit.roles.map((r) => {
-          return { id: r.id, value: r.title };
-        })
-      );
-      const roles_id = userToEdit.roles.map((p) => p.id);
       setReInitialValues({
+        ...initialValues, // استفاده از مقدار پیش‌فرض
         birth_date: userToEdit.birth_date
           ? convertDateToJalali(userToEdit.birth_date, "jD / jM / jYYYY")
           : "",
-        roles_id,
-        password: "",
+        roles_id: userToEdit.roles.map((p) => p.id),
         user_name: userToEdit.user_name || "",
         first_name: userToEdit.first_name || "",
         last_name: userToEdit.last_name || "",
         phone: userToEdit.phone || "",
         email: userToEdit.email || "",
         gender: userToEdit.gender || 1,
-        isEditing: true,
+        isEditing: true, // تنظیم مقدار برای ویرایش
       });
     }
   }, [userToEdit]);
+  
 
   const handleCloseModal = () => {
     navigate(-1);

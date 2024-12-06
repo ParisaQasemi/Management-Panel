@@ -21,8 +21,12 @@ import { MdShoppingCartCheckout, MdVerifiedUser } from "react-icons/md";
 import { BsFillQuestionSquareFill } from "react-icons/bs";
 import SidebarGroupTitle from "./SidebarGroupTitle";
 import SidebarItem from "./SidebarItem";
+import Avatar from "./Avatar";
+import { useSelector } from "react-redux";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
+  const user = useSelector((state) => state.userReducer.data);
+
   return (
     <div className="flex">
       <div
@@ -41,6 +45,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         <div className="text-2xl font-bold mt-7 mb-12  border-gray-100">
           پنل مدیریت
         </div>
+
+        <Avatar
+          name={user.user_name || user.full_name}
+          imagePath={user.image || "../assets/img/Avatar/user.png"}
+        />
 
         {/* Navigation Links Section */}
         <SidebarItem title="داشبورد" icon={<IoHomeSharp />} path="/" />

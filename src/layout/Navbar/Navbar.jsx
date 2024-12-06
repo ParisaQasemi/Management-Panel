@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { IoHomeSharp, IoMenu, IoNotifications } from "react-icons/io5";
-import { FaUserCircle } from "react-icons/fa";
+import { FaGripVertical, FaUserCircle } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
+import { useSelector } from "react-redux";
 
 const Navbar = ({ toggleSidebar }) => {
   const location = useLocation();
   const navigate = useNavigate();
+
+  const [isVisible, setIsVisible] = useState(false); // برای نمایش یا مخفی کردن منو
+  const menuRef = useRef(null); // برای تشخیص کلیک بیرون
+
+  const user = useSelector((state) => state.userReducer.data);
 
   const getTitle = () => {
     switch (location.pathname) {
@@ -58,8 +64,8 @@ const Navbar = ({ toggleSidebar }) => {
       case "/Users":
         return "مشاهده کاربران";
 
-        case "/Users/add-user":
-          return "افزودن محصول جدید";
+      case "/Users/add-user":
+        return "افزودن محصول جدید";
 
       case "/Roles":
         return "نقش ها";
@@ -85,6 +91,19 @@ const Navbar = ({ toggleSidebar }) => {
     navigate("/");
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsVisible(false); // منو را مخفی کن
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <nav
       className="sticky top-5 z-20 mb-10 border rounded-xl p-4
@@ -105,22 +124,35 @@ const Navbar = ({ toggleSidebar }) => {
           </h3>
         </div>
         {/* Search section and buttons*/}
-        <div className="flexflex-col-2 md:flex-row items-start justify-between w-full md:w-auto p-0 h-10">
+        <div className="flex flex-col-2 md:flex-row items-center justify-between w-full md:w-auto p-0 h-10">
           {/* Buttons section*/}
-          <div className="w-24 flex items-center justify-end">
-            <NavLink
-              to="/logout"
-              className="ps-2 py-2 text-sm flex items-center"
-            >
-              <FaUserCircle className="cursor-pointer" />
-              <span className="ps-1 hidden md:block">خروج</span>
-            </NavLink>
+
+          <div className="flex items-center justify-end ">
+            {/* منو */}
+            {isVisible && (
+              <div
+                ref={menuRef}
+                className="w-44 h-32 bg-white text-blue-950 absolute top-28 right-0 rounded-lg p-2 md:right-auto md:left-0 md:top-20"
+              >
+                <span className="block text-center h-8 font-bold text-blue-900">
+                  {user.user_name || user.full_name}
+                </span>
+                <NavLink to="/logout" className="text-sm flex items-center">
+                  <FaUserCircle className="w-6 h-6 ms-2 my-1 cursor-pointer" />
+                  <span className="ps-1">خروج</span>
+                </NavLink>
+                <IoMdSettings className="w-6 h-6 ms-2 my-1 cursor-pointer" />
+              </div>
+            )}
             <IoMenu
-              className="ms-2 cursor-pointer md:hidden"
+              className="w-6 h-6 ms-2 cursor-pointer md:hidden"
               onClick={toggleSidebar}
             />
-            <IoMdSettings className="ms-2 cursor-pointer" />
-            <IoNotifications className="ms-2 cursor-pointer" />
+            <IoNotifications className="w-6 h-6 ms-2 cursor-pointer" />
+            <FaGripVertical
+              className="w-6 h-6 ms-2 cursor-pointer"
+              onClick={() => setIsVisible((prev) => !prev)} // نمایش یا مخفی کردن منو با کلیک
+            />
           </div>
         </div>
       </div>
