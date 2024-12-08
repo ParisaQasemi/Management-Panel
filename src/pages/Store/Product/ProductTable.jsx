@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Actions from "./tableAddition/Actions";
 import {
   deleteProductService,
@@ -7,6 +7,11 @@ import {
 import PaginatiedDataTable from "../../../component/Pagination/PaginatiedDataTable";
 import { Alert, Confirm } from "../../../utils/alert";
 import { elements } from "chart.js";
+import { useHasPermission } from "../../../hooks/permissionsHook";
+import AddProduct from "./AddProduct";
+import CloseModalBtn from "../../../component/Modal/CloseModalBtn";
+import ModalBtn from "../../../component/Modal/ModalBtn";
+import { CategoryContext } from "../../../context/CategoryContext";
 
 const ProductTable = () => {
   // const params = useParams();
@@ -18,6 +23,15 @@ const ProductTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [countOnPage, setCountOnPage] = useState(10);
   const [pageCount, setPageCount] = useState(0);
+
+  const [showModal, setshowModal] = useState(false);
+  const { setEditId } = useContext(CategoryContext); // اضافه کردن context
+  const hasAddCategoryPerm = useHasPermission("create_product");
+
+  const handleOpenModal = () => {
+    setEditId(null); // پاک کردن editId
+    setshowModal(true);
+  };
 
   const dataInfo = [
     { field: "id", title: "#" },
@@ -102,7 +116,18 @@ const ProductTable = () => {
         pageCount={pageCount}
         handleSearch={handleSearch}
         numOfPage={5}
+        additionalElement={
+          hasAddCategoryPerm && <ModalBtn onClick={handleOpenModal} />
+        } 
       />
+
+{hasAddCategoryPerm && showModal && (
+        <AddProduct setForceRender={setForceRender}>
+          <button onClick={() => setshowModal(false)}>
+            <CloseModalBtn />
+          </button>
+        </AddProduct>
+      )}
     </>
   );
 };

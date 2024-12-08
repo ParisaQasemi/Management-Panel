@@ -4,25 +4,27 @@ import { GrGallery } from "react-icons/gr";
 import { MdDelete } from "react-icons/md";
 import { PiSubsetProperOf } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
+import ActionIcon from "../../../../component/ActionIcon";
 
 const Actions = ({ rowData }) => {
   const navigation = useNavigate();
 
   return (
     <>
-      <button
-        className="mx-1 cursor-pointer text-blue-500"
+      <ActionIcon
+        icon={<PiSubsetProperOf className="text-blue-500" />}
+        pTitle="create_product_attr"
         title="ثبت ویژگی"
         onClick={() =>
-          navigation('/products/set-attr', {
+          navigation("/products/set-attr", {
             state: { selectedProduct: rowData },
           })
         }
-      >
-        <PiSubsetProperOf />
-      </button>
-      <button
-        className="mx-1 cursor-pointer text-yellow-500"
+      />
+
+      <ActionIcon
+        icon={<FaEdit className="text-yellow-500" />}
+        pTitle="update_product"
         title="ویرایش"
         onClick={() => {
           // setshowModal(true);
@@ -30,23 +32,25 @@ const Actions = ({ rowData }) => {
             state: { productToEdit: rowData },
           });
         }}
-      >
-        <FaEdit />
-      </button>
-      <button
-        className="mx-1 cursor-pointer text-green-600"
+      />
+
+      <ActionIcon
+        icon={<GrGallery className="text-green-600" />}
+        pTitle="create_product_image"
         title="مدیریت گالری"
-        onClick={() => navigation('/products/gallery', {state:{selectedProduct:rowData}})}
-      >
-        <GrGallery />
-      </button>
-      <button
-        className="mx-1 cursor-pointer text-red-500"
+        onClick={() =>
+          navigation("/products/gallery", {
+            state: { selectedProduct: rowData },
+          })
+        }
+      />
+
+      <ActionIcon
+        icon={<MdDelete className="text-red-500" />}
+        pTitle="delete_product"
         title="حذف"
         onClick={() => {}}
-      >
-        <MdDelete />
-      </button>
+      />
     </>
   );
 };

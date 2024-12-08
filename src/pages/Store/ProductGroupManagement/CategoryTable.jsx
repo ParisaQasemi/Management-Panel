@@ -13,6 +13,7 @@ import AddCategory from "./AddCategory";
 import CloseModalBtn from "../../../component/Modal/CloseModalBtn";
 import { Alert, Confirm } from "../../../utils/alert";
 import { CategoryContext } from "../../../context/CategoryContext";
+import { useHasPermission } from "../../../hooks/permissionsHook";
 
 const CategoryTable = () => {
   const params = useParams();
@@ -21,7 +22,7 @@ const CategoryTable = () => {
   const [loading, setLoading] = useState(false);
   const [showModal, setshowModal] = useState(false);
   const { setEditId } = useContext(CategoryContext); // اضافه کردن context
-
+  const hasAddCategoryPerm = useHasPermission("create_category");
 
   const handleOpenModal = () => {
     setEditId(null); // پاک کردن editId
@@ -88,27 +89,6 @@ const CategoryTable = () => {
     },
   ];
 
-  // const additionField = [
-  //   {
-  //     title: "تاریخ",
-  //     elements: (rowData) => convertDateToJalali(rowData.created_at),
-  //   },
-  //   {
-  //     title: "نمایش در منو",
-  //     elements: (rowData) => <ShowInData rowData={rowData} />,
-  //   },
-  //   {
-  //     title: "عملیات",
-  //     elements: (rowData) => (
-  //       <Actions
-  //         rowData={rowData}
-  //         setshowModal={() => setshowModal(true)}
-  //         handleDeleteCategory={handleDeleteCategory}
-  //       />
-  //     ),
-  //   },
-  // ];
-
   const searchParams = {
     title: "جستجو",
     placeholder: "قسمتی از عنوان را وارد کنید",
@@ -121,20 +101,17 @@ const CategoryTable = () => {
       <PaginationTable
         data={data}
         dataInfo={dataInfo}
-        // additionField={additionField}
         searchParams={searchParams}
         numOfPage={5}
         setForceRender={setForceRender}
         loading={loading}
         additionalElement={
-          <ModalBtn  // باز و بستن مدال
-            onClick={handleOpenModal}
-          />
+          hasAddCategoryPerm && <ModalBtn onClick={handleOpenModal} />
         } 
       />
 
-      {showModal && (
-        <AddCategory>
+      {hasAddCategoryPerm && showModal && (
+        <AddCategory setForceRender={setForceRender}>
           <button onClick={() => setshowModal(false)}>
             <CloseModalBtn />
           </button>

@@ -7,7 +7,10 @@ import SubmitButton from "../../../component/form/SubmitButton";
 import ModalContentHeader from "../../../component/Modal/ModalContentHeader";
 import CloseModalBtn from "../../../component/Modal/CloseModalBtn";
 import { initialValues, onSubmit, validationSchema } from "./core";
-import { getAllRolesService, getSinglrUserService } from "../../../services/users";
+import {
+  getAllRolesService,
+  getSinglrUserService,
+} from "../../../services/users";
 import { convertDateToJalali } from "../../../utils/convertDate";
 
 const AddUser = () => {
@@ -90,7 +93,6 @@ const AddUser = () => {
       });
     }
   }, [userToEdit]);
-  
 
   const handleCloseModal = () => {
     navigate(-1);
@@ -190,11 +192,11 @@ const AddUser = () => {
                   <FormikControl
                     label="نقش ها"
                     control="searchableSelect"
-                    options={[{ id: 1, value: "تست" }]}
+                    options={allRoles}
                     name="roles_id"
                     firstItem="لطفا نقش های مورد نظر را انتخاب کنید"
                     resultType="array"
-                    initialItems={[]}
+                    initialItems={selectedRoles}
                   />
 
                   <div className="flex justify-center my-12">

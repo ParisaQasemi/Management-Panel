@@ -13,8 +13,6 @@ export const initialValues = {
   birth_date: "",
   gender: 1,
   roles_id: [],
-  isEditing: false, // اضافه کردن مقدار پیش‌فرض
-
 };
 
 export const onSubmit = async (values, actions, setData, userId) => {
@@ -61,13 +59,8 @@ export const validationSchema = Yup.object().shape({
     "فقط از حروف و اعداد استفاده شود"
   ),
   password: Yup.string().when("isEditing", {
-    is: true,
-    then: Yup.string().matches(
-      /^[\u0600-\u06FF\sa-zA-Z0-9@!%-_.$?&]+$/,
-      "فقط از حروف و اعداد استفاده شود"
-    ),
-    otherwise: Yup.string()
-      .required("لطفا این قسمت را پر کنید")
+    is: "password",
+    then: p=> p.required("لطفا این قسمت را پر کنید")
       .matches(
         /^[\u0600-\u06FF\sa-zA-Z0-9@!%-_.$?&]+$/,
         "فقط از حروف و اعداد استفاده شود"

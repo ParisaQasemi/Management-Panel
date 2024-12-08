@@ -1,8 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useHasPermission } from "../../hooks/permissionsHook";
 
-const SidebarItem = ({ title, icon, path }) => {
-  return (
+const SidebarItem = ({ title, icon, path, pTitle }) => {
+  const hasPerm = useHasPermission(pTitle)
+
+  return hasPerm && (
         <NavLink
           to={path}
           className={({ isActive }) =>

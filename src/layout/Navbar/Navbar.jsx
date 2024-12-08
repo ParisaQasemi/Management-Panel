@@ -49,13 +49,13 @@ const Navbar = ({ toggleSidebar }) => {
       case "/Discount":
         return "مدیریت تخفیف ها";
 
-      case "/CartManagement":
+      case "/Cart":
         return "مدیریت سبد ها";
 
-      case "/OrderManagement":
+      case "/Order":
         return "مدیریت سفارشات";
 
-      case "/ShoppingMethodManagement":
+      case "/deliveries":
         return "مدیریت نحوه ارسال";
 
       case "/Billing":
@@ -70,7 +70,7 @@ const Navbar = ({ toggleSidebar }) => {
       case "/Roles":
         return "نقش ها";
 
-      case "/UserPermissions":
+      case "/permissions":
         return "مجوز ها";
 
       case "/Questions":
@@ -141,7 +141,10 @@ const Navbar = ({ toggleSidebar }) => {
                   <FaUserCircle className="w-6 h-6 ms-2 my-1 cursor-pointer" />
                   <span className="ps-1">خروج</span>
                 </NavLink>
-                <IoMdSettings className="w-6 h-6 ms-2 my-1 cursor-pointer" />
+                <span className="flex text-sm my-2 ">
+                  <IoMdSettings className="w-6 h-6 ms-2 me-1 cursor-pointer" />
+                  تنظیمات
+                </span>
               </div>
             )}
             <IoMenu

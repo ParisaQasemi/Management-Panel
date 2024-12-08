@@ -39,7 +39,7 @@ const BrandsTable = ({}) => {
           rowData={rowData}
           setBrandToEdit={setBrandToEdit}
           handleDeleteBrand={handleDeleteBrand}
-          setshowModal={setshowModal} 
+          setshowModal={setshowModal}
         />
       ),
     },
@@ -60,7 +60,7 @@ const BrandsTable = ({}) => {
   //         rowData={rowData}
   //         setBrandToEdit={setBrandToEdit}
   //         handleDeleteBrand={handleDeleteBrand}
-  //         setshowModal={setshowModal} 
+  //         setshowModal={setshowModal}
   //       />
   //     ),
   //   },
@@ -75,7 +75,6 @@ const BrandsTable = ({}) => {
   const handleGetAllBrands = async () => {
     setLoading(true);
     const res = await getAllBrandsService();
-    console.log(res);
     res && setLoading(false);
     if (res.status === 200) {
       setData(res.data.data);
@@ -103,7 +102,7 @@ const BrandsTable = ({}) => {
   const handleOpenModal = (brand) => {
     setEditId(null);
     setshowModal(true);
-    setBrandToEdit(brand || null); 
+    setBrandToEdit(brand || null);
   };
 
   return (

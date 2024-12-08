@@ -1,6 +1,10 @@
 import * as Yup from "yup";
 import { Alert } from "../../../utils/alert";
-import { addNewRoleService, editRolePermissionsService, editRoleService } from "../../../services/users";
+import {
+  addNewRoleService,
+  editRolePermissionsService,
+  editRoleService,
+} from "../../../services/users";
 
 export const initialValues = {
   title: "",
@@ -40,10 +44,8 @@ export const onSubmit = async (
 
 export const validationSchema = Yup.object().shape({
   title: Yup.string().when("editPermissions", {
-    is: true,
-    then: null,
-    otherwise: Yup.string()
-      .required('"لطفا این قسمت را پر کنید"')
+    is: 'title',
+    then: t=> t.required('"لطفا این قسمت را پر کنید"')
       .matches(
         /^[\u0600-\u06FF\sa-zA-Z0-9@!%-_.$?&]+$/,
         "فقط از حروف و اعداد استفاده شود"
@@ -51,10 +53,8 @@ export const validationSchema = Yup.object().shape({
   }),
 
   description: Yup.string().when("editPermissions", {
-    is: true,
-    then: null,
-    otherwise: Yup.string()
-      .required("لطفا این قسمت را پر کنید")
+    is: 'description',
+    then: d=> d.required("لطفا این قسمت را پر کنید")
       .matches(
         /^[\u0600-\u06FF\sa-zA-Z0-9@!%-_.$?&]+$/,
         "فقط از حروف و اعداد استفاده شود"
@@ -63,3 +63,4 @@ export const validationSchema = Yup.object().shape({
 
   permissions_id: Yup.array().min(1, "حد اقل یک مورد انتخاب کنید"),
 });
+

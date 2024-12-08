@@ -48,7 +48,6 @@ const UsersTable = () => {
   const handleGetUsers = async (page, count, char) => {
     setLoading(true);
     const res = await getAllPaginatedUsersService(page, count, char);
-    console.log(res);
     res && setLoading(false);
     if (res.status === 200) {
       setData(res.data.data.data);

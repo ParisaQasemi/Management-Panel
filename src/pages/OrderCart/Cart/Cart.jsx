@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CartManagement = () => {
+const Cart = () => {
     return (
         <div>
             مدیریت سبد خرید
@@ -8,4 +8,4 @@ const CartManagement = () => {
     );
 }
 
-export default CartManagement;
+export default Cart;
