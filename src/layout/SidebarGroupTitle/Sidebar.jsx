@@ -102,7 +102,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <SidebarItem
             title="مدیریت سبد ها"
             icon={<FaShoppingCart />}
-            path="/Cart"
+            path="/carts"
             pTitle="read_carts"
           />
           <SidebarItem

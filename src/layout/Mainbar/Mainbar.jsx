@@ -5,7 +5,6 @@ import Navbar from "../Navbar/Navbar";
 import Dashboard from "../../pages/Dashboard/Dashboard";
 import ListProducts from "../../pages/Store/ListProducts/ListProducts";
 import Brand from "../../pages/Store/Brand/Brand";
-import Billing from "../../pages/OrderCart/Billing/Billing";
 import Users from "../../pages/UsersAndColleagues/Users/Users";
 import Roles from "../../pages/UsersAndColleagues/Roles/Roles";
 import Permissions from "../../pages/UsersAndColleagues/Permissions/Permissions";
@@ -14,7 +13,6 @@ import Feedback from "../../pages/Communications/Feedback/Feedback";
 import Table from "../../pages/Table/Table";
 import Profile from "../../pages/Profile/Profile";
 import Register from "../../pages/Register/Register";
-import AddCategory from "../../pages/Store/ProductGroupManagement/AddCategory";
 import Product from "../../pages/Store/Product/Product";
 import AddProduct from "../../pages/Store/Product/AddProduct";
 import Logout from "../../pages/auth/Logout";
@@ -30,16 +28,20 @@ import AddRole from "../../pages/UsersAndColleagues/Roles/AddRole";
 import AddUser from "../../pages/UsersAndColleagues/Users/AddUsers";
 import PermComponent from "../../component/PermComponent";
 import { useHasPermission } from "../../hooks/permissionsHook";
-import Cart from "../../pages/OrderCart/Cart/Cart";
 import Order from "../../pages/OrderCart/Order/Order";
-import Deliveries from "../../pages/OrderCart/deliveries/deliveries";
 import Category from "../../pages/Store/ProductGroupManagement/Category";
+import Delivery from "../../pages/OrderCart/Deliveries/Delivery";
+import AddDelivery from "../../pages/OrderCart/Deliveries/AddDeliveries";
+import Cart from "../../pages/OrderCart/Cart/Cart";
+import AddCart from "../../pages/OrderCart/Cart/AddCart";
 
 const Mainbar = ({ toggleSidebar }) => {
-  const hasCategoryPermission = useHasPermission("read_categories")
-  const hasDiscountPermission = useHasPermission("read_discounts")
-  const hasUserPermission = useHasPermission("read_users")
-  const hasRolePermission = useHasPermission("read_roles")
+  const hasCategoryPermission = useHasPermission("read_categories");
+  const hasDiscountPermission = useHasPermission("read_discounts");
+  const hasUserPermission = useHasPermission("read_users");
+  const hasRolePermission = useHasPermission("read_roles");
+  const hasDeliveryPermission = useHasPermission("read_deliveries");
+  const hasCartPermission = useHasPermission("read_carts");
 
   return (
     <div className="flex-1 flex flex-col p-6 md:mr-60">
@@ -149,14 +151,33 @@ const Mainbar = ({ toggleSidebar }) => {
             />
           }
         />
+        {hasDeliveryPermission && (
+          <Route path="/deliveries" element={<Delivery />}>
+            <Route
+              path="add-delivery"
+              element={
+                <PermComponent
+                  component={<AddDelivery />}
+                  pTitle="create_delivery"
+                />
+              }
+            />
+          </Route>
+        )}
 
-        <Route path="/Cart" element={<Cart />} />
+        {hasCartPermission && (
+          <Route path="/carts" element={<Cart />}>
+            <Route
+              path="add-cart"
+              element={
+                <PermComponent component={<AddCart />} pTitle="create_cart" />
+              }
+            />
+          </Route>
+        )}
+
         <Route path="/Order" element={<Order />} />
-        <Route
-          path="/deliveries"
-          element={<Deliveries />}
-        />
-        <Route path="/Billing" element={<Billing />} />
+
         <Route path="/Questions" element={<Questions />} />
         <Route path="/Feedback" element={<Feedback />} />
         <Route path="/Profile" element={<Profile />} />
@@ -164,9 +185,6 @@ const Mainbar = ({ toggleSidebar }) => {
         <Route path="/Table" element={<Table />} />
         <Route path="/ListProducts" element={<ListProducts />} />
         <Route path="/Logout" element={<Logout />} />
-
-        <Route path="/AddCategory" element={<AddCategory />} />
-        {/* <Route path="/AddProduct" element={<AddProduct />} /> */}
       </Routes>
     </div>
   );

@@ -49,7 +49,7 @@ const Navbar = ({ toggleSidebar }) => {
       case "/Discount":
         return "مدیریت تخفیف ها";
 
-      case "/Cart":
+      case "/carts":
         return "مدیریت سبد ها";
 
       case "/Order":
@@ -57,9 +57,6 @@ const Navbar = ({ toggleSidebar }) => {
 
       case "/deliveries":
         return "مدیریت نحوه ارسال";
-
-      case "/Billing":
-        return "صورت حساب";
 
       case "/Users":
         return "مشاهده کاربران";

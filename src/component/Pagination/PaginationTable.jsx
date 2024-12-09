@@ -10,7 +10,6 @@ import SpinnerLoad from "../SpinnerLoad";
 const PaginationTable = ({
   data,
   dataInfo,
-  // additionField,
   numOfPage,
   searchParams,
   setForceRender,

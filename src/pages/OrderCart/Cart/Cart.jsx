@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
+import CartsTable from "./CartsTable";
 
 const Cart = () => {
-    return (
-        <div>
-            مدیریت سبد خرید
-        </div>
-    );
-}
+  return (
+    <>
+      <CartsTable />
+    </>
+  );
+};
 
 export default Cart;
