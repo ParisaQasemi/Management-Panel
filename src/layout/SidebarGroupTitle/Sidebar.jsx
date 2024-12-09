@@ -108,7 +108,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <SidebarItem
             title="مدیریت سفارشات"
             icon={<FaLuggageCart />}
-            path="/Order"
+            path="/orders"
             pTitle="read_orders"
           />
           <SidebarItem

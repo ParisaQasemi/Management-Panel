@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
+import OrdersTable from "./OrderTable";
 
 const Order = () => {
-    return (
-        <div>
-            مدیریت سفارش
-        </div>
-    );
-}
+  return (
+    <>
+      <OrdersTable />
+    </>
+  );
+};
 
 export default Order;

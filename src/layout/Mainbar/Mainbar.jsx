@@ -34,6 +34,7 @@ import Delivery from "../../pages/OrderCart/Deliveries/Delivery";
 import AddDelivery from "../../pages/OrderCart/Deliveries/AddDeliveries";
 import Cart from "../../pages/OrderCart/Cart/Cart";
 import AddCart from "../../pages/OrderCart/Cart/AddCart";
+import AddOrder from "../../pages/OrderCart/Order/AddOrder";
 
 const Mainbar = ({ toggleSidebar }) => {
   const hasCategoryPermission = useHasPermission("read_categories");
@@ -42,6 +43,7 @@ const Mainbar = ({ toggleSidebar }) => {
   const hasRolePermission = useHasPermission("read_roles");
   const hasDeliveryPermission = useHasPermission("read_deliveries");
   const hasCartPermission = useHasPermission("read_carts");
+  const hasOrderPermission = useHasPermission("read_orders");
 
   return (
     <div className="flex-1 flex flex-col p-6 md:mr-60">
@@ -176,7 +178,16 @@ const Mainbar = ({ toggleSidebar }) => {
           </Route>
         )}
 
-        <Route path="/Order" element={<Order />} />
+        {hasOrderPermission && (
+          <Route path="/orders" element={<Order />}>
+            <Route
+              path="add-order"
+              element={
+                <PermComponent component={<AddOrder />} pTitle="create_order" />
+              }
+            />
+          </Route>
+        )}
 
         <Route path="/Questions" element={<Questions />} />
         <Route path="/Feedback" element={<Feedback />} />

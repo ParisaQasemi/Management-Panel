@@ -52,7 +52,7 @@ const Navbar = ({ toggleSidebar }) => {
       case "/carts":
         return "مدیریت سبد ها";
 
-      case "/Order":
+      case "/orders":
         return "مدیریت سفارشات";
 
       case "/deliveries":

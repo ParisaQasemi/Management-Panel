@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import SpinnerLoad from "../SpinnerLoad";
 import { GrFormNextLink, GrFormPreviousLink } from "react-icons/gr";
 import Search from "../Search/Search";
-import ModalBtn from "../Modal/ModalBtn";
-import { Link } from "react-router-dom";
 
 const PaginatiedDataTable = ({
   children,

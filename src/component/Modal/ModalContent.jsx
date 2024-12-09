@@ -1,6 +1,5 @@
 import React from "react";
 import { createPortal } from "react-dom";
-import ModalContentHeader from "./ModalContentHeader";
 import ModalContentFooter from "./ModalContentFooter";
 
 const ModalContent = ({ children, editId, editCategory, size = "full" }) => {
@@ -19,7 +18,6 @@ const ModalContent = ({ children, editId, editCategory, size = "full" }) => {
     <>
       <div className="fixed inset-0 bg-black opacity-70 z-30 " />
       <div className={`${modalSizeClass} h-fit`}>
-        {/* <ModalContentHeader title={title} /> */}
         {children}
         <ModalContentFooter modalSizeClass={modalSizeClass} />
       </div>
