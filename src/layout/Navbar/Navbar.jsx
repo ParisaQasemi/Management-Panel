@@ -79,6 +79,9 @@ const Navbar = ({ toggleSidebar }) => {
       case "/Login":
         return "ورود";
 
+      case "/products/set-attr":
+        return "افزودن ویژگی محصول";
+
       default:
         return "صفحه دیگر";
     }

@@ -9,6 +9,8 @@ import { getAllBrandsService } from "../../../services/Brands";
 import { getAllColorsService } from "../../../services/colors";
 import { getAllGuaranteesService } from "../../../services/guarantiese";
 import { useLocation } from "react-router-dom";
+import ModalContentHeader from "../../../component/Modal/ModalContentHeader";
+import ModalContent from "../../../component/Modal/ModalContent";
 
 const AddProduct = () => {
   const loaction = useLocation();
@@ -60,7 +62,7 @@ const AddProduct = () => {
         })
       );
     } else {
-      setColors([]); 
+      setColors([]);
     }
   };
 
@@ -98,19 +100,18 @@ const AddProduct = () => {
   };
 
   useEffect(() => {
-    getAllParentCategories()
-    getAllBrands()
-    getAllColors()
-    getAllGuarantees()
-    setInitialSelectValues()
-
+    getAllParentCategories();
+    getAllBrands();
+    getAllColors();
+    getAllGuarantees();
+    setInitialSelectValues();
 
     for (const key in productToEdit) {
       if (productToEdit[key] === null || productToEdit[key] === undefined) {
         productToEdit[key] = "";
       }
     }
-  
+
     setReInitialValues({
       ...initialValues,
       ...productToEdit,
@@ -125,7 +126,6 @@ const AddProduct = () => {
         : "",
     });
   }, []);
-  
 
   const handleSetMainCategories = async (value) => {
     setMainCategories("waiting");
@@ -144,197 +144,194 @@ const AddProduct = () => {
   };
 
   return (
-    <Formik
-      initialValues={reInitialValues || initialValues}
-      onSubmit={(values, actions) => onSubmit(values, actions, productToEdit)}
-      validationSchema={validationSchema}
-      enableReinitialize
-    >
-      {(formik) => {
-        return (
-          <div>
-            <div className="flex justify-end">
-              <PrevPageButton />
-            </div>
-            <Form className="w-3/4 lg:w-3/5 my-20 mx-auto">
-              <FormikControl
-                control="select"
-                options={parentCategories}
-                name="parentCats"
-                label="دسته والد"
-                firstItem="دسته مورد نظر را انتخاب کنید"
-                handleOnchange={handleSetMainCategories}
-                value={formik.values.parentCats || ""}
-              />
+    <>
+      <Formik
+        initialValues={reInitialValues || initialValues}
+        onSubmit={(values, actions) => onSubmit(values, actions, productToEdit)}
+        validationSchema={validationSchema}
+        enableReinitialize
+      >
+        {(formik) => {
+          return (
+            <div>
+              <div className="flex justify-end">
+                <PrevPageButton />
+              </div>
+              <Form className="w-3/4 lg:w-3/5 my-20 mx-auto">
+                <FormikControl
+                  control="select"
+                  options={parentCategories}
+                  name="parentCats"
+                  label="دسته والد"
+                  firstItem="دسته مورد نظر را انتخاب کنید"
+                  handleOnchange={handleSetMainCategories}
+                  value={formik.values.parentCats || ""}
+                />
 
-              {mainCategories === "waiting" ? (
-                <SpinnerLoad colorClass={"text-white"} isSmall={true} />
-              ) : null}
+                {mainCategories === "waiting" ? (
+                  <SpinnerLoad colorClass={"text-white"} isSmall={true} />
+                ) : null}
 
-              <FormikControl
-                control="searchableSelect"
-                options={
-                  typeof mainCategories == "object" ? mainCategories : []
-                }
-                name="category_ids"
-                label="دسته اصلی"
-                firstItem="دسته مورد نظر را انتخاب کنید"
-                resultType="string"
-                initialItems={selectedCategories}
-                value={formik.values.category_ids || ""}
-              />
+                <FormikControl
+                  control="searchableSelect"
+                  options={
+                    typeof mainCategories == "object" ? mainCategories : []
+                  }
+                  name="category_ids"
+                  label="دسته اصلی"
+                  firstItem="دسته مورد نظر را انتخاب کنید"
+                  resultType="string"
+                  initialItems={selectedCategories}
+                  value={formik.values.category_ids || ""}
+                />
 
-              <FormikControl
-                control="input"
-                name="title"
-                type="text"
-                label="عنوان *"
-                firstItem="فقط از حروف و اعداد استفاده کنید"
-                value={formik.values.title || ""}
-              />
+                <FormikControl
+                  control="input"
+                  name="title"
+                  type="text"
+                  label="عنوان *"
+                  firstItem="فقط از حروف و اعداد استفاده کنید"
+                  value={formik.values.title || ""}
+                />
 
-              <FormikControl
-                control="input"
-                name="price"
-                type="number"
-                label="قیمت *"
-                firstItem="(تومان) فقط از اعداد استفاده کنید"
-                value={formik.values.price || ""}
-              />
+                <FormikControl
+                  control="input"
+                  name="price"
+                  type="number"
+                  label="قیمت *"
+                  firstItem="(تومان) فقط از اعداد استفاده کنید"
+                  value={formik.values.price || ""}
+                />
 
-              <FormikControl
-                control="input"
-                name="weight"
-                type="number"
-                label="وزن"
-                firstItem="(گرم) فقط از اعداد استفاده کنید"
-                value={formik.values.weight || ""}
-              />
+                <FormikControl
+                  control="input"
+                  name="weight"
+                  type="number"
+                  label="وزن"
+                  firstItem="(گرم) فقط از اعداد استفاده کنید"
+                  value={formik.values.weight || ""}
+                />
 
-              <FormikControl
-                control="select"
-                options={brands}
-                name="brand_id"
-                label="برند"
-                firstItem="برند مورد نظر را انتخاب کنید"
-                value={formik.values.brand_id || ""}
-              />
+                <FormikControl
+                  control="select"
+                  options={brands}
+                  name="brand_id"
+                  label="برند"
+                  firstItem="برند مورد نظر را انتخاب کنید"
+                  value={formik.values.brand_id || ""}
+                />
 
-              <FormikControl
-                control="searchableSelect"
-                options={colors}
-                name="color_ids"
-                label="رنگ"
-                firstItem="رنگ مورد نظر را انتخاب کنید"
-                resultType="string"
-                initialItems={selectedColor}
-                value={formik.values.color_ids || []}
-              />
+                <FormikControl
+                  control="searchableSelect"
+                  options={colors}
+                  name="color_ids"
+                  label="رنگ"
+                  firstItem="رنگ مورد نظر را انتخاب کنید"
+                  resultType="string"
+                  initialItems={selectedColor}
+                  value={formik.values.color_ids || []}
+                />
 
-              <FormikControl
-                control="searchableSelect"
-                options={guarantees}
-                name="guarantee_ids"
-                label="گارانتی"
-                firstItem="گارانتی مورد نظر را انتخاب کنید"
-                resultType="string"
-                value={formik.values.guarantee_ids || []}
-                initialItems={selectedGuarantees}
-              />
+                <FormikControl
+                  control="searchableSelect"
+                  options={guarantees}
+                  name="guarantee_ids"
+                  label="گارانتی"
+                  firstItem="گارانتی مورد نظر را انتخاب کنید"
+                  resultType="string"
+                  value={formik.values.guarantee_ids || []}
+                  initialItems={selectedGuarantees}
+                />
 
-              {/* <FormikControl
+                {/* <FormikControl
                 control="textarea"
                 name="descriptions"
                 label="توضیحات"
                 firstItem="فقط از حروف و اعداد استفاده شود"
               /> */}
 
-              
-               <FormikControl
-                control="ckeditor"
-                name="descriptions"
-                label="توضیحات"
-                firstItem="فقط از حروف و اعداد استفاده شود"
-                value={formik.values.descriptions || []}
-
-              /> 
-
-              <FormikControl
-                control="textarea"
-                name="short_descriptions"
-                label="توضیحات کوتاه"
-                firstItem="فقط از حروف و اعداد استفاده شود"
-                value={formik.values.short_descriptions || []}
-
-              />
-
-              <FormikControl
-                control="textarea"
-                name="cart_descriptions"
-                label="توضیحات سبد"
-                firstItem="فقط از حروف و اعداد استفاده شود"
-                value={formik.values.cart_descriptions || []}
-
-              />
-
-              {!productToEdit ? (
                 <FormikControl
-                  control="file"
-                  name="image"
-                  label="تصویر"
-                  firstItem="تصویر"
-                  value={formik.values.image || ""}
-
+                  control="ckeditor"
+                  name="descriptions"
+                  label="توضیحات"
+                  firstItem="فقط از حروف و اعداد استفاده شود"
+                  value={formik.values.descriptions || []}
                 />
-              ) : null}
 
-              <FormikControl
-                control="input"
-                type="text"
-                name="alt_image"
-                label=" تصویر"
-                firstItem="نوضیح تصویر"
-                value={formik.values.alt_image || ""}
-              />
+                <FormikControl
+                  control="textarea"
+                  name="short_descriptions"
+                  label="توضیحات کوتاه"
+                  firstItem="فقط از حروف و اعداد استفاده شود"
+                  value={formik.values.short_descriptions || []}
+                />
 
-              <FormikControl
-                control="input"
-                type="text"
-                name="keywords"
-                label="کلمات کلیدی"
-                firstItem="مثلا: تست1 - تست2 - تست3"
-                value={formik.values.keywords || ""}
-              />
+                <FormikControl
+                  control="textarea"
+                  name="cart_descriptions"
+                  label="توضیحات سبد"
+                  firstItem="فقط از حروف و اعداد استفاده شود"
+                  value={formik.values.cart_descriptions || []}
+                />
 
-              <FormikControl
-                control="input"
-                type="number"
-                name="stock"
-                label="موجودی"
-                firstItem="فقط از اعداد استفاده کنید (عدد)"
-                value={formik.values.stock || ""}
-              />
+                {!productToEdit ? (
+                  <FormikControl
+                    control="file"
+                    name="image"
+                    label="تصویر"
+                    firstItem="تصویر"
+                    value={formik.values.image || ""}
+                  />
+                ) : null}
 
-              <FormikControl
-                control="input"
-                type="number"
-                name="discount"
-                label="درصد تخفیف"
-                firstItem="فقط از اعداد استفاده کنید (درصد)"
-                value={formik.values.discount || ""}
-              />
+                <FormikControl
+                  control="input"
+                  type="text"
+                  name="alt_image"
+                  label=" تصویر"
+                  firstItem="نوضیح تصویر"
+                  value={formik.values.alt_image || ""}
+                />
 
-              <div className="flex justify-center mb-24">
-                <button className="text-white bg-[#0075ff] hover:bg-blue-600 font-bold p-2 rounded-lg text-sm mx-1 focus:outline-none focus:ring focus:border-[#0075ff]">
-                  ذخیره
-                </button>
-                <PrevPageButton />
-              </div>
-            </Form>
-          </div>
-        );
-      }}
-    </Formik>
+                <FormikControl
+                  control="input"
+                  type="text"
+                  name="keywords"
+                  label="کلمات کلیدی"
+                  firstItem="مثلا: تست1 - تست2 - تست3"
+                  value={formik.values.keywords || ""}
+                />
+
+                <FormikControl
+                  control="input"
+                  type="number"
+                  name="stock"
+                  label="موجودی"
+                  firstItem="فقط از اعداد استفاده کنید (عدد)"
+                  value={formik.values.stock || ""}
+                />
+
+                <FormikControl
+                  control="input"
+                  type="number"
+                  name="discount"
+                  label="درصد تخفیف"
+                  firstItem="فقط از اعداد استفاده کنید (درصد)"
+                  value={formik.values.discount || ""}
+                />
+
+                <div className="flex justify-center mb-24">
+                  <button className="text-white bg-[#0075ff] hover:bg-blue-600 font-bold p-2 rounded-lg text-sm mx-1 focus:outline-none focus:ring focus:border-[#0075ff]">
+                    ذخیره
+                  </button>
+                  <PrevPageButton />
+                </div>
+              </Form>
+            </div>
+          );
+        }}
+      </Formik>
+    </>
   );
 };
 

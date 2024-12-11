@@ -39,7 +39,7 @@ const ProductTable = () => {
     {
       field: null,
       title: "گروه محصول",
-      elements: (rowData)=> rowData.categories[0]?.title,
+      elements: (rowData) => rowData.categories[0]?.title,
     },
     { field: "title", title: "عنوان" },
     { field: "price", title: "قیمت" },
@@ -119,10 +119,10 @@ const ProductTable = () => {
         numOfPage={5}
         additionalElement={
           hasAddCategoryPerm && <ModalBtn onClick={handleOpenModal} />
-        } 
+        }
       />
 
-{hasAddCategoryPerm && showModal && (
+      {hasAddCategoryPerm && showModal && (
         <AddProduct setForceRender={setForceRender}>
           <button onClick={() => setshowModal(false)}>
             <CloseModalBtn />
