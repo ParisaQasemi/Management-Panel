@@ -12,7 +12,7 @@ import ModalBtn from "../../../component/Modal/ModalBtn";
 import AddCategory from "./AddCategory";
 import CloseModalBtn from "../../../component/Modal/CloseModalBtn";
 import { Alert, Confirm } from "../../../utils/alert";
-import { CategoryContext } from "../../../context/CategoryContext";
+import { CategoryContext } from "@/context/CategoryContext";
 import { useHasPermission } from "../../../hooks/permissionsHook";
 
 const CategoryTable = () => {

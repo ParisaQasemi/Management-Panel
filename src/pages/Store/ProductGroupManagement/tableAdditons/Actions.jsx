@@ -3,7 +3,7 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { PiSubsetProperOf } from "react-icons/pi";
 import { useNavigate, useParams } from "react-router-dom";
-import { CategoryContext } from "../../../../context/CategoryContext";
+import { CategoryContext } from "@/context/CategoryContext";
 import { SiGoogledocs } from "react-icons/si";
 import ActionIcon from "../../../../component/ActionIcon";
 
