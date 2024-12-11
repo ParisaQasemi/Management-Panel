@@ -36,7 +36,7 @@ const PermissionsTable = () => {
     <PaginationTable
       data={data}
       dataInfo={dataInfo}
-      numOfPAge={8}
+      numOfPAge={5}
       searchParams={searchParams}
       loading={loading}
     />

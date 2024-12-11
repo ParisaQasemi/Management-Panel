@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getOrdersStatisticsService } from "../../services/order";
 import SpinnerLoad from "../../component/SpinnerLoad";
 import Card from "./Card";
+import { FaDolly, FaLuggageCart, FaMoneyCheckAlt, FaShoppingBasket } from "react-icons/fa";
 
 const cardObjects = [
   {
@@ -10,9 +11,10 @@ const cardObjects = [
     currentValue: "",
     title: "سبد خرید امروز",
     desc: "سبد های خرید مانده امروز",
-    icon: "fas fa-shopping-basket",
+    icon: <FaShoppingBasket />,
     lastWeekValue: "",
     lastMonthValue: "",
+    color: "bg-pink-600", 
   },
   {
     key: 2,
@@ -20,9 +22,10 @@ const cardObjects = [
     currentValue: "",
     title: "سفارشات مانده امروز",
     desc: " سفارشات معلق و فاقد پرداختی",
-    icon: "fas fa-dolly",
+    icon: <FaDolly />,
     lastWeekValue: "",
     lastMonthValue: "",
+    color: "bg-yellow-300"
   },
   {
     key: 3,
@@ -30,9 +33,11 @@ const cardObjects = [
     currentValue: "",
     title: "سفارشات امروز",
     desc: "سفارشات کامل و دارای پرداختی",
-    icon: "fas fa-luggage-cart",
+    icon: <FaLuggageCart />,
     lastWeekValue: "",
     lastMonthValue: "",
+    color: "bg-green-400", 
+
   },
   {
     key: 4,
@@ -40,9 +45,11 @@ const cardObjects = [
     currentValue: "",
     title: "درآمد امروز",
     desc: "جمع مبالغ پرداختی (تومان)",
-    icon: "fas fa-money-check-alt",
+    icon: <FaMoneyCheckAlt />,
     lastWeekValue: "",
     lastMonthValue: "",
+    color: "bg-red-500", 
+
   },
 ];
 
@@ -72,7 +79,7 @@ const Cards = () => {
   }, []);
 
   return (
-    <div className="flex justify-between">
+    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ">
       {loading ? (
         <SpinnerLoad className="text-blue-300" /> //colorClass={""}
       ) : (

@@ -8,14 +8,15 @@ import PaginatiedDataTable from "../../../component/Pagination/PaginatiedDataTab
 import { Alert, Confirm } from "../../../utils/alert";
 import { elements } from "chart.js";
 import { useHasPermission } from "../../../hooks/permissionsHook";
-import AddProduct from "./AddProduct";
 import CloseModalBtn from "../../../component/Modal/CloseModalBtn";
 import ModalBtn from "../../../component/Modal/ModalBtn";
 import { CategoryContext } from "../../../context/CategoryContext";
+import AddProduct from "./AddProduct";
+import { useParams } from "react-router-dom";
 
 const ProductTable = () => {
-  // const params = useParams();
-  // const [forceRender, setForceRender] = useState(0);
+  const params = useParams();
+  const [forceRender, setForceRender] = useState(0);
   // NEW Code
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);

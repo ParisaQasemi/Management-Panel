@@ -112,7 +112,7 @@ const ColorTable = () => {
         data={data}
         dataInfo={dataInfo}
         // additionField={additionField}
-        numOfPage={2}
+        numOfPage={5}
         searchParams={searchParams}
         loading={loading}
         additionalElement={<ModalBtn onClick={handleOpenModal} />}

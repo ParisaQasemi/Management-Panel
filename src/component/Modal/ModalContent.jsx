@@ -11,13 +11,13 @@ const ModalContent = ({ children, editId, editCategory, size = "full" }) => {
 
   const modalSizeClass =
     size === "small"
-      ? "fixed inset-0 z-30 max-w-xl mx-auto my-5 p-2 bg-[#090e24] rounded-lg shadow-lg"
-      : "fixed inset-0 z-30 w-full h-full overflow-y-auto bg-[#090e24]";
-
+      ? "fixed inset-0 z-30 max-w-xl mx-auto md:my-5 p-2 md:h-fit rounded-lg shadow-lg bg-[#090e24]" 
+      : "fixed inset-0 z-30 w-full h-full bg-[#090e24]";
+     
   return createPortal(
     <>
       <div className="fixed inset-0 bg-black opacity-70 z-30 " />
-      <div className={`${modalSizeClass} h-fit`}>
+      <div className={`${modalSizeClass} h-full   overflow-y-auto`}>
         {children}
         <ModalContentFooter modalSizeClass={modalSizeClass} />
       </div>

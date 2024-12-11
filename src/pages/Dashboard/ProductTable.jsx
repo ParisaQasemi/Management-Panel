@@ -35,8 +35,8 @@ const ProductTable = () => {
   }, []);
 
   return (
-    <div className="w-full lg:w-1/2 p-2 ">
-      <p className="text-center mt-3 text-dark font-bold">
+    <div className="w-full">
+      <p className="text-center mt-10 md:mt-3 font-bold">
         محصولات رو به اتمام
       </p>
       {loading ? (
@@ -46,7 +46,7 @@ const ProductTable = () => {
           فعلا محصول رو به اتمامی وجود ندارد
         </strong>
       ) : (
-        <table className="table text-center my-2 bg-gradient-custom backdrop-blur-lg rounded-lg shadow-lg">
+        <table className="table text-center my-2 bg-gradient-custom backdrop-blur-lg bg-blue-500 rounded-lg shadow-lg">
           <thead className="text-lg font-bold text-white">
             <tr>
               <th className="px-4 py-2">#</th>

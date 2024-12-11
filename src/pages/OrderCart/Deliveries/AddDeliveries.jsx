@@ -48,7 +48,7 @@ const AddDelivery = () => {
             {(formik) => {
               return (
                 <Form>
-                  <div className="w-3/5 my-20 mx-auto ">
+                  <div className="w-3/4 lg:w-3/5 my-20 mx-auto">
                     <FormikControl
                       control="input"
                       type="text"

@@ -12,7 +12,7 @@ const Checkbox = (props) => {
   <Field id={name} name={name}>
     {({ field }) => {
       return (
-        <div className="grid grid-cols-3 gap-4 text-white rounded">
+        <div className="grid md:grid-cols-3 gap-4 text-white rounded ">
           {options.map((o) => (
             <div className="flex items-center gap-2" key={o.id}>
               <input

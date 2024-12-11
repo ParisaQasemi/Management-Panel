@@ -60,7 +60,7 @@ const PaginationTable = ({
   return (
     <div>
       {/* Modal Button and Search */}
-      <div className="flex justify-between">
+      <div className="flex justify-between ">
         <div className="w-full">
           <div className="flex justify-between">
             <Search
@@ -73,125 +73,78 @@ const PaginationTable = ({
       </div>
 
       {/* Table Product */}
-
-      {loading ? (
-        <SpinnerLoad colorClass={colorClass} />
-      ) : data.length ? (
-        <table className="table text-right my-5 bg-gradient-custom backdrop-blur-lg">
-          <thead className="text-lg font-bold text-white">
-            {/* <tr>
-              {dataInfo.map((i) => (
-                <th key={i.field}>{i.title}</th>
-              ))}
-              {additionField
-                ? additionField.map((a, index) => {
-                    return <th key={a.id + "__" + index}>{a.title}</th>;
-                  })
-                : null}
-            </tr> */}
-
-            <tr>
-              {dataInfo.map((i, index) => (
-                <th key={i.field || `notField__${index}`}>{i.title}</th>
-              ))}
-            </tr>
-          </thead>
-
-          <tbody className="text-sm font-light text-gray-300">
-            {tableData.map((d) => (
-              // <tr key={d.id}>
-              //   {dataInfo.map((i) => (
-              //     <th key={`${i.field}_${d.id}`}>{d[i.field]}</th>
-              //   ))}
-              //   {additionField
-              //     ? additionField.map((a, index) => {
-              //         return <td key={a.id + "__" + index}>{a.elements(d)}</td>;
-              //       })
-              //     : null}
-              // </tr>
-
-              <tr key={d.id}>
-                {dataInfo.map((i, index) =>
-                  i.field ? (
-                    <td key={`${i.field}_${d.id}`}>{d[i.field]}</td>
-                  ) : (
-                    <td key={d.id + "__" + i.id + "__" + index}>
-                      {i.elements(d)}
-                    </td>
-                  )
-                )}
+      <div className="overflow-x-auto my-5">
+        {loading ? (
+          <SpinnerLoad colorClass={colorClass} />
+        ) : data.length ? (
+          <table className="table text-right bg-gradient-custom backdrop-blur-lg bg-blue-800 w-full">
+            <thead className="text-lg font-bold text-white">
+              <tr>
+                {dataInfo.map((i, index) => (
+                  <th key={i.field || `notField__${index}`}>{i.title}</th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <h3 className="text-center text-red-600 font-bold mt-5">
-          هیچ رکوردی یافت نشد
-        </h3>
-      )}
+            </thead>
 
-      {/* Pagination Table button */}
-      {pages.length > 1 ? (
-        <div className="flex justify-center items-center" dir="ltr">
-          <div className="join rounded-none">
-            <button
-              className="join-item btn btn-sm mx-1 rounded-lg border-none
-         text-white bg-[#74b0f5] hover:bg-[#0075ff]"
-              onClick={() => setCurrentPage(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              <GrFormPreviousLink />
-            </button>
+            <tbody className="text-sm font-light text-gray-300">
+              {tableData.map((d) => (
+                <tr key={d.id}>
+                  {dataInfo.map((i, index) =>
+                    i.field ? (
+                      <td key={`${i.field}_${d.id}`}>{d[i.field]}</td>
+                    ) : (
+                      <td key={d.id + "__" + i.id + "__" + index}>
+                        {i.elements(d)}
+                      </td>
+                    )
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <h3 className="text-center text-red-600 font-bold mt-5">
+            هیچ رکوردی یافت نشد
+          </h3>
+        )}
+      </div>
 
-            {currentPage > pageRange ? (
-              <button
-                className={`join-item btn btn-sm me-1 rounded-lg border-none
-     text-white bg-[#74b0f5] hover:bg-[#0075ff] 
-     `}
-                onClick={() => setCurrentPage(1)}
-              >
-                1
-              </button>
-            ) : null}
+      <div className="flex justify-center items-center PaginationBtn  mt-5">
+        {/* دکمه قبلی */}
+        <button
+          onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
+          className="mx-1 p-2  bg-gray-200 text-black rounded hover:bg-gray-300 disabled:opacity-50"
+          disabled={currentPage === 1}
+        >
+          <GrFormPreviousLink />
+        </button>
 
-            {pages.map((page) => {
-              return page < currentPage + pageRange &&
-                page > currentPage - pageRange ? (
-                <button
-                  key={page}
-                  className={`join-item btn btn-sm mx-1 rounded-lg border-none
-         text-white bg-[#74b0f5] hover:bg-[#0075ff]
-              ${currentPage === page ? "bg-[#0075ff]" : ""}
-         `}
-                  onClick={() => setCurrentPage(page)}
-                >
-                  {page}
-                </button>
-              ) : null;
-            })}
+        {/* شماره صفحات */}
+        {pages.map((page) => (
+          <button
+            key={page}
+            onClick={() => setCurrentPage(page)}
+            className={`mx-1 p-1 w-7 h-8 text-center font-bold text-sm rounded ${
+              currentPage === page
+                ? "text-white bg-[#0075ff]"
+                : "bg-gray-200 text-black"
+            }`}
+          >
+            {page}
+          </button>
+        ))}
 
-            {currentPage <= pageCount - pageRange ? (
-              <button
-                className={`join-item btn btn-sm ms-1 rounded-lg border-none
-     text-white bg-[#74b0f5] hover:bg-[#0075ff] 
-     `}
-                onClick={() => setCurrentPage(pageCount)}
-              >
-                {pageCount}
-              </button>
-            ) : null}
-
-            <button
-              className="join-item btn btn-sm mx-1 rounded-lg border-none
-         text-white bg-[#74b0f5] hover:bg-[#0075ff]"
-              onClick={() => setCurrentPage(currentPage + 1)}
-              disabled={currentPage === pageCount}
-            >
-              <GrFormNextLink />
-            </button>
-          </div>
-        </div>
-      ) : null}
+        {/* دکمه بعدی */}
+        <button
+          onClick={() =>
+            currentPage < pages.length && setCurrentPage(currentPage + 1)
+          }
+          className="mx-1 p-2  bg-gray-200 text-black rounded hover:bg-gray-300 disabled:opacity-50"
+          disabled={currentPage === pages.length}
+        >
+          <GrFormNextLink />
+        </button>
+      </div>
     </div>
   );
 };

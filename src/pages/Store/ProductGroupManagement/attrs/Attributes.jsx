@@ -109,7 +109,7 @@ const Attributes = () => {
         </span>
       </h6>
 
-      <div className="p-6 ">
+      <div className="p-6">
 
         {/* <!-- بخش بالای حدول --> */}
         <AddAtrrs 

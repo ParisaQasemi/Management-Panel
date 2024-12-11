@@ -147,7 +147,7 @@ const AddCart = () => {
           >
             {(formik) => {
               return (
-                <Form className="w-11/12 my-20 mx-auto ">
+                <Form className="w-3/4 lg:w-3/5 my-20 mx-auto">
                   <div >
                     <div className="flex flex-wrap gap-4 w-full h-20">
                       {/* آی دی مشتری */}

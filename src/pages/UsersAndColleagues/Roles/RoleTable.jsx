@@ -62,7 +62,7 @@ const RoleTable = () => {
       <PaginationTable
         data={data}
         dataInfo={dataInfo}
-        numOfPage={8}
+        numOfPage={5}
         searchParams={searchParams}
         loading={loading}
         additionalElement={<ModalBtn onClick={handleOpenModal} />}

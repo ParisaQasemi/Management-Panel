@@ -72,7 +72,7 @@ const DeliveriesTable = () => {
       <PaginationTable
         data={data}
         dataInfo={dataInfo}
-        numOfPAge={8}
+        numOfPAge={5}
         searchParams={searchParams}
         loading={loading}
         additionalElement={<ModalBtn onClick={handleOpenModal} />}

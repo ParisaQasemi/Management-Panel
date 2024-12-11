@@ -79,7 +79,8 @@ const AddCategory = ({ setForceRender, children }) => {
 
   return (
     <ModalContent size="full" editId={editId} editCategory={editCategory}>
-      <ModalContentHeader title=" افزودن دسته محصولات" />
+      <ModalContentHeader 
+      title={editCategory ? " ویرایش دسته محصولات" : " افزودن دسته محصولات"} />
 
       {children}
       <Formik
@@ -91,7 +92,7 @@ const AddCategory = ({ setForceRender, children }) => {
         enableReinitialize
       >
         {/* Form Inputs */}
-        <Form className="w-3/5 mt-20 mx-auto ">
+        <Form className="w-3/4 lg:w-3/5 my-20 mx-auto ">
           {parents.length > 0 ? (
             <FormikControl
               control="select"

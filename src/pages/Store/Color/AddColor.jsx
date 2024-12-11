@@ -30,7 +30,7 @@ const AddColor = ({ children, setData, colorToEdit, setColorToEdit }) => {
 
   return (
     <>
-      <ModalContent size="small">
+      <ModalContent size="small" className='h-full'>
         <ModalContentHeader title={colorToEdit ? "ویرایش رنگ" : "افزودن رنگ"} />
         {children}
         <Formik
@@ -42,7 +42,7 @@ const AddColor = ({ children, setData, colorToEdit, setColorToEdit }) => {
           enableReinitialize
         >
           {/* Form Inputs */}
-          <Form className="w-3/5 mt-20 mx-auto ">
+          <Form className="w-3/4 lg:w-3/5 my-20 mx-auto">
             <FormikControl
               control="input"
               type="text"
@@ -55,13 +55,13 @@ const AddColor = ({ children, setData, colorToEdit, setColorToEdit }) => {
               {({ form }) => {
                 return (
                   <div className="w-full flex justify-start items-center mb-8">
-                    <label htmlFor="">انتخاب رنگ</label>
+                    <label className="text-white">انتخاب رنگ</label>
                     <input
                       type="color"
                       id="code"
                       name="code"
                       title="انتخاب رنگ"
-                      className="mx-3"
+                      className="mx-auto"
                       value={colorPickerValue}
                       onChange={(e) => handleChangeColorCodeField(e, form)}
                     />

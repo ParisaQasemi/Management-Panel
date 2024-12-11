@@ -83,7 +83,7 @@ const AddRole = () => {
           validationSchema={validationSchema}
           enableReinitialize
         >
-          <Form className="w-3/5 my-20 mx-auto ">
+          <Form className="w-3/4 lg:w-3/5 my-20 mx-auto ">
             {editType !== "permissions" ? (
               <>
                 <FormikControl

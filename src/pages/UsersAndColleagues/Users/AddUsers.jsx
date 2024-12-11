@@ -101,7 +101,7 @@ const AddUser = () => {
   return (
     <ModalContent>
       <ModalContentHeader
-        title={"افزودن کاربر"}
+        title={userToEdit ? "ویرایش کاربر" : "افزودن کاربر"}
         closeFunction={() => navigate(-1)}
       />
       <div>
@@ -121,7 +121,7 @@ const AddUser = () => {
         >
           {(formik) => {
             return (
-              <Form className="w-3/5 my-20 mx-auto ">
+              <Form className="w-3/4 lg:w-3/5 my-20 mx-auto ">
                 <>
                   <FormikControl
                     control="input"

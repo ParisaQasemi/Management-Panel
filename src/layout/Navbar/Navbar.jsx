@@ -107,7 +107,7 @@ const Navbar = ({ toggleSidebar }) => {
         backdrop-blur-lg bg-blue-950/30 "
     >
       {/* Dashboard section*/}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+      <div className="flex flex-col md:flex-row w-full justify-between items-start md:items-center">
         <div className="mb-2 md:mb-0">
           <span className="flex">
             <IoHomeSharp
@@ -129,7 +129,7 @@ const Navbar = ({ toggleSidebar }) => {
             {isVisible && (
               <div
                 ref={menuRef}
-                className="w-44 h-32 bg-white text-blue-950 absolute top-28 right-0 rounded-lg p-2 md:right-auto md:left-0 md:top-20"
+                className="w-44 h-fit bg-white text-blue-950 absolute top-28 right-0 rounded-lg p-2 md:right-auto md:left-0 md:top-20"
               >
                 <span className="block text-center h-8 font-bold text-blue-900">
                   {user.user_name || user.full_name}
@@ -138,10 +138,6 @@ const Navbar = ({ toggleSidebar }) => {
                   <FaUserCircle className="w-6 h-6 ms-2 my-1 cursor-pointer" />
                   <span className="ps-1">خروج</span>
                 </NavLink>
-                <span className="flex text-sm my-2 ">
-                  <IoMdSettings className="w-6 h-6 ms-2 me-1 cursor-pointer" />
-                  تنظیمات
-                </span>
               </div>
             )}
             <IoMenu

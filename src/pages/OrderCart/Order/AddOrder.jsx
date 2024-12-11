@@ -129,7 +129,7 @@ const AddOrder = () => {
           >
             {(formik) => {
               return (
-                <Form className="w-3/5 my-20 mx-auto ">
+                <Form className="w-3/4 lg:w-3/5 my-20 mx-auto">
                   <>
                     <div className="flex justify-between bg-red-00">
                       {/* کد سبد */}

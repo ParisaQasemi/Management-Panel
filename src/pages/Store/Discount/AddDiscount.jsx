@@ -100,7 +100,7 @@ const AddDiscount = () => {
         >
           {(formik) => {
             return (
-              <Form className="w-3/5 my-20 mx-auto ">
+              <Form className="w-3/4 lg:w-3/5 my-20 mx-auto">
                 <FormikControl
                   control="input"
                   type="text"

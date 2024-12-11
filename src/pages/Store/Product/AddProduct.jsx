@@ -156,7 +156,7 @@ const AddProduct = () => {
             <div className="flex justify-end">
               <PrevPageButton />
             </div>
-            <Form className="w-3/5 mt-20 mx-auto ">
+            <Form className="w-3/4 lg:w-3/5 my-20 mx-auto">
               <FormikControl
                 control="select"
                 options={parentCategories}

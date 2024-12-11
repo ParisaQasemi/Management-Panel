@@ -3,7 +3,7 @@ import { CiSearch } from "react-icons/ci";
 
 const Search = ({ setSearchChar, placeholder }) => {
   return (
-    <div className="relative w-52 md:w-96 mb-4 md:mb-0">
+    <div className="relative w-64 md:w-96 mb-4 md:mb-0">
       <CiSearch className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 text-gray-400" />
       <input
         type="text"
