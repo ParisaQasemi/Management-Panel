@@ -9,7 +9,7 @@ import {
 } from "../../../services/Brands";
 import ModalBtn from "../../../component/Modal/ModalBtn";
 import CloseModalBtn from "../../../component/Modal/CloseModalBtn";
-import { CategoryContext } from "@/context/CategoryContext";
+import { CategoryContext } from "@/context/categoryContext";
 import { Alert, Confirm } from "../../../utils/alert";
 
 const BrandsTable = ({}) => {

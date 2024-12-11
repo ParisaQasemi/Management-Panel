@@ -10,7 +10,7 @@ import { elements } from "chart.js";
 import { useHasPermission } from "../../../hooks/permissionsHook";
 import CloseModalBtn from "../../../component/Modal/CloseModalBtn";
 import ModalBtn from "../../../component/Modal/ModalBtn";
-import { CategoryContext } from "@/context/CategoryContext";
+import { CategoryContext } from "@/context/categoryContext";
 import AddProduct from "./AddProduct";
 import { useParams } from "react-router-dom";
 

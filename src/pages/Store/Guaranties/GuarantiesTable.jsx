@@ -5,7 +5,7 @@ import Actions from "./tableAddition/Actions";
 import { Alert, Confirm } from "../../../utils/alert";
 import ModalBtn from "../../../component/Modal/ModalBtn";
 import { deleteGuaranteesService, getAllGuaranteesService } from "../../../services/guarantiese";
-import { CategoryContext } from "@/context/CategoryContext";
+import { CategoryContext } from "@/context/categoryContext";
 import CloseModalBtn from "../../../component/Modal/CloseModalBtn";
 
 const GuarantiesTable = () => {

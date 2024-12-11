@@ -9,7 +9,7 @@ import {
 } from "../../../services/category";
 import SubmitButton from "../../../component/form/SubmitButton";
 import { useParams } from "react-router-dom";
-import { CategoryContext } from "@/context/CategoryContext";
+import { CategoryContext } from "@/context/categoryContext";
 import { initialValues, onSubmit, validationSchema } from "./core";
 import ModalContentHeader from "../../../component/Modal/ModalContentHeader";
 

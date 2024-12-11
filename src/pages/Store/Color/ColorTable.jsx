@@ -4,7 +4,7 @@ import AddColor from "./AddColor";
 import { Alert, Confirm } from "../../../utils/alert";
 import ModalBtn from "../../../component/Modal/ModalBtn";
 import CloseModalBtn from "../../../component/Modal/CloseModalBtn";
-import { CategoryContext } from "@/context/CategoryContext";
+import { CategoryContext } from "@/context/categoryContext";
 import Actions from "./tabaleAddition/Actions";
 import { deleteColorService, getAllColorsService } from "../../../services/colors";
 
