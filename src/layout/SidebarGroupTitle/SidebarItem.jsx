@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useHasPermission } from "../../hooks/permissionsHook";
 
-const SidebarItem = ({ title, icon, path, pTitle }) => {
+const SidebarItem = ({ title, icon, path, pTitle, onClick }) => {
   const hasPerm = useHasPermission(pTitle)
 
   return hasPerm && (
@@ -11,6 +11,7 @@ const SidebarItem = ({ title, icon, path, pTitle }) => {
           className={({ isActive }) =>
             `flex p-3 rounded-lg  ${isActive ? "bg-[#1F2B54]" : ""}`
           }
+          onClick={onClick}
         >
           {({ isActive }) => (
             <>

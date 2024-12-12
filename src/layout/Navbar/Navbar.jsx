@@ -2,10 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { IoHomeSharp, IoMenu, IoNotifications } from "react-icons/io5";
 import { FaGripVertical, FaUserCircle } from "react-icons/fa";
-import { IoMdSettings } from "react-icons/io";
 import { useSelector } from "react-redux";
 
-const Navbar = ({ toggleSidebar }) => {
+const Navbar = ({ toggleSidebar, productToEdit }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -14,16 +13,21 @@ const Navbar = ({ toggleSidebar }) => {
 
   const user = useSelector((state) => state.userReducer.data);
 
+
+  const [pageTitle, setPageTitle] = useState("افزودن محصول جدید"); // عنوان پیش‌فرض
+  
+  useEffect(() => {
+    if (location.state?.pageTitle) {
+      setPageTitle(location.state.pageTitle); // تنظیم عنوان بر اساس state
+    }
+  }, [location.state]);
+
   const getTitle = () => {
+
+
     switch (location.pathname) {
       case "/":
         return "داشبورد";
-
-      case "/Table":
-        return "جدول ها";
-
-      case "/ListProducts":
-        return "لیست محصولات";
 
       case "/Category":
         return "مدیریت گروه محصول";
@@ -32,7 +36,8 @@ const Navbar = ({ toggleSidebar }) => {
         return "مدیریت محصول";
 
       case "/products/add-product":
-        return "افزودن محصول جدید";
+        return  <h3>{pageTitle}</h3> ;
+          
 
       case "/products/gallery":
         return "مدیریت گالری تصاویر";
@@ -106,12 +111,12 @@ const Navbar = ({ toggleSidebar }) => {
 
   return (
     <nav
-      className="sticky top-5 z-20 mb-10 border rounded-xl p-4
+      className="sticky top-5 z-20 mb-10 border rounded-xl p-2 md:p-4
         backdrop-blur-lg bg-blue-950/30 "
     >
       {/* Dashboard section*/}
-      <div className="flex flex-col md:flex-row w-full justify-between items-start md:items-center">
-        <div className="mb-2 md:mb-0">
+      <div className="flex  flex-col md:flex-row w-full justify-between items-start md:items-center">
+        <div className="mb-1 md:mb-0">
           <span className="flex">
             <IoHomeSharp
               className="mx-1 text-gray-400 text-sm cursor-pointer"
@@ -119,15 +124,12 @@ const Navbar = ({ toggleSidebar }) => {
             />
             &nbsp; / &nbsp; {getTitle()}
           </span>
-          <h3 className="font-semibold text-sm hidden md:block">
-            {getTitle()}
-          </h3>
         </div>
         {/* Search section and buttons*/}
-        <div className="flex flex-col-2 md:flex-row items-center justify-between w-full md:w-auto p-0 h-10">
+        <div className="flex flex-col-2 md:flex-row items-center justify-between w-full md:w-auto p-0">
           {/* Buttons section*/}
 
-          <div className="flex items-center justify-end ">
+          <div className="flex w-full items-center justify-between lg:justify-start">
             {/* منو */}
             {isVisible && (
               <div
@@ -144,14 +146,18 @@ const Navbar = ({ toggleSidebar }) => {
               </div>
             )}
             <IoMenu
-              className="w-6 h-6 ms-2 cursor-pointer md:hidden"
+              className="w-5 h-5 ms-2 cursor-pointer md:hidden"
               onClick={toggleSidebar}
             />
-            <IoNotifications className="w-6 h-6 ms-2 cursor-pointer" />
+            <div className="flex">
+            
+            <IoNotifications className="w-5 h-5 ms-2 cursor-pointer" />
             <FaGripVertical
-              className="w-6 h-6 ms-2 cursor-pointer"
+              className="w-5 h-5 ms-2 cursor-pointer "
               onClick={() => setIsVisible((prev) => !prev)} // نمایش یا مخفی کردن منو با کلیک
             />
+            </div>
+            
           </div>
         </div>
       </div>

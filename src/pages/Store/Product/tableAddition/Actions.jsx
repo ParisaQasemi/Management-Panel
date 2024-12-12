@@ -27,9 +27,8 @@ const Actions = ({ rowData }) => {
         pTitle="update_product"
         title="ویرایش"
         onClick={() => {
-          // setshowModal(true);
           navigation("/products/add-product", {
-            state: { productToEdit: rowData },
+            state: { productToEdit: rowData, pageTitle: "ویرایش محصول" }, // ارسال عنوان
           });
         }}
       />

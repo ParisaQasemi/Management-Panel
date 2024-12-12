@@ -3,14 +3,12 @@ import { Route, Routes } from "react-router-dom";
 
 import Navbar from "../Navbar/Navbar";
 import Dashboard from "../../pages/Dashboard/Dashboard";
-import ListProducts from "../../pages/Store/ListProducts/ListProducts";
 import Brand from "../../pages/Store/Brand/Brand";
 import Users from "../../pages/UsersAndColleagues/Users/Users";
 import Roles from "../../pages/UsersAndColleagues/Roles/Roles";
 import Permissions from "../../pages/UsersAndColleagues/Permissions/Permissions";
 import Questions from "../../pages/Communications/Questions/Questions";
 import Feedback from "../../pages/Communications/Feedback/Feedback";
-import Table from "../../pages/Table/Table";
 import Profile from "../../pages/Profile/Profile";
 import Register from "../../pages/Register/Register";
 import Product from "../../pages/Store/Product/Product";
@@ -193,8 +191,6 @@ const Mainbar = ({ toggleSidebar }) => {
         <Route path="/Feedback" element={<Feedback />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/Register" element={<Register />} />
-        <Route path="/Table" element={<Table />} />
-        <Route path="/ListProducts" element={<ListProducts />} />
         <Route path="/Logout" element={<Logout />} />
       </Routes>
     </div>

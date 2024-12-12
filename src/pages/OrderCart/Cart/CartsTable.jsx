@@ -99,6 +99,7 @@ const CartsTable = () => {
         setCurrentPage={setCurrentPage}
         pageCount={pageCount}
         handleSearch={handleSearch}
+        numOfPage={5}
         additionalElement={<ModalBtn onClick={handleOpenModal} />}
       />
       <Outlet context={{ handleGetCarts }} />

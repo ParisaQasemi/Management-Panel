@@ -82,7 +82,6 @@ const AddCart = () => {
         products,
       });
     }
-    console.log(res);
     if (res.status === 201 || res.status === 200) {
       Alert("انجام شد", res.data.message, "success");
       handleGetCarts();
@@ -92,7 +91,7 @@ const AddCart = () => {
   };
 
   const handleDeleteProduct = (id) => {
-    setSelectedProductsInfo((old) => old.filter((o) => o.id != id));
+    setSelectedProductsInfo((old) => old.filter((o) => o.id !== id));
   };
 
   const handleGetCartToEditInfo = async () => {
@@ -145,149 +144,116 @@ const AddCart = () => {
             validationSchema={validationSchema}
             enableReinitialize
           >
-            {(formik) => {
-              return (
-                <Form className="w-3/4 lg:w-3/5 my-20 mx-auto">
-                  <div >
-                    <div className="flex flex-wrap gap-4 w-full h-20">
-                      {/* آی دی مشتری */}
-                      <div className="flex-1 min-w-[200px] max-w-[300px] ">
-                        <Field
-                          type="text"
-                          name="user_id"
-                          className="w-full border border-white rounded-lg p-3 text-white text-sm focus:outline-none bg-transparent"
-                          placeholder="آی دی مشتری"
-                        />
-                        <ErrorMessage name="user_id" component={FormikError} />
-                      </div>
-
-                      {/* محصول */}
-                      <div className="flex-1 min-w-[200px] max-w-[300px] ">
-                        <SelectSearch
-                          options={allProducts}
-                          search={true}
-                          placeholder="محصول"
-                          onChange={(e) =>
-                            handleChangeSelectedProduct(e, formik)
-                          }
-                        />
-                        <ErrorMessage
-                          name="product_id"
-                          component={FormikError}
-                        />
-                      </div>
-
-                      {/* رنگ */}
-                      <div className="flex-1 min-w-[200px] max-w-[300px]">
-                        <SelectSearch
-                          options={colors}
-                          placeholder="رنگ"
-                          onChange={(e) => formik.setFieldValue("color_id", e)}
-                        />
-                        <ErrorMessage name="color_id" component={FormikError} />
-                      </div>
-
-                      {/* گارانتی */}
-                      <div className="flex-1 min-w-[200px] max-w-[300px] ">
-                        <SelectSearch
-                          options={guarantees}
-                          placeholder="گارانتی"
-                          onChange={(e) =>
-                            formik.setFieldValue("guarantee_id", e)
-                          }
-                        />
-                        <ErrorMessage
-                          name="guarantee_id"
-                          component={FormikError}
-                        />
-                      </div>
-
-                      {/* تعداد */}
-                      <div className="flex-1 min-w-[200px] max-w-[300px] ">
-                        <Field
-                          type="number"
-                          name="count"
-                          className="w-full border border-white rounded-lg p-3 text-white text-sm focus:outline-none bg-transparent"
-                          placeholder="تعداد"
-                        />
-                        <ErrorMessage name="count" component={FormikError} />
-                      </div>
-
-                      {/* دکمه ثبت */}
-                      <div className="flex justify-center items-center flex-1 w-50 ">
-                        <FaCheck
-                          className="text-white bg-green-500 rounded-full p-2 cursor-pointer hover:bg-green-600"
-                          title="ثبت فرم"
-                          onClick={() => formik.submitForm()}
-                        />
-                      </div>
-                    </div>
-
-                    <hr className="my-5 bg-white" />
+            {(formik) => (
+              <Form className="w-full lg:w-3/5 mx-auto mt-10">
+                <div className="flex flex-wrap gap-6 justify-between mx-auto">
+                  {/* آی دی مشتری */}
+                  <div className="flex flex-col w-96 sm:w-1/2 lg:w-full mx-auto">
+                    <Field
+                      type="text"
+                      name="user_id"
+                      className="w-full p-3 border rounded-lg text-sm bg-transparent focus:outline-none"
+                      placeholder="آی دی مشتری"
+                    />
+                    <ErrorMessage name="user_id" component={FormikError} />
                   </div>
 
-                    <div className=" flex flex-wrap justify-center w-full p-3">
-                      {selectedProductsInfo.map((product) => (
-                        <div
-                          className="w-full sm:w-1/2 lg:w-1/3 p-2"
-                          key={product.id}
-                        >
-                          <div className="bg-white rounded-lg shadow-md p-4 flex items-center">
-                            <span className="flex text-sm text-gray-700 truncate">
-                              <IoTimeSharp
-                                className="text-red-600 cursor-pointer ml-2 hover:text-red-800"
-                                title="حذف محصول از سبد"
-                                onClick={() => handleDeleteProduct(product.id)}
-                              />
-                              {product.product.title} (قیمت واحد:{" "}
-                              {numberWithCommas(product.product.price)})
-                              (گارانتی: {product.guarantee?.title}) (
-                              {product.count} عدد)
-                              <FaCheckCircle
-                                className="ml-2"
-                                style={{ color: product.color?.code }}
-                              />
-                            </span>
-                          </div>
-                        </div>
-                      ))}
+              <div className="lg:flex justify-between">
+                
+                  {/* محصول */}
+                  <div className="flex flex-col w-96 sm:w-1/2 lg:w-1/3 mx-2 lg:mx-auto my-1">
+                    <SelectSearch
+                      options={allProducts}
+                      search={true}
+                      placeholder="محصول"
+                      onChange={(e) => handleChangeSelectedProduct(e, formik)}
+                    />
+                    <ErrorMessage name="product_id" component={FormikError} />
+                  </div>
 
-                      {selectedProductsInfo.length > 0 ? (
-                        <>
-                          <div className="w-full sm:w-1/2 p-2">
-                            <div className="bg-white rounded-lg shadow-md p-4 flex justify-between items-center">
-                              <span className="w-3/4 text-center text-gray-900">
-                                {numberWithCommas(
-                                  selectedProductsInfo
-                                    .map((p) => p.count * p.product.price)
-                                    .reduce((a, b) => a + b)
-                                )}
-                              </span>
-                              <span className="w-1/4 text-center text-blue-950 font-bold">
-                                جمع کل
-                              </span>
-                            </div>
-                          </div>
-                          <div className="w-full sm:w-1/2 lg:w-2/3 p-2 text-center">
-                            <button
-                              type="button"
-                              className="bg-blue-500 w-36 py-2 my-5 text-white rounded-lg shadow-md"
-                              onClick={() => handleConfirmAddCart(formik)}
-                              disabled={isSubmitting}
-                            >
-                              {isSubmitting ? "صبر کنید..." : "ذخیره"}
-                            </button>
-                          </div>
-                        </>
-                      ) : (
-                        <h6 className="w-full text-center text-white mt-4">
-                          محصولات خود را مشخص کنید
-                        </h6>
-                      )}
+                  {/* رنگ */}
+                  <div className="flex flex-col w-96 sm:w-1/2 lg:w-1/3 mx-2 my-1 ">
+                    <SelectSearch
+                      options={colors}
+                      placeholder="رنگ"
+                      onChange={(e) => formik.setFieldValue("color_id", e)}
+                    />
+                    <ErrorMessage name="color_id" component={FormikError} />
+                  </div>
+
+                  {/* گارانتی */}
+                  <div className="flex flex-col w-96 sm:w-1/2 lg:w-1/3 mx-2 lg:mx-auto my-1 ">
+                    <SelectSearch
+                      options={guarantees}
+                      placeholder="گارانتی"
+                      onChange={(e) => formik.setFieldValue("guarantee_id", e)}
+                    />
+                    <ErrorMessage name="guarantee_id" component={FormikError} />
+                  </div>
+              </div>
+
+                  {/* تعداد */}
+                  <div className="flex flex-col w-96 sm:w-1/2 lg:w-full mx-auto">
+                    <Field
+                      type="number"
+                      name="count"
+                      className="w-full p-3 border rounded-lg text-sm bg-transparent focus:outline-none"
+                      placeholder="تعداد"
+                    />
+                    <ErrorMessage name="count" component={FormikError} />
+                  </div>
+
+                  {/* دکمه ثبت */}
+                  <div className="flex justify-center items-center w-full  sm:w-auto lg:w-full">
+                    <button
+                      type="button"
+                      className="bg-green-500 text-white py-2 px-4 rounded-full hover:bg-green-600"
+                      onClick={() => formik.submitForm()}
+                    >
+                      {isSubmitting ? "صبر کنید..." : "ثبت"}
+                    </button>
+                  </div>
+                </div>
+
+                <hr className="my-5 border-t-2 border-gray-300" />
+
+                <div className="space-y-4">
+                  {selectedProductsInfo.map((product) => (
+                    <div
+                      className="bg-white shadow-md rounded-lg p-4 flex items-center justify-between"
+                      key={product.id}
+                    >
+                      <div>
+                        <span className="text-sm text-gray-700">
+                          {product.product.title} - گارانتی:{" "}
+                          {product.guarantee?.title} - تعداد:{" "}
+                          {product.count}
+                        </span>
+                      </div>
+                      <div>
+                        <IoTimeSharp
+                          onClick={() => handleDeleteProduct(product.id)}
+                          className="text-red-600 cursor-pointer hover:text-red-800"
+                          title="حذف محصول"
+                        />
+                      </div>
                     </div>
-                </Form>
-              );
-            }}
+                  ))}
+                </div>
+
+                {selectedProductsInfo.length > 0 && (
+                  <div className="mt-4 text-center">
+                    <button
+                      type="button"
+                      className="bg-blue-500 py-2 px-6 rounded-lg text-white"
+                      onClick={() => handleConfirmAddCart(formik)}
+                    >
+                      تایید و اضافه کردن سبد خرید
+                    </button>
+                  </div>
+                )}
+              </Form>
+            )}
           </Formik>
         </div>
       </ModalContent>

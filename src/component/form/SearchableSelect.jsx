@@ -63,7 +63,7 @@ const SearchableSelect = ({ formik, resultType, options, name, label, firstItem,
             >
               <span className="block text-white font-bold w-32">{label}</span>
               <div className="w-full mt-1 border-white border-b-[1px] text-white text-sm focus:outline-none bg-transparent">
-                <div className="flex w-full">
+                <div className="flex w-full flex-wrap ">
                   {selectedItems.length > 0 ? (
                     selectedItems.map((selectedItem) => (
                       <span key={selectedItem.id} className="flex m-1 bg-blue-950 rounded-lg p-1">

@@ -9,8 +9,6 @@ import { getAllBrandsService } from "../../../services/Brands";
 import { getAllColorsService } from "../../../services/colors";
 import { getAllGuaranteesService } from "../../../services/guarantiese";
 import { useLocation } from "react-router-dom";
-import ModalContentHeader from "../../../component/Modal/ModalContentHeader";
-import ModalContent from "../../../component/Modal/ModalContent";
 
 const AddProduct = () => {
   const loaction = useLocation();
@@ -26,6 +24,13 @@ const AddProduct = () => {
   const [brands, setBrands] = useState([]);
   const [colors, setColors] = useState([]);
   const [guarantees, setGuarantees] = useState([]);
+
+  const [pageTitle, setPageTitle] = useState("افزودن محصول جدید"); // عنوان پیش‌فرض
+  useEffect(() => {
+    if (location.state?.pageTitle) {
+      setPageTitle(location.state.pageTitle); // تنظیم عنوان بر اساس state
+    }
+  }, [location.state]);
 
   const getAllParentCategories = async () => {
     const res = await getCategoriesService();

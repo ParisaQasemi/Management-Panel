@@ -47,7 +47,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         />
 
         {/* Navigation Links Section */}
-        <SidebarItem title="داشبورد" icon={<IoHomeSharp />} path="/" pTitle='read_' />
+        <SidebarItem title="داشبورد" icon={<IoHomeSharp />} path="/" pTitle='read_'             onClick={toggleSidebar}
+        />
 
         <div className="sidebar_items_container">
           {/* ---------- Store ---------- */}
@@ -62,36 +63,48 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             icon={<AiOutlineProduct />}
             path="/Category"
             pTitle="read_categories"
+            onClick={toggleSidebar}
+
           />
           <SidebarItem
             title="مدیریت محصول"
             icon={<AiOutlineProduct />}
             path="/Product"
             pTitle="read_products"
+            onClick={toggleSidebar}
+
           />
           <SidebarItem
             title="مدیریت برند ها"
             icon={<TbBrandAsana />}
             path="/Brand"
             pTitle="read_brands"
+            onClick={toggleSidebar}
+
           />
           <SidebarItem
             title="مدیریت گارانتی ها"
             icon={<AiOutlineAppstore />}
             path="/Guaranties"
             pTitle="read_guaranties"
+            onClick={toggleSidebar}
+
           />
           <SidebarItem
             title="مدیریت رنگ ها"
             icon={<IoIosColorPalette />}
             path="/Color"
             pTitle="read_colors"
+            onClick={toggleSidebar}
+
           />
           <SidebarItem
             title="مدیریت تخفیف ها"
             icon={<RiDiscountPercentFill />}
             path="/Discount"
             pTitle="read_discounts"
+            onClick={toggleSidebar}
+
           />
 
           {/* ---------- Orde And Cart ---------- */}
@@ -104,18 +117,24 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             icon={<FaShoppingCart />}
             path="/carts"
             pTitle="read_carts"
+            onClick={toggleSidebar}
+
           />
           <SidebarItem
             title="مدیریت سفارشات"
             icon={<FaLuggageCart />}
             path="/orders"
             pTitle="read_orders"
+            onClick={toggleSidebar}
+
           />
           <SidebarItem
             title="مدیریت نحوه ارسال"
             icon={<MdShoppingCartCheckout />}
             path="/deliveries"
             pTitle="read_deliveries"
+            onClick={toggleSidebar}
+
           />
 
           {/* ---------- Users And Partners ---------- */}
@@ -128,12 +147,16 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             icon={<FaUsers />}
             path="/Users"
             pTitle="read_users"
+            onClick={toggleSidebar}
+
           />
           <SidebarItem
             title="نقش ها "
             icon={<FaUserCog />}
             path="/Roles"
             pTitle="read_roles"
+            onClick={toggleSidebar}
+
           />
 
           <SidebarItem
@@ -141,6 +164,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             icon={<MdVerifiedUser />}
             path="/permissions"
             pTitle="read_permissions"
+            onClick={toggleSidebar}
+
           />
 
           {/* ---------- Communications ---------- */}
@@ -153,12 +178,16 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             icon={<BsFillQuestionSquareFill />}
             path="/Questions"
             pTitle="read_questions"
+            onClick={toggleSidebar}
+
           />
           <SidebarItem
             title="نظرات "
             icon={<FaComment />}
             path="/Feedback"
             pTitle="read_comments"
+            onClick={toggleSidebar}
+
           />
         </div>
       </div>

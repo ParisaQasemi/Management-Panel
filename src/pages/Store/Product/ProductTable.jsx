@@ -12,9 +12,10 @@ import CloseModalBtn from "../../../component/Modal/CloseModalBtn";
 import ModalBtn from "../../../component/Modal/ModalBtn";
 import { CategoryContext } from "@/context/categoryContext";
 import AddProduct from "./AddProduct";
-import { useParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 
 const ProductTable = () => {
+  const navigate = useNavigate()
   const params = useParams();
   const [forceRender, setForceRender] = useState(0);
   // NEW Code
@@ -25,14 +26,11 @@ const ProductTable = () => {
   const [countOnPage, setCountOnPage] = useState(10);
   const [pageCount, setPageCount] = useState(0);
 
-  const [showModal, setshowModal] = useState(false);
+  // const [showModal, setshowModal] = useState(false);
   const { setEditId } = useContext(CategoryContext); // اضافه کردن context
   const hasAddCategoryPerm = useHasPermission("create_product");
 
-  const handleOpenModal = () => {
-    setEditId(null); // پاک کردن editId
-    setshowModal(true);
-  };
+  
 
   const dataInfo = [
     { field: "id", title: "#" },
@@ -52,21 +50,6 @@ const ProductTable = () => {
       ),
     },
   ];
-
-  // const additionField = [
-  //   {
-  //     title: "تاریخ",
-  //     elements: (rowData) => convertDateToJalali(rowData.created_at),
-  //   },
-  //   {
-  //     title: "نمایش در منو",
-  //     elements: (rowData) => <ShowInData rowData={rowData} />,
-  //   },
-  //   {
-  //     title: "عملیات",
-  //     elements: (rowData) => <Actions rowData={rowData} />,
-  //   },
-  // ];
 
   const searchParams = {
     title: "جستجو",
@@ -105,8 +88,13 @@ const ProductTable = () => {
     handleGetProducts(currentPage, countOnPage, searchChar);
   }, [currentPage]);
 
+  const handleOpenModal = () => {
+    setEditId(null); 
+    navigate("/products/add-product");
+  };
   return (
     <>
+    <Outlet />
       <PaginatiedDataTable
         tableData={data}
         dataInfo={dataInfo}
@@ -121,14 +109,6 @@ const ProductTable = () => {
           hasAddCategoryPerm && <ModalBtn onClick={handleOpenModal} />
         }
       />
-
-      {hasAddCategoryPerm && showModal && (
-        <AddProduct setForceRender={setForceRender}>
-          <button onClick={() => setshowModal(false)}>
-            <CloseModalBtn />
-          </button>
-        </AddProduct>
-      )}
     </>
   );
 };
