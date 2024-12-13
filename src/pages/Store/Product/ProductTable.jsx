@@ -6,28 +6,22 @@ import {
 } from "../../../services/products";
 import PaginatiedDataTable from "../../../component/Pagination/PaginatiedDataTable";
 import { Alert, Confirm } from "../../../utils/alert";
-import { elements } from "chart.js";
 import { useHasPermission } from "../../../hooks/permissionsHook";
-import CloseModalBtn from "../../../component/Modal/CloseModalBtn";
 import ModalBtn from "../../../component/Modal/ModalBtn";
 import { CategoryContext } from "@/context/categoryContext";
-import AddProduct from "./AddProduct";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 
 const ProductTable = () => {
   const navigate = useNavigate()
   const params = useParams();
   const [forceRender, setForceRender] = useState(0);
-  // NEW Code
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchChar, setSearchChar] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [countOnPage, setCountOnPage] = useState(10);
   const [pageCount, setPageCount] = useState(0);
-
-  // const [showModal, setshowModal] = useState(false);
-  const { setEditId } = useContext(CategoryContext); // اضافه کردن context
+  const { setEditId } = useContext(CategoryContext); 
   const hasAddCategoryPerm = useHasPermission("create_product");
 
   
@@ -54,7 +48,6 @@ const ProductTable = () => {
   const searchParams = {
     title: "جستجو",
     placeholder: "قسمتی از عنوان را وارد کنید",
-    // searchField: "title",
   };
 
   const handleGetProducts = async (page, count, char) => {

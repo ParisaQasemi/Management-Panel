@@ -14,7 +14,6 @@ const Ckeditor = ({ name, label, firstItem }) => {
               editor={ClassicEditor}
               data={form.values[name] || `<p>${label}: ${firstItem}</p>`}
               onReady={(editor) => {
-                // console.log("ready");
               }}
               onChange={(event, editor) => {
                 const data = editor.getData();

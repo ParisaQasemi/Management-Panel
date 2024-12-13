@@ -34,10 +34,10 @@ const AddDiscount = () => {
   };
 
   const handleSetProductSelectBox = (formik) => {
-    const idsArr = formik.values.product_ids.split("-").filter((id) => id); // فیلتر کردن آیتم‌های خالی
+    const idsArr = formik.values.product_ids.split("-").filter((id) => id);
     const selectedProductArr = idsArr
-      .map((id) => allProducts.find((p) => p.id == id)) // از find به جای filter برای پیدا کردن اولین آیتم استفاده کنید
-      .filter((product) => product); // فیلتر کردن آیتم‌های undefined یا null
+      .map((id) => allProducts.find((p) => p.id == id)) 
+      .filter((product) => product); 
   
     console.log(selectedProductArr);
   

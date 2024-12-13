@@ -15,12 +15,11 @@ import ModalContentHeader from "../../../component/Modal/ModalContentHeader";
 
 const AddCategory = ({ setForceRender, children }) => {
   const params = useParams();
-  const { editId, setEditId } = useContext(CategoryContext); //دکمه ویرایش
-  const [editCategory, setEditCategory] = useState(null); // دکمه ویرایش
+  const { editId, setEditId } = useContext(CategoryContext); 
+  const [editCategory, setEditCategory] = useState(null);
   const [parents, setParents] = useState([]);
   const [reInitialValues, setReInitialValues] = useState(null);
 
-  // دکمه ویرایش
   const handleGetSingleCategory = async () => {
     try {
       const res = await getSingleCategoryService(editId);

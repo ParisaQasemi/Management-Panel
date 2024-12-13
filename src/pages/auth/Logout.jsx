@@ -16,7 +16,6 @@ const Logout = () => {
         setLoading(false)
     } catch (error) {
         setLoading(false)
-        // Alert("متاسفم", 'مشکلی از سمت سرور رخ داده', "error");
     }
   }
 

@@ -63,14 +63,18 @@ const Cards = () => {
     setLoading(false);
     if (res.status === 200) {
       const data = res.data.data;
-      let newCardObj = [...cardObjects];
-      for (const key in data) {
-        const index = newCardObj.findIndex((co) => co.name == key);
-        newCardObj[index].currentValue = data[key].today;
-        newCardObj[index].lastWeekValue = data[key].thisWeek;
-        newCardObj[index].lastMonthValue = data[key].thisMonth;
-      }
-      setCardInfos(newCardObj);
+      const updatedCardInfos = cardObjects.map((card) => {
+        const cardData = data[card.name];
+        return cardData
+          ? {
+              ...card,
+              currentValue: cardData.today,
+              lastWeekValue: cardData.thisWeek,
+              lastMonthValue: cardData.thisMonth,
+            }
+          : card;
+      });
+      setCardInfos(updatedCardInfos);
     }
   };
 
@@ -79,11 +83,11 @@ const Cards = () => {
   }, []);
 
   return (
-    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ">
+    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {loading ? (
-        <SpinnerLoad className="text-blue-300" /> //colorClass={""}
+        <SpinnerLoad className="text-blue-300" /> 
       ) : (
-        cardInfos.map((cardInfo) => <Card {...cardInfo} />)
+        cardInfos.map(({ key, ...rest }) => <Card key={key} {...rest} />)
       )}
     </div>
   );

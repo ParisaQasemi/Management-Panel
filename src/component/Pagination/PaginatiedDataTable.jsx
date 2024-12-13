@@ -4,7 +4,6 @@ import { GrFormNextLink, GrFormPreviousLink } from "react-icons/gr";
 import Search from "../Search/Search";
 
 const PaginatiedDataTable = ({
-  children,
   tableData,
   dataInfo,
   loading,
@@ -13,8 +12,6 @@ const PaginatiedDataTable = ({
   setCurrentPage,
   searchParams,
   handleSearch,
-  setshowModal,
-  handleOpenModal,
   additionalElement,
 }) => {
   const pageRange = 3;
@@ -48,8 +45,6 @@ const PaginatiedDataTable = ({
             {additionalElement || ""}
           </div>
         </div>
-
-        {/* <div className="w-52 bg-green-400 flex items-end my-3">{children}</div> */}
       </div>
 
       <div className="overflow-x-auto my-5">

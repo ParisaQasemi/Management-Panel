@@ -36,7 +36,6 @@ export const setDashboardChart = (labels, datapoints) => {
           display: true,
           title: {
             display: true,
-            // text: 'زمان'
           },
         },
         y: {
@@ -45,8 +44,6 @@ export const setDashboardChart = (labels, datapoints) => {
             display: true,
             text: " میلیون تومان",
           },
-          // suggestedMin: -10,
-          // suggestedMax: 200
         },
       },
     },

@@ -9,8 +9,6 @@ import Roles from "../../pages/UsersAndColleagues/Roles/Roles";
 import Permissions from "../../pages/UsersAndColleagues/Permissions/Permissions";
 import Questions from "../../pages/Communications/Questions/Questions";
 import Feedback from "../../pages/Communications/Feedback/Feedback";
-import Profile from "../../pages/Profile/Profile";
-import Register from "../../pages/Register/Register";
 import Product from "../../pages/Store/Product/Product";
 import AddProduct from "../../pages/Store/Product/AddProduct";
 import Logout from "../../pages/auth/Logout";
@@ -39,9 +37,10 @@ const Mainbar = ({ toggleSidebar }) => {
   const hasDiscountPermission = useHasPermission("read_discounts");
   const hasUserPermission = useHasPermission("read_users");
   const hasRolePermission = useHasPermission("read_roles");
-  const hasDeliveryPermission = useHasPermission("read_deliveries");
+  const hasDeliveyPermission = useHasPermission("read_deliveries");
   const hasCartPermission = useHasPermission("read_carts");
   const hasOrderPermission = useHasPermission("read_orders");
+
 
   return (
     <div className="flex-1 flex flex-col p-6 md:mr-60">
@@ -151,7 +150,7 @@ const Mainbar = ({ toggleSidebar }) => {
             />
           }
         />
-        {hasDeliveryPermission && (
+        {hasDeliveyPermission && (
           <Route path="/deliveries" element={<Delivery />}>
             <Route
               path="add-delivery"
@@ -189,8 +188,6 @@ const Mainbar = ({ toggleSidebar }) => {
 
         <Route path="/Questions" element={<Questions />} />
         <Route path="/Feedback" element={<Feedback />} />
-        <Route path="/Profile" element={<Profile />} />
-        <Route path="/Register" element={<Register />} />
         <Route path="/Logout" element={<Logout />} />
       </Routes>
     </div>

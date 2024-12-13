@@ -25,10 +25,10 @@ const AddProduct = () => {
   const [colors, setColors] = useState([]);
   const [guarantees, setGuarantees] = useState([]);
 
-  const [pageTitle, setPageTitle] = useState("افزودن محصول جدید"); // عنوان پیش‌فرض
+  const [pageTitle, setPageTitle] = useState("افزودن محصول جدید"); 
   useEffect(() => {
     if (location.state?.pageTitle) {
-      setPageTitle(location.state.pageTitle); // تنظیم عنوان بر اساس state
+      setPageTitle(location.state.pageTitle); 
     }
   }, [location.state]);
 
@@ -247,13 +247,6 @@ const AddProduct = () => {
                   value={formik.values.guarantee_ids || []}
                   initialItems={selectedGuarantees}
                 />
-
-                {/* <FormikControl
-                control="textarea"
-                name="descriptions"
-                label="توضیحات"
-                firstItem="فقط از حروف و اعداد استفاده شود"
-              /> */}
 
                 <FormikControl
                   control="ckeditor"

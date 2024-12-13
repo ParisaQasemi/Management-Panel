@@ -15,9 +15,8 @@ const Attributes = () => {
   const location = useLocation();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [attrToEdit, setAttrToEdit] = useState(null)
-  const [reInitValues, setReInitValues] = useState(null)
-
+  const [attrToEdit, setAttrToEdit] = useState(null);
+  const [reInitValues, setReInitValues] = useState(null);
 
   const dataInfo = [
     { field: "id", title: "#" },
@@ -29,24 +28,16 @@ const Attributes = () => {
     },
     {
       title: "عملیات",
-      elements: (rowData) => <AttrAction rowData={rowData}
-      attrToEdit={attrToEdit} setAttrToEdit={setAttrToEdit}
-      handleDeleteCategoryAttr={handleDeleteCategoryAttr} />,
+      elements: (rowData) => (
+        <AttrAction
+          rowData={rowData}
+          attrToEdit={attrToEdit}
+          setAttrToEdit={setAttrToEdit}
+          handleDeleteCategoryAttr={handleDeleteCategoryAttr}
+        />
+      ),
     },
   ];
-
-  // const additionField = [
-  //   {
-  //     title: "نمایش در فیلتر",
-  //     elements: (rowData) => <ShowInFilter rowData={rowData} />,
-  //   },
-  //   {
-  //     title: "عملیات",
-  //     elements: (rowData) => <AttrAction rowData={rowData}
-  //     attrToEdit={attrToEdit} setAttrToEdit={setAttrToEdit}
-  //     handleDeleteCategoryAttr={handleDeleteCategoryAttr} />,
-  //   },
-  // ];
 
   const searchParams = {
     title: "جستجو",
@@ -70,32 +61,27 @@ const Attributes = () => {
     handleGetCategoryAttrs();
   }, []);
 
-  useEffect(()=> {
-    if(attrToEdit) setReInitValues({
-      title: attrToEdit.title,
-      unit: attrToEdit.unit,
-      in_filter: attrToEdit.in_filter ? true : false
-    })
-    else setReInitValues(null)
-  }, [attrToEdit])
+  useEffect(() => {
+    if (attrToEdit)
+      setReInitValues({
+        title: attrToEdit.title,
+        unit: attrToEdit.unit,
+        in_filter: attrToEdit.in_filter ? true : false,
+      });
+    else setReInitValues(null);
+  }, [attrToEdit]);
 
-
-  const handleDeleteCategoryAttr = async (attr)=>{
-    if( await Confirm(`حذف ${attr.title}`, 'آیا از حذف رکورد اطمینان دارید؟')) {
+  const handleDeleteCategoryAttr = async (attr) => {
+    if (await Confirm(`حذف ${attr.title}`, "آیا از حذف رکورد اطمینان دارید؟")) {
       try {
-        const res = await deleteCategoryAttrService(attr.id)
-        if(res.status == 200) {
-          Alert('انجام شد', res.data.message, 'success')
-          setData(lastData=>[...lastData].filter(d=>d.id != attr.id))
+        const res = await deleteCategoryAttrService(attr.id);
+        if (res.status == 200) {
+          Alert("انجام شد", res.data.message, "success");
+          setData((lastData) => [...lastData].filter((d) => d.id != attr.id));
         }
-      }
-      catch (error){
-
-      }
+      } catch (error) {}
     }
-  }
-
-
+  };
 
   return (
     <>
@@ -103,32 +89,28 @@ const Attributes = () => {
         مدیریت ویژگی های دسته بندی
       </h3>
       <h6 className="text-center my-3">
-         ویژگی : 
+        ویژگی :
         <span className="text-blue-400">
-         { location.state.categoryData.title } 
+          {location.state.categoryData.title}
         </span>
       </h6>
 
       <div className="p-6">
-
-        {/* <!-- بخش بالای حدول --> */}
-        <AddAtrrs 
-        reInitValues={reInitValues}
-        location={location}
-        setData={setData}
-        attrToEdit={attrToEdit}
-        setAttrToEdit={setAttrToEdit} 
+        <AddAtrrs
+          reInitValues={reInitValues}
+          location={location}
+          setData={setData}
+          attrToEdit={attrToEdit}
+          setAttrToEdit={setAttrToEdit}
         />
 
         <div className="flex justify-end">
           <PrevPageButton />
         </div>
 
-        {/* <!-- جدول --> */}
         <PaginationTable
           data={data}
           dataInfo={dataInfo}
-          // additionField={additionField}
           numOfPage={5}
           searchParams={searchParams}
           loading={loading}

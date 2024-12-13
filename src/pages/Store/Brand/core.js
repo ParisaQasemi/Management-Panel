@@ -9,7 +9,7 @@ export const initialValues = {
   logo: null,
 };
 
-export const onSubmit = async (values, actions, setData, brandToEdit) => {
+export const onSubmit = async (values, setData, brandToEdit) => {
   if (brandToEdit) {
     const res = await editBrandService(brandToEdit.id, values);
     if (res.status === 200) {

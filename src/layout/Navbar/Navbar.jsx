@@ -4,27 +4,24 @@ import { IoHomeSharp, IoMenu, IoNotifications } from "react-icons/io5";
 import { FaGripVertical, FaUserCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
-const Navbar = ({ toggleSidebar, productToEdit }) => {
+const Navbar = ({ toggleSidebar }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [isVisible, setIsVisible] = useState(false); // برای نمایش یا مخفی کردن منو
-  const menuRef = useRef(null); // برای تشخیص کلیک بیرون
+  const [isVisible, setIsVisible] = useState(false);
+  const menuRef = useRef(null);
 
   const user = useSelector((state) => state.userReducer.data);
 
+  const [pageTitle, setPageTitle] = useState("افزودن محصول جدید");
 
-  const [pageTitle, setPageTitle] = useState("افزودن محصول جدید"); // عنوان پیش‌فرض
-  
   useEffect(() => {
     if (location.state?.pageTitle) {
-      setPageTitle(location.state.pageTitle); // تنظیم عنوان بر اساس state
+      setPageTitle(location.state.pageTitle);
     }
   }, [location.state]);
 
   const getTitle = () => {
-
-
     switch (location.pathname) {
       case "/":
         return "داشبورد";
@@ -36,8 +33,7 @@ const Navbar = ({ toggleSidebar, productToEdit }) => {
         return "مدیریت محصول";
 
       case "/products/add-product":
-        return  <h3>{pageTitle}</h3> ;
-          
+        return <h3>{pageTitle}</h3>;
 
       case "/products/gallery":
         return "مدیریت گالری تصاویر";
@@ -99,7 +95,7 @@ const Navbar = ({ toggleSidebar, productToEdit }) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsVisible(false); // منو را مخفی کن
+        setIsVisible(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -114,7 +110,6 @@ const Navbar = ({ toggleSidebar, productToEdit }) => {
       className="sticky top-5 z-20 mb-10 border rounded-xl p-2 md:p-4
         backdrop-blur-lg bg-blue-950/30 "
     >
-      {/* Dashboard section*/}
       <div className="flex  flex-col md:flex-row w-full justify-between items-start md:items-center">
         <div className="mb-1 md:mb-0">
           <span className="flex">
@@ -125,12 +120,9 @@ const Navbar = ({ toggleSidebar, productToEdit }) => {
             &nbsp; / &nbsp; {getTitle()}
           </span>
         </div>
-        {/* Search section and buttons*/}
-        <div className="flex flex-col-2 md:flex-row items-center justify-between w-full md:w-auto p-0">
-          {/* Buttons section*/}
 
+        <div className="flex flex-col-2 md:flex-row items-center justify-between w-full md:w-auto p-0">
           <div className="flex w-full items-center justify-between lg:justify-start">
-            {/* منو */}
             {isVisible && (
               <div
                 ref={menuRef}
@@ -150,14 +142,12 @@ const Navbar = ({ toggleSidebar, productToEdit }) => {
               onClick={toggleSidebar}
             />
             <div className="flex">
-            
-            <IoNotifications className="w-5 h-5 ms-2 cursor-pointer" />
-            <FaGripVertical
-              className="w-5 h-5 ms-2 cursor-pointer "
-              onClick={() => setIsVisible((prev) => !prev)} // نمایش یا مخفی کردن منو با کلیک
-            />
+              <IoNotifications className="w-5 h-5 ms-2 cursor-pointer" />
+              <FaGripVertical
+                className="w-5 h-5 ms-2 cursor-pointer "
+                onClick={() => setIsVisible((prev) => !prev)}
+              />
             </div>
-            
           </div>
         </div>
       </div>

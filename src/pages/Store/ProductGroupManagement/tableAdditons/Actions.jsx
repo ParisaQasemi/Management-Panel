@@ -10,7 +10,7 @@ import ActionIcon from "../../../../component/ActionIcon";
 const Actions = ({ rowData, handleDeleteCategory, setshowModal }) => {
   const navigate = useNavigate();
   const params = useParams();
-  const { setEditId } = useContext(CategoryContext); //دکمه ویرایش
+  const { setEditId } = useContext(CategoryContext); 
 
   return (
     <>
@@ -27,22 +27,8 @@ const Actions = ({ rowData, handleDeleteCategory, setshowModal }) => {
             })
           }
         />
-      ) : // <button
-      //   className="mx-1 cursor-pointer text-blue-500"
-      //   title="زیرمجموعه"
-      //   onClick={() =>
-      //     navigate(`/Category/${rowData.id}`, {
-      //       state: {
-      //         parentData: rowData,
-      //       },
-      //     })
-      //   }
-      // >
-      //   <PiSubsetProperOf />
-      // </button>
-      null}
+      ) :  null}
 
-      {/* دکمه ویرایش */}
       <ActionIcon
         icon={<FaEdit className="text-yellow-500" />}
         pTitle="update_category"
@@ -52,16 +38,6 @@ const Actions = ({ rowData, handleDeleteCategory, setshowModal }) => {
           setshowModal();
         }}
       />
-      {/* <button
-        onClick={() => {
-          setEditId(rowData.id);
-          setshowModal();
-        }}
-        className="mx-1 cursor-pointer text-yellow-500"
-        title="ویرایش"
-      >
-        <FaEdit />
-      </button> */}
 
       {params.categoryId ? (
         <ActionIcon
@@ -76,20 +52,7 @@ const Actions = ({ rowData, handleDeleteCategory, setshowModal }) => {
             })
           }
         />
-      ) : // <button
-      //   onClick={() =>
-      //     navigate(`/Category/${rowData.id}/attributes`, {
-      //       state: {
-      //         categoryData: rowData,
-      //       },
-      //     })
-      //   }
-      //   className="mx-1 cursor-pointer text-green-500"
-      //   title="افزودن"
-      // >
-      //   <SiGoogledocs />
-      // </button>
-      null}
+      ) :  null}
 
       <ActionIcon
         icon={<MdDelete className="text-red-500"/>}
@@ -97,14 +60,6 @@ const Actions = ({ rowData, handleDeleteCategory, setshowModal }) => {
         title="حذف"
         onClick={() => handleDeleteCategory(rowData)}
       />
-
-      {/* <button
-        onClick={() => handleDeleteCategory(rowData)}
-        className="mx-1 cursor-pointer text-red-500"
-        title="حذف"
-      >
-        <MdDelete />
-      </button> */}
     </>
   );
 };

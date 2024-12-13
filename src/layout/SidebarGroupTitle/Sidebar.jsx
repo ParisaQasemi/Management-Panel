@@ -29,25 +29,24 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           isOpen ? "translate-x-0" : "translate-x-full"
         } md:translate-x-0 shadow-lg backdrop-blur-lg bg-blue-950/30 rounded-l-3xl z-30 `}
       >
-        {/* Toggle sidebar visibility */}
         <button
           className="relative top-3 left-3 md:hidden p-2"
           onClick={toggleSidebar}
         >
           <IoMdClose className="text-2xl" />
         </button>
-        {/* SideBar Title */}
-        {/* <div className="text-2xl font-bold mt-7 mb-2 text-center  border-gray-100">
-          پنل مدیریت
-        </div> */}
 
         <Avatar
           name={user.user_name || user.full_name}
           imagePath={user.image || "/src/assets/img/Avatar/user.png"}
         />
 
-        {/* Navigation Links Section */}
-        <SidebarItem title="داشبورد" icon={<IoHomeSharp />} path="/" pTitle='read_'             onClick={toggleSidebar}
+        <SidebarItem
+          title="داشبورد"
+          icon={<IoHomeSharp />}
+          path="/"
+          pTitle="read_"
+          onClick={toggleSidebar}
         />
 
         <div className="sidebar_items_container">
@@ -55,8 +54,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <SidebarGroupTitle
             title="فروشگاه"
             pTitles={[
-              "read_categories",  "read_products",  "read_brands",  "read_guaranties",  "read_colors", "read_discounts"
-             ]}
+              "read_categories",
+              "read_products",
+              "read_brands",
+              "read_guaranties",
+              "read_colors",
+              "read_discounts",
+            ]}
           />
           <SidebarItem
             title="مدیریت گروه محصول"
@@ -64,7 +68,6 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             path="/Category"
             pTitle="read_categories"
             onClick={toggleSidebar}
-
           />
           <SidebarItem
             title="مدیریت محصول"
@@ -72,7 +75,6 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             path="/Product"
             pTitle="read_products"
             onClick={toggleSidebar}
-
           />
           <SidebarItem
             title="مدیریت برند ها"
@@ -80,7 +82,6 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             path="/Brand"
             pTitle="read_brands"
             onClick={toggleSidebar}
-
           />
           <SidebarItem
             title="مدیریت گارانتی ها"
@@ -88,7 +89,6 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             path="/Guaranties"
             pTitle="read_guaranties"
             onClick={toggleSidebar}
-
           />
           <SidebarItem
             title="مدیریت رنگ ها"
@@ -96,7 +96,6 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             path="/Color"
             pTitle="read_colors"
             onClick={toggleSidebar}
-
           />
           <SidebarItem
             title="مدیریت تخفیف ها"
@@ -104,13 +103,12 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             path="/Discount"
             pTitle="read_discounts"
             onClick={toggleSidebar}
-
           />
 
           {/* ---------- Orde And Cart ---------- */}
           <SidebarGroupTitle
             title=" سفارشات و سبد "
-            pTitles={["read_carts",  "read_orders",  "read_deliveries"]}
+            pTitles={["read_carts", "read_orders", "read_deliveries"]}
           />
           <SidebarItem
             title="مدیریت سبد ها"
@@ -118,7 +116,6 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             path="/carts"
             pTitle="read_carts"
             onClick={toggleSidebar}
-
           />
           <SidebarItem
             title="مدیریت سفارشات"
@@ -126,7 +123,6 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             path="/orders"
             pTitle="read_orders"
             onClick={toggleSidebar}
-
           />
           <SidebarItem
             title="مدیریت نحوه ارسال"
@@ -134,13 +130,12 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             path="/deliveries"
             pTitle="read_deliveries"
             onClick={toggleSidebar}
-
           />
 
           {/* ---------- Users And Partners ---------- */}
           <SidebarGroupTitle
             title="کاربران و همکاران "
-            pTitles={["read_users",  "read_roles",  "read_permissions"]}
+            pTitles={["read_users", "read_roles", "read_permissions"]}
           />
           <SidebarItem
             title="مشاهده کاربران"
@@ -148,7 +143,6 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             path="/Users"
             pTitle="read_users"
             onClick={toggleSidebar}
-
           />
           <SidebarItem
             title="نقش ها "
@@ -156,7 +150,6 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             path="/Roles"
             pTitle="read_roles"
             onClick={toggleSidebar}
-
           />
 
           <SidebarItem
@@ -165,13 +158,12 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             path="/permissions"
             pTitle="read_permissions"
             onClick={toggleSidebar}
-
           />
 
           {/* ---------- Communications ---------- */}
           <SidebarGroupTitle
             title=" ارتباطات "
-            pTitles={["read_questions",  "read_comments"]}
+            pTitles={["read_questions", "read_comments"]}
           />
           <SidebarItem
             title="سوال ها "
@@ -179,7 +171,6 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             path="/Questions"
             pTitle="read_questions"
             onClick={toggleSidebar}
-
           />
           <SidebarItem
             title="نظرات "
@@ -187,7 +178,6 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             path="/Feedback"
             pTitle="read_comments"
             onClick={toggleSidebar}
-
           />
         </div>
       </div>

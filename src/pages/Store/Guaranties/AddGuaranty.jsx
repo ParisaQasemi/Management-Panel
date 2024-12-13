@@ -10,7 +10,6 @@ const AddGuaranty = ({
   children,
   setData,
   guaranteeToEdit,
-  setGuaranteeToEdit,
 }) => {
   const [reInitValues, setReInitValues] = useState(null);
 

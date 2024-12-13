@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { getCategoryAttrsService } from "../../../../services/categoryAttr";
 import { ErrorMessage, Field, Formik } from "formik";
 import PrevPageButton from "../../../../component/authForm/PrevPageButton";
 import SpinnerLoad from "../../../../component/SpinnerLoad";

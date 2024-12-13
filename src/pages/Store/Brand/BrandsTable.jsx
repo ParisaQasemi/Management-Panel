@@ -45,27 +45,6 @@ const BrandsTable = ({}) => {
     },
   ];
 
-  // const additionField = [
-  //   {
-  //     title: "لوگو",
-  //     elements: (rowData) =>
-  //       rowData.logo ? (
-  //         <img src={apiPath + "/" + rowData.logo} width="40" />
-  //       ) : null,
-  //   },
-  //   {
-  //     title: "عملیات",
-  //     elements: (rowData) => (
-  //       <Actions
-  //         rowData={rowData}
-  //         setBrandToEdit={setBrandToEdit}
-  //         handleDeleteBrand={handleDeleteBrand}
-  //         setshowModal={setshowModal}
-  //       />
-  //     ),
-  //   },
-  // ];
-
   const searchParams = {
     title: "جستجو",
     placeholder: "قسمتی از عنوان را وارد کنید",
@@ -110,7 +89,6 @@ const BrandsTable = ({}) => {
       <PaginationTable
         data={data}
         dataInfo={dataInfo}
-        // additionField={additionField}
         numOfPage={5}
         searchParams={searchParams}
         loading={loading}

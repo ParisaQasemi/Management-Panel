@@ -6,7 +6,10 @@ const Avatar = ({name, imagePath}) => {
             <span className='flex justify-center'>
                 <img src={imagePath} className='w-16 h-16 border border-white bg-transparent rounded-full' alt="" />
             </span>
-            <span className='flex justify-center font-bold py-2 text-white'>{name}</span>
+            <span className='flex justify-center font-bold py-2 text-white'>
+  {name ? name : 'پنل مدیریت'}
+</span>
+
         </div>
     );
 }

@@ -12,3 +12,5 @@ class Permissions extends Component {
 }
 
 export default Permissions;
+
+

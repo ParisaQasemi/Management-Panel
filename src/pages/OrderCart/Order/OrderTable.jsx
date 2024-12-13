@@ -16,9 +16,9 @@ const OrdersTable = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchChar, setSearchChar] = useState("");
-  const [currentPage, setCurrentPage] = useState(1); // صفحه حال حاضر
-  const [countOnPage, setCountOnPage] = useState(10); // تعداد محصول در هر صفحه
-  const [pageCount, setPageCount] = useState(0); // تعداد کل صفحات
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [countOnPage, setCountOnPage] = useState(10); 
+  const [pageCount, setPageCount] = useState(0); 
 
   const dataInfo = [
     { field: "id", title: "#" },

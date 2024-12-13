@@ -14,7 +14,6 @@ export const initialValues = {
 
 export const onSubmit = async (
   values,
-  actions,
   setData,
   roleIdToEdit,
   editType

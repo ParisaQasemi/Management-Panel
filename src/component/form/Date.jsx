@@ -1,7 +1,7 @@
 import { ErrorMessage, FastField } from "formik";
 import React, { useEffect, useState } from "react";
 import FormikError from "./FormikError";
-import { FaCheck, FaCheckSquare } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 import jMoment from "moment-jalaali";
 
 const days = [
@@ -30,7 +30,6 @@ const Date = ({ formik, name, label, yearsLimit, initialDate}) => {
   const [year, setYear] = useState(jMoment().jYear());
   const [years, setYears] = useState([]);
   const [showConfig, setShowConfig] = useState(false);
-  // const yearsLimit = yearsLimit || { from: 10, to: 10 };
 
   useEffect(() => {
     let now = jMoment(initialDate)
@@ -48,7 +47,7 @@ const Date = ({ formik, name, label, yearsLimit, initialDate}) => {
     ) {
       newYears.push(index);
     }
-    setYears(newYears); // مقدار جدید به طور کامل جایگزین می‌شود
+    setYears(newYears); 
     setShowConfig(true);
   };
 

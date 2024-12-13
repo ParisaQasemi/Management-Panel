@@ -30,27 +30,12 @@ const GuarantiesTable = () => {
           rowData={rowData}
           setGuaranteeToEdit={setGuaranteeToEdit}
           handleDeleteGuarantee={handleDeleteGuarantee}
-          setshowModal={setshowModal} // اضافه کردن این پراپ
+          setshowModal={setshowModal} 
 
         />
       ),
     },
   ];
-
-  // const additionField = [
-  //   {
-  //     title: "عملیات",
-  //     elements: (rowData) => (
-  //       <Actions
-  //         rowData={rowData}
-  //         setGuaranteeToEdit={setGuaranteeToEdit}
-  //         handleDeleteGuarantee={handleDeleteGuarantee}
-  //         setshowModal={setshowModal} // اضافه کردن این پراپ
-
-  //       />
-  //     ),
-  //   },
-  // ];
 
   const searchParams = {
     title: "جستجو",
@@ -86,9 +71,7 @@ const GuarantiesTable = () => {
   const handleOpenModal = (guarantee) => {
     setEditId(null);
     setshowModal(true);
-    // setGuaranteeToEdit(guarantee || null);
     setGuaranteeToEdit(null);
-
   };
 
   return (
@@ -96,7 +79,6 @@ const GuarantiesTable = () => {
       <PaginationTable
         data={data}
         dataInfo={dataInfo}
-        // additionField={additionField}
         numOfPage={5}
         searchParams={searchParams}
         loading={loading}

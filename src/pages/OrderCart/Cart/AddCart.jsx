@@ -13,9 +13,7 @@ import CloseModalBtn from "../../../component/Modal/CloseModalBtn";
 import { initialValues, onSubmit, validationSchema } from "./core";
 import FormikError from "../../../component/form/FormikError";
 
-import { FaCheck, FaCheckCircle } from "react-icons/fa";
 import { IoTimeSharp } from "react-icons/io5";
-import { numberWithCommas } from "../../../utils/numbers";
 import {
   getAllProductTitlesService,
   getOneProductService,
@@ -147,7 +145,6 @@ const AddCart = () => {
             {(formik) => (
               <Form className="w-full lg:w-3/5 mx-auto mt-10">
                 <div className="flex flex-wrap gap-6 justify-between mx-auto">
-                  {/* آی دی مشتری */}
                   <div className="flex flex-col w-96 sm:w-1/2 lg:w-full mx-auto">
                     <Field
                       type="text"
@@ -158,41 +155,41 @@ const AddCart = () => {
                     <ErrorMessage name="user_id" component={FormikError} />
                   </div>
 
-              <div className="lg:flex justify-between">
-                
-                  {/* محصول */}
-                  <div className="flex flex-col w-96 sm:w-1/2 lg:w-1/3 mx-2 lg:mx-auto my-1">
-                    <SelectSearch
-                      options={allProducts}
-                      search={true}
-                      placeholder="محصول"
-                      onChange={(e) => handleChangeSelectedProduct(e, formik)}
-                    />
-                    <ErrorMessage name="product_id" component={FormikError} />
+                  <div className="lg:flex justify-between">
+                    <div className="flex flex-col w-96 sm:w-1/2 lg:w-1/3 mx-2 lg:mx-auto my-1">
+                      <SelectSearch
+                        options={allProducts}
+                        search={true}
+                        placeholder="محصول"
+                        onChange={(e) => handleChangeSelectedProduct(e, formik)}
+                      />
+                      <ErrorMessage name="product_id" component={FormikError} />
+                    </div>
+
+                    <div className="flex flex-col w-96 sm:w-1/2 lg:w-1/3 mx-2 my-1 ">
+                      <SelectSearch
+                        options={colors}
+                        placeholder="رنگ"
+                        onChange={(e) => formik.setFieldValue("color_id", e)}
+                      />
+                      <ErrorMessage name="color_id" component={FormikError} />
+                    </div>
+
+                    <div className="flex flex-col w-96 sm:w-1/2 lg:w-1/3 mx-2 lg:mx-auto my-1 ">
+                      <SelectSearch
+                        options={guarantees}
+                        placeholder="گارانتی"
+                        onChange={(e) =>
+                          formik.setFieldValue("guarantee_id", e)
+                        }
+                      />
+                      <ErrorMessage
+                        name="guarantee_id"
+                        component={FormikError}
+                      />
+                    </div>
                   </div>
 
-                  {/* رنگ */}
-                  <div className="flex flex-col w-96 sm:w-1/2 lg:w-1/3 mx-2 my-1 ">
-                    <SelectSearch
-                      options={colors}
-                      placeholder="رنگ"
-                      onChange={(e) => formik.setFieldValue("color_id", e)}
-                    />
-                    <ErrorMessage name="color_id" component={FormikError} />
-                  </div>
-
-                  {/* گارانتی */}
-                  <div className="flex flex-col w-96 sm:w-1/2 lg:w-1/3 mx-2 lg:mx-auto my-1 ">
-                    <SelectSearch
-                      options={guarantees}
-                      placeholder="گارانتی"
-                      onChange={(e) => formik.setFieldValue("guarantee_id", e)}
-                    />
-                    <ErrorMessage name="guarantee_id" component={FormikError} />
-                  </div>
-              </div>
-
-                  {/* تعداد */}
                   <div className="flex flex-col w-96 sm:w-1/2 lg:w-full mx-auto">
                     <Field
                       type="number"
@@ -203,7 +200,6 @@ const AddCart = () => {
                     <ErrorMessage name="count" component={FormikError} />
                   </div>
 
-                  {/* دکمه ثبت */}
                   <div className="flex justify-center items-center w-full  sm:w-auto lg:w-full">
                     <button
                       type="button"
@@ -226,8 +222,7 @@ const AddCart = () => {
                       <div>
                         <span className="text-sm text-gray-700">
                           {product.product.title} - گارانتی:{" "}
-                          {product.guarantee?.title} - تعداد:{" "}
-                          {product.count}
+                          {product.guarantee?.title} - تعداد: {product.count}
                         </span>
                       </div>
                       <div>

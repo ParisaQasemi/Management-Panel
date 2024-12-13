@@ -6,7 +6,10 @@ import ModalBtn from "../../../component/Modal/ModalBtn";
 import CloseModalBtn from "../../../component/Modal/CloseModalBtn";
 import { CategoryContext } from "@/context/categoryContext";
 import Actions from "./tabaleAddition/Actions";
-import { deleteColorService, getAllColorsService } from "../../../services/colors";
+import {
+  deleteColorService,
+  getAllColorsService,
+} from "../../../services/colors";
 
 const ColorTable = () => {
   const [data, setData] = useState([]);
@@ -14,8 +17,6 @@ const ColorTable = () => {
   const [colorToEdit, setColorToEdit] = useState(null);
   const [showModal, setshowModal] = useState(false);
   const { setEditId } = useContext(CategoryContext);
-
-  
 
   const dataInfo = [
     { field: "id", title: "#" },
@@ -45,31 +46,6 @@ const ColorTable = () => {
       ),
     },
   ];
-
-  // const additionField = [
-  //   {
-  //     title: "رنگ",
-  //     elements: (rowData) => (
-  //       <div
-  //         className="block"
-  //         style={{ background: rowData.code, color: rowData.code }}
-  //       >
-  //         ...
-  //       </div>
-  //     ),
-  //   },
-  //   {
-  //     title: "عملیات",
-  //     elements: (rowData) => (
-  //       <Actions
-  //         rowData={rowData}
-  //         setColorToEdit={setColorToEdit}
-  //         handleDeleteColor={handleDeleteColor}
-  //         setshowModal={setshowModal}
-  //       />
-  //     ),
-  //   },
-  // ];
 
   const searchParams = {
     title: "جستجو",
@@ -111,7 +87,6 @@ const ColorTable = () => {
       <PaginationTable
         data={data}
         dataInfo={dataInfo}
-        // additionField={additionField}
         numOfPage={5}
         searchParams={searchParams}
         loading={loading}

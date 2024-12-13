@@ -21,11 +21,11 @@ const CategoryTable = () => {
   const [forceRender, setForceRender] = useState(0);
   const [loading, setLoading] = useState(false);
   const [showModal, setshowModal] = useState(false);
-  const { setEditId } = useContext(CategoryContext); // اضافه کردن context
+  const { setEditId } = useContext(CategoryContext); 
   const hasAddCategoryPerm = useHasPermission("create_category");
 
   const handleOpenModal = () => {
-    setEditId(null); // پاک کردن editId
+    setEditId(null); 
     setshowModal(true);
   };
 

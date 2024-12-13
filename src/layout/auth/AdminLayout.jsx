@@ -8,14 +8,7 @@ import { getRolesActionRedux } from "../../redux/user/userActions";
 
 const AdminLayout = () => {
   const [loading, isLogin] = useIsLogin();
-  // const { roles, error } = useSelector((state) => state.userReducer);
-  // const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getRolesActionRedux());
-  // }, []);
-
-  // Responsive Menu Item
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);

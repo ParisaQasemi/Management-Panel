@@ -132,7 +132,6 @@ const AddOrder = () => {
                 <Form className="w-3/4 lg:w-3/5 my-20 mx-auto">
                   <>
                     <div className="flex justify-between bg-red-00">
-                      {/* کد سبد */}
                       <FormikControl
                         control="input"
                         type="number"
@@ -141,7 +140,6 @@ const AddOrder = () => {
                         onBlur={(e) => handleGetCartsInfo(e.target.value)}
                       />
 
-                      {/* تاریخ پرداخت */}
                       <FormikControl
                         control="date"
                         formik={formik}
@@ -151,7 +149,6 @@ const AddOrder = () => {
                         yearsLimit={{ from: 10, to: 0 }}
                       />
 
-                      {/* مبلغ سبد */}
                       <div className="">
                         <input
                           type="text"
@@ -173,7 +170,6 @@ const AddOrder = () => {
                         />
                       </div>
 
-                      {/* آی دی تخفیف */}
                       <FormikControl
                         control="input"
                         type="number"
@@ -182,7 +178,6 @@ const AddOrder = () => {
                         onBlur={(e) => handleDiscountInfo(e.target.value)}
                       />
 
-                      {/* درصد تخفیف */}
                       <div>
                         <input
                           type="text"
@@ -193,7 +188,6 @@ const AddOrder = () => {
                       </div>
                     </div>
                     
-                    {/* آدرس */}
                     <FormikControl
                       control="input"
                       type="text"
@@ -202,7 +196,6 @@ const AddOrder = () => {
                     />
 
                     <div className="flex justify-between bg-yellow-30">
-                      {/* روش ارسال */}
                       <FormikControl
                         control="select"
                         options={allDeliveries}
@@ -210,7 +203,6 @@ const AddOrder = () => {
                         firstItem="روش ارسال"
                       />
 
-                      {/* شماره تماس */}
                       <FormikControl
                         control="input"
                         type="text"
@@ -218,7 +210,6 @@ const AddOrder = () => {
                         placeholder="شماره تماس"
                       />
 
-                      {/* ایمیل */}
                       <FormikControl
                         control="input"
                         type="text"
@@ -226,7 +217,6 @@ const AddOrder = () => {
                         placeholder="ایمیل"
                       />
 
-                      {/* شماره کارت */}
                       <FormikControl
                         control="input"
                         type="number"
@@ -234,7 +224,6 @@ const AddOrder = () => {
                         placeholder="شماره کارت"
                       />
 
-                      {/* نام بانک */}
                       <FormikControl
                         control="input"
                         type="text"
